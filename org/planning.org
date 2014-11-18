@@ -1,0 +1,69 @@
+
+Zooniverse Talk 2.0 Frontend Planning
+
+* Project talk
+
+** Boards
+Projects will have a list of boards that are created by project owners (ex. Science, Help, About..etc)
+Boards will contain a list of Comments
+  - Latest comment in board
+  - Latest discussion in board
+  - Last updated
+  - Last commenting user
+  - Link to last discussion
+  - Basic stats (# users, comments, etc)
+  - Board description
+
+** Discussion
+Discussion will be about an object or open-ended, containing a title and content
+The top comment will be the content of the post and live at the top of the thread
+  - Same basic stats
+  - Link to latest post
+  - Last active
+
+** Comments
+Users will have the ability to comment on talk about subjects in a post classification summary prompt (similar to current planet-hunters)
+Users will be able to create new posts about a subject in a 'New post' form
+
+** New Comment Form
+The form to create a post will give users the option to mention objects and other users and collections
+It will contain some type of formatting (markdown, wysiwyg, something else...)
+Users will be able to add hashtags to comments (auto complete?)
+Comment boxes will have simple (text-only) and formatted options
+Some sort of subject/collection search for setting the focus
+
+** Comment display
+Render mentions to links
+Follow link to focus
+Replies
+User avatar, name, display name
+Timestamp (time ago?  local time?)
+Moderation
+Upvote
+Discourse style summary?
+
+* Zooniverse Talk
+
+** Structure
+Same board->post->comment nesting model of project-talk, but focused on open-ended discussion
+
+** New Comment form
+Same as project-talk new post form
+
+* Profile
+
+** Talk Notifications
+Users will have a feed of talk activity since their last visit, in a dedicated section
+
+** Talk activity feed
+Talk activity feed will contain mentions of the user, and comments from threads they are subscribed to
+Users will be subscribed to the zooniverse-wide discussion by default
+Users will be subscribed to the threads that they have commented in 
+Users will be able to subscribe to specific boards and threads by clicking a subscribe button
+
+** Private messages
+In a user's own profile they will be able to view private messages sent to them
+When viewing other user's profiles they will be able to send them private messages
+
+* Notifications
+Users will be notified of talk activity in the main-navigation notification system, and linked to the appropriate page
