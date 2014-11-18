@@ -1,0 +1,19 @@
+{
+  "name": "Talk-Front-End",
+  "version": "0.0.0",
+  "description": "Talk Frontend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zooniverse/Talk-Frontend.git"
+  },
+  "author": "Zooniverse",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zooniverse/Talk-Frontend/issues"
+  },
+  "homepage": "https://github.com/zooniverse/Talk-Frontend"
+}
