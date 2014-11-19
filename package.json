@@ -1,10 +1,21 @@
 {
   "name": "Talk-Front-End",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Talk Frontend",
-  "main": "index.js",
+  "main": "dist/talk.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "gulp"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "coffee-reactify",
+        {
+          "coffeeout": true
+        }
+      ],
+      "coffeeify"
+    ]
   },
   "repository": {
     "type": "git",
@@ -15,5 +26,26 @@
   "bugs": {
     "url": "https://github.com/zooniverse/Talk-Frontend/issues"
   },
-  "homepage": "https://github.com/zooniverse/Talk-Frontend"
+  "homepage": "https://github.com/zooniverse/Talk-Frontend",
+  "dependencies": {
+    "react": "^0.12.1"
+  },
+  "devDependencies": {
+    "browser-sync": "^1.7.0",
+    "browserify": "^6.3.2",
+    "browserify-shim": "^3.8.0",
+    "cjsx-loader": "^1.0.0",
+    "coffee-loader": "^0.7.2",
+    "coffee-react-transform": "^2.0.0",
+    "coffee-reactify": "^2.0.0",
+    "coffeeify": "^1.0.0",
+    "gulp": "^3.8.10",
+    "gulp-util": "^3.0.1",
+    "vinyl-source-stream": "^1.0.0",
+    "watchify": "^2.1.1",
+    "webpack": "^1.4.13"
+  },
+  "browserify-shim": {
+    "react": "global:React"
+  }
 }
