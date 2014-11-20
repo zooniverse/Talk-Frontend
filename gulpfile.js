@@ -14,6 +14,7 @@ var execWebpack = function(config) {
     });
 }
 
+/* Build /src into dist/talk.js */
 gulp.task('build', function() {
     var bundler = browserify({
         entries: ['./src/index.cjsx'], // entry point
@@ -23,10 +24,11 @@ gulp.task('build', function() {
     var bundle = function() {
         return bundler
             .bundle()
-        //    .on('error', handleErrors)
+            .on('error', function(err) {
+                gutil.log('browserify error', err);
+            })
             .pipe(source('talk.js'))
             .pipe(gulp.dest('dist')) // output destination
-        //    .on('end', bundleLogger.end);
     };
     bundle();
 });

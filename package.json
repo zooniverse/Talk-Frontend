@@ -1,10 +1,11 @@
 {
-  "name": "Talk-Front-End",
+  "name": "zooniverse-talk",
   "version": "0.0.1",
   "description": "Talk Frontend",
-  "main": "dist/talk.js",
+  "main": "src/index.cjsx",
   "scripts": {
-    "start": "gulp"
+      "start": "gulp",
+      "test": "jest"
   },
   "browserify": {
     "transform": [
@@ -15,6 +16,23 @@
         }
       ],
       "coffeeify"
+    ]
+  },
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/preprocessor.js",
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react"
+    ],
+    "testFileExtensions": [
+      "coffee",
+      "js",
+      "cjsx"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "coffee",
+      "cjsx"
     ]
   },
   "repository": {
@@ -38,9 +56,11 @@
     "coffee-loader": "^0.7.2",
     "coffee-react-transform": "^2.0.0",
     "coffee-reactify": "^2.0.0",
+    "coffee-script": "^1.8.0",
     "coffeeify": "^1.0.0",
     "gulp": "^3.8.10",
     "gulp-util": "^3.0.1",
+    "jest-cli": "^0.1.18",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.1.1",
     "webpack": "^1.4.13"

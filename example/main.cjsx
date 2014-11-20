@@ -1,5 +1,6 @@
 React = require 'react'
-{Main} = require '../src/'
-React.render <Main />, document.getElementById('app')
+{ExampleComponent} = require '../src/index'
+
+React.render <ExampleComponent />, document.getElementById('app')
 
 console.log 'main'
