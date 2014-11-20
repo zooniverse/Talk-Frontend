@@ -1,5 +1,5 @@
 React = require 'react'
-{ExampleComponent, CommentBox} = require '../src/index'
+{CommentBox} = require '../src/index'
 
 React.render <CommentBox />, document.getElementById('app')
 
