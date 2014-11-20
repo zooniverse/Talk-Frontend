@@ -4,8 +4,8 @@
   "description": "Talk Frontend",
   "main": "src/index.cjsx",
   "scripts": {
-      "start": "gulp",
-      "test": "jest"
+    "start": "gulp",
+    "test": "jest"
   },
   "browserify": {
     "transform": [
@@ -61,6 +61,7 @@
     "gulp": "^3.8.10",
     "gulp-util": "^3.0.1",
     "jest-cli": "^0.1.18",
+    "jsx-loader": "^0.12.2",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.1.1",
     "webpack": "^1.4.13"

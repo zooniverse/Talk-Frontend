@@ -15,7 +15,8 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.cjsx$/, loaders: ['coffee-loader', 'cjsx-loader'] },
-            { test: /\.coffee$/, loader: 'coffee-loader' }
+            { test: /\.coffee$/, loader: 'coffee-loader' },
+            { test: /\.jsx$/, loader: 'jsx-loader' }
         ],
         noParse: [
                 /^react$/

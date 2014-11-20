@@ -18,7 +18,7 @@ var execWebpack = function(config) {
 gulp.task('build', function() {
     var bundler = browserify({
         entries: ['./src/index.cjsx'], // entry point
-        extensions: ['.coffee', '.cjsx']
+        extensions: ['.js', '.coffee', '.cjsx']
     }).transform(shim).exclude('react');
 
     var bundle = function() {
