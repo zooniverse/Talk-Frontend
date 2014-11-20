@@ -1,6 +1,6 @@
 React = require 'react'
-{ExampleComponent} = require '../src/index'
+{ExampleComponent, CommentBox} = require '../src/index'
 
-React.render <ExampleComponent />, document.getElementById('app')
+React.render <CommentBox />, document.getElementById('app')
 
 console.log 'main'
