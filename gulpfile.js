@@ -6,6 +6,8 @@ var shim = require("browserify-shim");
 var browserSync = require("browser-sync");
 var source = require("vinyl-source-stream");
 var exampleWebpackConfig = require("./example/webpack.example.js");
+var nib = require("nib");
+var stylus = require("gulp-stylus");
 
 var execWebpack = function(config) {
     webpack((config), function(err, stats) {
@@ -33,6 +35,28 @@ gulp.task('build', function() {
     bundle();
 });
 
+var execStylus = function(output) {
+    gulp.src('./src/css/**/*')
+        .pipe(stylus({use: nib(), 'include css': true, errors: true}))
+        .on('error', function(err) {
+            gutil.log('browserify error', err);
+        })
+        .pipe(gulp.dest(output))
+        .pipe(gulp.dest('./example/build/css'));
+}
+
+gulp.task('dev-css', function() {
+    execStylus('./example/build/css');
+})
+
+gulp.task('prod-css', function() {
+    execStylus('./css')
+})
+
+gulp.task('watch-css', ['dev-css'], function() {
+    gulp.watch('./src/css/**/*', ['dev-css'])
+})
+
 gulp.task('webpack', function(callback){
     execWebpack(exampleWebpackConfig);
     callback();
@@ -50,4 +74,4 @@ gulp.task('dev-server', function(){
     });
 });
 
-gulp.task('default', ['webpack', 'dev-server']);
+gulp.task('default', ['webpack', 'dev-server', 'watch-css']);

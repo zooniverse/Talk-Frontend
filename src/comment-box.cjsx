@@ -12,7 +12,6 @@ module?.exports = React.createClass
 
   onSubmitComment: (e) ->
     e.preventDefault()
-    console.log "send talk comment"
     @refs.textarea.getDOMNode().value = ""
 
   render: ->
