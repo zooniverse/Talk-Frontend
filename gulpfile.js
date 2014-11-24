@@ -14,14 +14,14 @@ var execWebpack = function(config) {
         if (err) new gutil.PluginError("execWebpack", err);
         // gutil.log(stats.toString({colors: true}));
     });
-}
+};
 
 /* Build /src into dist/talk.js */
 gulp.task('build', function() {
     var bundler = browserify({
         entries: ['./src/index.cjsx'], // entry point
         extensions: ['.js', '.coffee', '.cjsx']
-    }).transform(shim).exclude('react');
+    }).transform(shim).exclude('react');xo
 
     var bundle = function() {
         return bundler
@@ -42,20 +42,19 @@ var execStylus = function(output) {
             gutil.log('browserify error', err);
         })
         .pipe(gulp.dest(output))
-        .pipe(gulp.dest('./example/build/css'));
-}
+};
 
 gulp.task('dev-css', function() {
     execStylus('./example/build/css');
-})
+});
 
 gulp.task('prod-css', function() {
-    execStylus('./css')
-})
+    execStylus('./css');
+});
 
 gulp.task('watch-css', ['dev-css'], function() {
-    gulp.watch('./src/css/**/*', ['dev-css'])
-})
+    gulp.watch('./src/css/**/*', ['dev-css']);
+});
 
 gulp.task('webpack', function(callback){
     execWebpack(exampleWebpackConfig);
