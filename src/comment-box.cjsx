@@ -17,6 +17,7 @@ module?.exports = React.createClass
   onSubmitComment: (e) ->
     e.preventDefault()
     @refs.textarea.getDOMNode().value = ""
+    @setState previewing: false
 
   onPreviewClick: (e) ->
     @setState previewing: !@state.previewing

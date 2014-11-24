@@ -43,3 +43,17 @@ describe 'CommentBox', ->
 
     preview = findRenderedComponentWithType(commentBox, CommentPreview)
     expect(preview.getDOMNode().textContent.match("test comment")).toBeTruthy()
+
+  it 'hides the comment preview on submit', ->
+    commentBox = renderIntoDocument(<CommentBox />)
+    form = findRenderedDOMComponentWithTag(commentBox, 'form')
+
+    commentBox.setState previewing: true
+
+    previewBeforeSubmit = scryRenderedComponentsWithType(commentBox, CommentPreview)
+    expect(previewBeforeSubmit.length).toBe(1)
+
+    Simulate.submit(form)
+
+    previewAfterSubmit = scryRenderedComponentsWithType(commentBox, CommentPreview)
+    expect(previewAfterSubmit.length).toBe(0)
