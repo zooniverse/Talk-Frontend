@@ -21,7 +21,7 @@ gulp.task('build', function() {
     var bundler = browserify({
         entries: ['./src/index.cjsx'], // entry point
         extensions: ['.js', '.coffee', '.cjsx']
-    }).transform(shim).exclude('react');xo
+    }).transform(shim).exclude('react');
 
     var bundle = function() {
         return bundler
