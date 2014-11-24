@@ -32,3 +32,14 @@ describe 'CommentBox', ->
     Simulate.click(previewBtn)
     previewAfterSecondClick = scryRenderedComponentsWithType(commentBox, CommentPreview)
     expect(previewAfterSecondClick.length).toBe(0)
+
+  it 'sends the textarea content to the preview component', ->
+    commentBox = renderIntoDocument(<CommentBox />)
+    previewBtn = findRenderedDOMComponentWithClass(commentBox, 'talk-comment-preview-button')
+    textarea = findRenderedDOMComponentWithTag(commentBox, 'textarea')
+
+    textarea.getDOMNode().innerHTML = "test comment"
+    Simulate.click(previewBtn)
+
+    preview = findRenderedComponentWithType(commentBox, CommentPreview)
+    expect(preview.getDOMNode().textContent.match("test comment")).toBeTruthy()

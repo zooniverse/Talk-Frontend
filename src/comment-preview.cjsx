@@ -6,4 +6,7 @@ module?.exports = React.createClass
   render: ->
     <div className='talk-comment-preview'>
       <h1>Preview</h1>
+      <p>
+        {@props.content}
+      </p>
     </div>

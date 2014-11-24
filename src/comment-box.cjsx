@@ -34,5 +34,8 @@ module?.exports = React.createClass
       <button className='talk-comment-preview-button'onClick={@onPreviewClick}>Preview</button>
 
       {if @state.previewing
-        <CommentPreview />}
+        <CommentPreview content={@previewContent()} />}
     </div>
+
+  previewContent: ->
+    @refs.textarea.getDOMNode().value
