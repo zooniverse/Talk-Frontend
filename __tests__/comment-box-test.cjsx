@@ -3,8 +3,8 @@ jest
 
 describe 'CommentBox', ->
   React = require 'react/addons'
-  {findRenderedDOMComponentWithTag, renderIntoDocument, Simulate} = React.addons.TestUtils
-  {CommentBox} = require '../src/index'
+  {findRenderedDOMComponentWithTag, scryRenderedComponentsWithType, findRenderedComponentWithType, findRenderedDOMComponentWithClass, renderIntoDocument, Simulate} = React.addons.TestUtils
+  {CommentBox, CommentPreview} = require '../src/index'
 
   it 'clears the textarea on submit', ->
     commentBox = renderIntoDocument(<CommentBox />)
@@ -17,3 +17,18 @@ describe 'CommentBox', ->
     expect(textarea.getDOMNode().textContent).toEqual("a comment")
     Simulate.submit(form)
     expect(textarea.getDOMNode().textContent).toEqual("")
+
+  it 'toggles a CommentPreview component', ->
+    commentBox = renderIntoDocument(<CommentBox />)
+    previewBtn = findRenderedDOMComponentWithClass(commentBox, 'talk-comment-preview-button')
+
+    preview = scryRenderedComponentsWithType(commentBox, CommentPreview)
+    expect(preview.length).toBe(0)
+
+    Simulate.click(previewBtn)
+    previewAfterFirstClick = scryRenderedComponentsWithType(commentBox, CommentPreview)
+    expect(previewAfterFirstClick.length).toBe(1)
+
+    Simulate.click(previewBtn)
+    previewAfterSecondClick = scryRenderedComponentsWithType(commentBox, CommentPreview)
+    expect(previewAfterSecondClick.length).toBe(0)
