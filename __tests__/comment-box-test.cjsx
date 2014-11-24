@@ -4,7 +4,7 @@ jest
 describe 'CommentBox', ->
   React = require 'react/addons'
   {findRenderedDOMComponentWithTag, scryRenderedComponentsWithType, findRenderedComponentWithType, findRenderedDOMComponentWithClass, renderIntoDocument, Simulate} = React.addons.TestUtils
-  {CommentBox, CommentPreview} = require '../src/index'
+  {CommentBox, CommentPreview, CommentHelp} = require '../src/index'
 
   it 'clears the textarea on submit', ->
     commentBox = renderIntoDocument(<CommentBox />)
@@ -57,3 +57,18 @@ describe 'CommentBox', ->
 
     previewAfterSubmit = scryRenderedComponentsWithType(commentBox, CommentPreview)
     expect(previewAfterSubmit.length).toBe(0)
+
+  it 'toggles a comment help component', ->
+    commentBox = renderIntoDocument(<CommentBox />)
+    helpBtn = findRenderedDOMComponentWithClass(commentBox, 'talk-comment-help-button')
+
+    helpDialog = scryRenderedComponentsWithType(commentBox, CommentHelp)
+    expect(helpDialog.length).toBe(0)
+
+    Simulate.click(helpBtn)
+    helpDialogAfterFirstClick = scryRenderedComponentsWithType(commentBox, CommentHelp)
+    expect(helpDialogAfterFirstClick.length).toBe(1)
+
+    Simulate.click(helpBtn)
+    helpDialogAfterSecondClick = scryRenderedComponentsWithType(commentBox, CommentHelp)
+    expect(helpDialogAfterSecondClick.length).toBe(0)
