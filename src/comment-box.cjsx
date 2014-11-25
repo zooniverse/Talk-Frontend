@@ -14,23 +14,21 @@ module?.exports = React.createClass
     cols: 30
 
   getInitialState: ->
-    previewing: false
-    showingHelp: false # state should just be 'showing' X and then read it...
-    showingImageSelect: false
+    showing: null # name of child to show
 
   onSubmitComment: (e) ->
     e.preventDefault()
     @refs.textarea.getDOMNode().value = ""
-    @setState previewing: false
+    @setState showing: null
 
   onPreviewClick: (e) ->
-    @setState previewing: !@state.previewing
+    @toggleComponent('preview')
 
   onHelpClick: (e) ->
-    @setState showingHelp: !@state.showingHelp
+    @toggleComponent('help')
 
   onImageSelectClick: (e) ->
-    @setState showingImageSelect: !@state.showingImageSelect
+    @toggleComponent('image-selector')
 
   render: ->
     <div className="talk-comment-box">
@@ -46,15 +44,18 @@ module?.exports = React.createClass
       <button className='talk-comment-help-button' onClick={@onHelpClick}>Help</button>
       <button className='talk-comment-image-select-button' onClick={@onImageSelectClick}>Select an Image</button>
 
-      {if @state.showingImageSelect
+      {if @state.showing is 'image-selector'
         <CommentImageSelector />}
 
-      {if @state.previewing
+      {if @state.showing is 'preview'
         <CommentPreview content={@previewContent()} />}
 
-      {if @state.showingHelp
+      {if @state.showing is 'help'
         <CommentHelp />}
     </div>
+
+  toggleComponent: (name) ->
+    @setState showing: if @state.showing is name then null else name
 
   previewContent: ->
     @refs.textarea.getDOMNode().value

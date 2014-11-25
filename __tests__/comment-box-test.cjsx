@@ -48,7 +48,7 @@ describe 'CommentBox', ->
     commentBox = renderIntoDocument(<CommentBox />)
     form = findRenderedDOMComponentWithClass(commentBox, 'talk-comment-form')
 
-    commentBox.setState previewing: true
+    commentBox.setState showing: 'preview'
 
     previewBeforeSubmit = scryRenderedComponentsWithType(commentBox, CommentPreview)
     expect(previewBeforeSubmit.length).toBe(1)
