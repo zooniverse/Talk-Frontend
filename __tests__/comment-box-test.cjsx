@@ -6,11 +6,12 @@ describe 'CommentBox', ->
   {findRenderedDOMComponentWithTag, scryRenderedComponentsWithType, findRenderedComponentWithType, findRenderedDOMComponentWithClass, renderIntoDocument, Simulate} = React.addons.TestUtils
   {CommentBox, CommentPreview, CommentHelp} = require '../src/index'
 
-  it 'clears the textarea on submit', ->
-    commentBox = renderIntoDocument(<CommentBox />)
+  commentBox = renderIntoDocument(<CommentBox />)
+  form = findRenderedDOMComponentWithClass(commentBox, 'talk-comment-form')
+  textarea = findRenderedDOMComponentWithTag(form, 'textarea')
+  previewBtn = findRenderedDOMComponentWithClass(commentBox, 'talk-comment-preview-button')
 
-    form = findRenderedDOMComponentWithClass(commentBox, 'talk-comment-form')
-    textarea = findRenderedDOMComponentWithTag(form, 'textarea')
+  it 'clears the textarea on submit', ->
     submitBtn = findRenderedDOMComponentWithTag(form, 'button')
 
     textarea.getDOMNode().innerHTML = "a comment"
@@ -19,9 +20,6 @@ describe 'CommentBox', ->
     expect(textarea.getDOMNode().textContent).toEqual("")
 
   it 'toggles a CommentPreview component', ->
-    commentBox = renderIntoDocument(<CommentBox />)
-    previewBtn = findRenderedDOMComponentWithClass(commentBox, 'talk-comment-preview-button')
-
     preview = scryRenderedComponentsWithType(commentBox, CommentPreview)
     expect(preview.length).toBe(0)
 
@@ -34,10 +32,6 @@ describe 'CommentBox', ->
     expect(previewAfterSecondClick.length).toBe(0)
 
   it 'sends the textarea content to the preview component', ->
-    commentBox = renderIntoDocument(<CommentBox />)
-    previewBtn = findRenderedDOMComponentWithClass(commentBox, 'talk-comment-preview-button')
-    textarea = findRenderedDOMComponentWithTag(commentBox, 'textarea')
-
     textarea.getDOMNode().innerHTML = "test comment"
     Simulate.click(previewBtn)
 
@@ -45,9 +39,6 @@ describe 'CommentBox', ->
     expect(preview.getDOMNode().textContent.match("test comment")).toBeTruthy()
 
   it 'hides the comment preview on submit', ->
-    commentBox = renderIntoDocument(<CommentBox />)
-    form = findRenderedDOMComponentWithClass(commentBox, 'talk-comment-form')
-
     commentBox.setState showing: 'preview'
 
     previewBeforeSubmit = scryRenderedComponentsWithType(commentBox, CommentPreview)
@@ -59,7 +50,6 @@ describe 'CommentBox', ->
     expect(previewAfterSubmit.length).toBe(0)
 
   it 'toggles a comment help component', ->
-    commentBox = renderIntoDocument(<CommentBox />)
     helpBtn = findRenderedDOMComponentWithClass(commentBox, 'talk-comment-help-button')
 
     helpDialog = scryRenderedComponentsWithType(commentBox, CommentHelp)
