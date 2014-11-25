@@ -9,7 +9,7 @@ describe 'CommentBox', ->
   it 'clears the textarea on submit', ->
     commentBox = renderIntoDocument(<CommentBox />)
 
-    form = findRenderedDOMComponentWithTag(commentBox, 'form')
+    form = findRenderedDOMComponentWithClass(commentBox, 'talk-comment-form')
     textarea = findRenderedDOMComponentWithTag(form, 'textarea')
     submitBtn = findRenderedDOMComponentWithTag(form, 'button')
 
@@ -46,7 +46,7 @@ describe 'CommentBox', ->
 
   it 'hides the comment preview on submit', ->
     commentBox = renderIntoDocument(<CommentBox />)
-    form = findRenderedDOMComponentWithTag(commentBox, 'form')
+    form = findRenderedDOMComponentWithClass(commentBox, 'talk-comment-form')
 
     commentBox.setState previewing: true
 

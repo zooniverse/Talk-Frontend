@@ -1,6 +1,7 @@
 React = require 'react'
 CommentPreview = require './comment-preview'
 CommentHelp = require './comment-help'
+CommentImageSelector = require './comment-image-selector'
 
 module?.exports = React.createClass
   displayName: 'Commentbox'
@@ -30,15 +31,17 @@ module?.exports = React.createClass
   render: ->
     <div className="talk-comment-box">
       <h1>{@props.header}</h1>
-      <img src={@props.focusImage}/>
+      <img src={@props.focusImage} />
 
-      <form onSubmit={@onSubmitComment}>
+      <form className="talk-comment-form" onSubmit={@onSubmitComment}>
         <textarea ref="textarea" rows={@props.rows} cols={@props.cols} />
         <button type="submit">{@props.submit}</button>
       </form>
 
       <button className='talk-comment-preview-button' onClick={@onPreviewClick}>Preview</button>
       <button className='talk-comment-help-button' onClick={@onHelpClick}>Help</button>
+
+      <CommentImageSelector />
 
       {if @state.previewing
         <CommentPreview content={@previewContent()} />}
