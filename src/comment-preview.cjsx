@@ -7,7 +7,7 @@ module?.exports = React.createClass
     (str + ' ')
       .replace(/@user:(\S+) /, "<a href='http://www.zooniverse.org/user/$1'>$1</a> ") # user mentions
       .replace(/@subject:(\S+) /, "<a href='http://www.zooniverse.org/subjects/$1'>$1</a> ") # subject mentions
-      .replace(/\#(\S+) /, "<a href='http://www.zooniverse.org/tags/$1'>$1</a> ") # hashtags
+      .replace(/\#(\S+) /, "<a href='http://www.zooniverse.org/tags/$1'>#$1</a> ") # hashtags
 
   render: ->
     <div className='talk-comment-preview'>

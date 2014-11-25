@@ -22,4 +22,4 @@ describe 'CommentPreview', ->
     commentPreview = renderIntoDocument(<CommentPreview content="test content #testHashTag" />)
 
     commentPreviewText = findRenderedDOMComponentWithClass(commentPreview, 'talk-comment-preview-content')
-    expect(commentPreviewText.getDOMNode().innerHTML).toEqual("test content <a href=\"http://www.zooniverse.org/tags/testHashTag\">testHashTag</a> ")
+    expect(commentPreviewText.getDOMNode().innerHTML).toEqual("test content <a href=\"http://www.zooniverse.org/tags/testHashTag\">#testHashTag</a> ")
