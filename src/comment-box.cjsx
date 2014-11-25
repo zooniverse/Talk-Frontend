@@ -15,7 +15,8 @@ module?.exports = React.createClass
 
   getInitialState: ->
     previewing: false
-    showingHelp: false
+    showingHelp: false # state should just be 'showing' X and then read it...
+    showingImageSelect: false
 
   onSubmitComment: (e) ->
     e.preventDefault()
@@ -27,6 +28,9 @@ module?.exports = React.createClass
 
   onHelpClick: (e) ->
     @setState showingHelp: !@state.showingHelp
+
+  onImageSelectClick: (e) ->
+    @setState showingImageSelect: !@state.showingImageSelect
 
   render: ->
     <div className="talk-comment-box">
@@ -40,8 +44,10 @@ module?.exports = React.createClass
 
       <button className='talk-comment-preview-button' onClick={@onPreviewClick}>Preview</button>
       <button className='talk-comment-help-button' onClick={@onHelpClick}>Help</button>
+      <button className='talk-comment-image-select-button' onClick={@onImageSelectClick}>Select an Image</button>
 
-      <CommentImageSelector />
+      {if @state.showingImageSelect
+        <CommentImageSelector />}
 
       {if @state.previewing
         <CommentPreview content={@previewContent()} />}
