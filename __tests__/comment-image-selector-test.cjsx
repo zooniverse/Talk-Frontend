@@ -14,7 +14,7 @@ TEST_IMAGES = [
 
 describe 'CommentImageSelector', ->
   React = require 'react/addons'
-  {findRenderedDOMComponentWithTag, scryRenderedComponentsWithType, scryRenderedDOMComponentsWithClass, findRenderedComponentWithType, findRenderedDOMComponentWithClass, renderIntoDocument, Simulate} = React.addons.TestUtils
+  {findRenderedDOMComponentWithTag, scryRenderedDOMComponentsWithTag, scryRenderedComponentsWithType, scryRenderedDOMComponentsWithClass, findRenderedComponentWithType, findRenderedDOMComponentWithClass, renderIntoDocument, Simulate} = React.addons.TestUtils
   {CommentImageSelector} = require '../src/index'
 
   it 'holds a list of images', ->
@@ -48,3 +48,17 @@ describe 'CommentImageSelector', ->
     filteredImages = scryRenderedDOMComponentsWithClass(selector, 'talk-comment-image-item')
     expect(filteredImages.length).toEqual(1)
     expect(selector.state.images[0].id).toEqual('GZ12384')
+
+  it 'fires a callback #onSelectImage with the image data when an image is selected', ->
+    testOnSelectImage = (image) -> image
+    selector = renderIntoDocument(<CommentImageSelector onSelectImage={testOnSelectImage} />)
+    selector.setState(images: TEST_IMAGES)
+
+    imageItems = scryRenderedDOMComponentsWithClass(selector, 'talk-comment-image-item')
+    firstSelectButton = findRenderedDOMComponentWithTag(imageItems[0], 'button')
+
+    spyOn(selector.props, 'onSelectImage')
+    Simulate.click(firstSelectButton)
+
+    expect(selector.props.onSelectImage).toHaveBeenCalled()
+    expect(selector.props.onSelectImage).toHaveBeenCalledWith(TEST_IMAGES[0])

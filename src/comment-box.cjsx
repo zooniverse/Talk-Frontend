@@ -7,7 +7,6 @@ module?.exports = React.createClass
   displayName: 'Commentbox'
 
   getDefaultProps: ->
-    focusImage: 'http://placehold.it/200X200'
     submit: "Submit"
     header: "Add to the discussion"
     rows: 8
@@ -15,6 +14,7 @@ module?.exports = React.createClass
 
   getInitialState: ->
     showing: null # name of child to show
+    focusImage: 'http://placehold.it/200X200'
 
   onSubmitComment: (e) ->
     e.preventDefault()
@@ -30,10 +30,13 @@ module?.exports = React.createClass
   onImageSelectClick: (e) ->
     @toggleComponent('image-selector')
 
+  onSelectImage: (image) ->
+    @setState focusImage: image.location
+
   render: ->
     <div className="talk-comment-box">
       <h1>{@props.header}</h1>
-      <img src={@props.focusImage} />
+      <img src={@state.focusImage} />
 
       <form className="talk-comment-form" onSubmit={@onSubmitComment}>
         <textarea ref="textarea" rows={@props.rows} cols={@props.cols} />
@@ -45,7 +48,7 @@ module?.exports = React.createClass
       <button className='talk-comment-image-select-button' onClick={@onImageSelectClick}>Select an Image</button>
 
       {if @state.showing is 'image-selector'
-        <CommentImageSelector />}
+        <CommentImageSelector onSelectImage={@onSelectImage}/>}
 
       {if @state.showing is 'preview'
         <CommentPreview content={@previewContent()} />}

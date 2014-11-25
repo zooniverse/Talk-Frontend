@@ -4,7 +4,7 @@ jest
 describe 'CommentBox', ->
   React = require 'react/addons'
   {findRenderedDOMComponentWithTag, scryRenderedComponentsWithType, findRenderedComponentWithType, findRenderedDOMComponentWithClass, renderIntoDocument, Simulate} = React.addons.TestUtils
-  {CommentBox, CommentPreview, CommentHelp} = require '../src/index'
+  {CommentBox, CommentPreview, CommentHelp, CommentImageSelector} = require '../src/index'
 
   commentBox = renderIntoDocument(<CommentBox />)
   form = findRenderedDOMComponentWithClass(commentBox, 'talk-comment-form')
@@ -62,3 +62,17 @@ describe 'CommentBox', ->
     Simulate.click(helpBtn)
     helpDialogAfterSecondClick = scryRenderedComponentsWithType(commentBox, CommentHelp)
     expect(helpDialogAfterSecondClick.length).toBe(0)
+
+  it 'toggles a comment image selector component', ->
+    helpBtn = findRenderedDOMComponentWithClass(commentBox, 'talk-comment-image-select-button')
+
+    imageSelector = scryRenderedComponentsWithType(commentBox, CommentImageSelector)
+    expect(imageSelector.length).toBe(0)
+
+    Simulate.click(helpBtn)
+    imageSelectorAfterFirstClick = scryRenderedComponentsWithType(commentBox, CommentImageSelector)
+    expect(imageSelectorAfterFirstClick.length).toBe(1)
+
+    Simulate.click(helpBtn)
+    imageSelectorAfterSecondClick = scryRenderedComponentsWithType(commentBox, CommentImageSelector)
+    expect(imageSelectorAfterSecondClick.length).toBe(0)

@@ -41,6 +41,7 @@ module?.exports = React.createClass
   imageItem: (image, i) ->
     <div key={i} className="talk-comment-image-item">
       <img src={image.location} />
+      <button onClick={=> @props.onSelectImage(image)}>Select</button>
     </div>
 
   render: ->
