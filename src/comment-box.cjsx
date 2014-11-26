@@ -9,8 +9,8 @@ module?.exports = React.createClass
   getDefaultProps: ->
     submit: "Submit"
     header: "Add to the discussion"
-    rows: 8
-    cols: 30
+    rows: 10
+    cols: 100
 
   getInitialState: ->
     showing: null # name of child to show
@@ -36,25 +36,29 @@ module?.exports = React.createClass
   render: ->
     <div className="talk-comment-box">
       <h1>{@props.header}</h1>
-      <img src={@state.focusImage} />
+      <img className="talk-comment-focus-image" src={@state.focusImage} />
 
       <form className="talk-comment-form" onSubmit={@onSubmitComment}>
         <textarea ref="textarea" rows={@props.rows} cols={@props.cols} />
         <button type="submit">{@props.submit}</button>
       </form>
 
-      <button className='talk-comment-preview-button' onClick={@onPreviewClick}>Preview</button>
-      <button className='talk-comment-help-button' onClick={@onHelpClick}>Help</button>
-      <button className='talk-comment-image-select-button' onClick={@onImageSelectClick}>Select an Image</button>
+      <div className="talk-comment-buttons-container">
+        <button className='talk-comment-preview-button' onClick={@onPreviewClick}>Preview</button>
+        <button className='talk-comment-help-button' onClick={@onHelpClick}>Help</button>
+        <button className='talk-comment-image-select-button' onClick={@onImageSelectClick}>Select an Image</button>
+      </div>
 
-      {if @state.showing is 'image-selector'
-        <CommentImageSelector onSelectImage={@onSelectImage}/>}
+      <div className="talk-comment-children">
+        {if @state.showing is 'image-selector'
+          <CommentImageSelector onSelectImage={@onSelectImage}/>}
 
-      {if @state.showing is 'preview'
-        <CommentPreview content={@previewContent()} />}
+        {if @state.showing is 'preview'
+          <CommentPreview content={@previewContent()} />}
 
-      {if @state.showing is 'help'
-        <CommentHelp />}
+        {if @state.showing is 'help'
+          <CommentHelp />}
+      </div>
     </div>
 
   toggleComponent: (name) ->

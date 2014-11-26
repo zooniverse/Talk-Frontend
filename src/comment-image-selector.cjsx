@@ -49,7 +49,7 @@ module?.exports = React.createClass
       <h1>Select an image focus for this comment</h1>
 
       <form onSubmit={@onSubmitSearch}>
-        <input ref="imageSearch" type="search" />
+        <input ref="imageSearch" type="search" placeholder="Search by ID"/>
       </form>
 
       <div className="talk-comment-suggested-images">

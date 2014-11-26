@@ -1,4 +1,38 @@
 .talk-comment-box
   width: 100%
-  button
+  background: grey
+  overflow: auto
+
+  .talk-comment-focus-image
+    float: left
+    width 30%
+    max-height: 250px
+    max-width: 250px
+
+  .talk-comment-form
+    float: left
+    width: 70%
+
+    button[type='submit']
+      display: block
+
+    textarea
+      box-sizing: border-box
+      max-width: 800px
+      width: 100%
+
+  .talk-comment-buttons-container
     display: block
+    float: left
+    width: 100%
+
+  .talk-comment-children
+    float: left
+    width: 100%
+
+  .talk-comment-image-item
+    float: left
+
+    button
+      display: block
+      margin: 0 auto
