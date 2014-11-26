@@ -34,8 +34,6 @@ module?.exports = React.createClass
   onSubmitSearch: (e) ->
     e.preventDefault()
     query = @refs.imageSearch.getDOMNode().value
-
-    console.log "image-search for", query
     @setState images: @queryForImages(query)
 
   imageItem: (image, i) ->

@@ -6,7 +6,7 @@ module?.exports = React.createClass
   formattedPreviewContent: (str) ->
     (str + ' ')
       .replace(/@(\S+) /, "<a href='http://www.zooniverse.org/user/$1'>$1</a> ") # user mentions
-      .replace(/\^([A-Z]+[0-9]+)\s*$/, "<a href='http://www.zooniverse.org/subjects/$1'>$1</a> ") # subject mentions
+      .replace(/\^([A-Za-z]+[0-9]+)\s*$/, "<a href='http://www.zooniverse.org/subjects/$1'>$1</a> ") # subject mentions
       .replace(/\#(\S+) /, "<a href='http://www.zooniverse.org/tags/$1'>#$1</a> ") # hashtags
 
   render: ->
