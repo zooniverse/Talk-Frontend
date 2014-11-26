@@ -22,7 +22,10 @@ module?.exports = React.createClass
     images: []
 
   componentWillMount: ->
-    # fake query for suggested images here...
+    @setInitialImages()
+
+  setInitialImages: ->
+    # fake query for suggested images
     setTimeout (=>
       @setState images: DEV_IMAGES
     ), 500
@@ -34,7 +37,10 @@ module?.exports = React.createClass
   onSubmitSearch: (e) ->
     e.preventDefault()
     query = @refs.imageSearch.getDOMNode().value
-    @setState images: @queryForImages(query)
+    if query is ""
+      @setInitialImages()
+    else
+      @setState images: @queryForImages(query)
 
   imageItem: (image, i) ->
     <div key={i} className="talk-comment-image-item">

@@ -17,8 +17,16 @@ describe 'CommentImageSelector', ->
   {findRenderedDOMComponentWithTag, scryRenderedDOMComponentsWithTag, scryRenderedComponentsWithType, scryRenderedDOMComponentsWithClass, findRenderedComponentWithType, findRenderedDOMComponentWithClass, renderIntoDocument, Simulate} = React.addons.TestUtils
   {CommentImageSelector} = require '../src/index'
 
+  selector = renderIntoDocument(<CommentImageSelector />)
+
+  # stub query for images
+  selector.queryForImages = (query) ->
+    TEST_IMAGES.filter (img) => img.id.toLowerCase() is query.toLowerCase()
+
+  form = findRenderedDOMComponentWithTag(selector, 'form')
+  input = findRenderedDOMComponentWithTag(form, 'input')
+
   it 'holds a list of images', ->
-    selector = renderIntoDocument(<CommentImageSelector />)
     selector.setState(images: [])
 
     images = scryRenderedDOMComponentsWithClass(selector, 'talk-comment-image-item')
@@ -29,15 +37,7 @@ describe 'CommentImageSelector', ->
     expect(imagesAfterUpdate.length).toEqual(TEST_IMAGES.length)
 
   it 'updates images after a search query', ->
-    selector = renderIntoDocument(<CommentImageSelector />)
     selector.setState(images: TEST_IMAGES)
-
-    # stub query for images
-    selector.queryForImages = (query) ->
-      TEST_IMAGES.filter (img) => img.id.toLowerCase() is query.toLowerCase()
-
-    form = findRenderedDOMComponentWithTag(selector, 'form')
-    input = findRenderedDOMComponentWithTag(form, 'input')
 
     input.getDOMNode().value = 'gz12384'
     images = scryRenderedDOMComponentsWithClass(selector, 'talk-comment-image-item')
@@ -51,14 +51,21 @@ describe 'CommentImageSelector', ->
 
   it 'fires a callback #onSelectImage with the image data when an image is selected', ->
     testOnSelectImage = (image) -> image
-    selector = renderIntoDocument(<CommentImageSelector onSelectImage={testOnSelectImage} />)
-    selector.setState(images: TEST_IMAGES)
+    cbSelector = renderIntoDocument(<CommentImageSelector onSelectImage={testOnSelectImage} />) # callback selector
+    cbSelector.setState(images: TEST_IMAGES)
 
-    imageItems = scryRenderedDOMComponentsWithClass(selector, 'talk-comment-image-item')
+    imageItems = scryRenderedDOMComponentsWithClass(cbSelector, 'talk-comment-image-item')
     firstSelectButton = findRenderedDOMComponentWithTag(imageItems[0], 'button')
 
-    spyOn(selector.props, 'onSelectImage')
+    spyOn(cbSelector.props, 'onSelectImage')
     Simulate.click(firstSelectButton)
 
-    expect(selector.props.onSelectImage).toHaveBeenCalled()
-    expect(selector.props.onSelectImage).toHaveBeenCalledWith(TEST_IMAGES[0])
+    expect(cbSelector.props.onSelectImage).toHaveBeenCalled()
+    expect(cbSelector.props.onSelectImage).toHaveBeenCalledWith(TEST_IMAGES[0])
+
+  it 'renders the initial set of images on an empty search query', ->
+    spyOn(selector, 'setInitialImages')
+    input.getDOMNode().value = ''
+    Simulate.submit(form)
+
+    expect(selector.setInitialImages).toHaveBeenCalled()
