@@ -6,6 +6,13 @@ CommentImageSelector = require './comment-image-selector'
 module?.exports = React.createClass
   displayName: 'Commentbox'
 
+  validations: [
+    {
+      check: (text) -> text.trim().length is 0
+      error: "Comments must have content"
+    }
+  ]
+
   getDefaultProps: ->
     submit: "Submit"
     header: "Add to the discussion"
@@ -15,9 +22,11 @@ module?.exports = React.createClass
   getInitialState: ->
     showing: null # name of child to show
     focusImage: 'http://placehold.it/200X200'
+    validationErrors: []
 
   onSubmitComment: (e) ->
     e.preventDefault()
+    return if @handleValidationErrors(@refs.textarea.getDOMNode().value)
     @refs.textarea.getDOMNode().value = ""
     @setState showing: null
 
@@ -33,7 +42,11 @@ module?.exports = React.createClass
   onSelectImage: (image) ->
     @setState focusImage: image.location
 
+
   render: ->
+    validationErrors = @state.validationErrors.map (message, i) =>
+      <p key={i}>{message}</p>
+
     <div className="talk-comment-box">
       <h1>{@props.header}</h1>
       <img className="talk-comment-focus-image" src={@state.focusImage} />
@@ -41,6 +54,7 @@ module?.exports = React.createClass
       <form className="talk-comment-form" onSubmit={@onSubmitComment}>
         <textarea ref="textarea" rows={@props.rows} cols={@props.cols} />
         <button type="submit">{@props.submit}</button>
+        {validationErrors}
       </form>
 
       <div className="talk-comment-buttons-container">
@@ -66,3 +80,15 @@ module?.exports = React.createClass
 
   previewContent: ->
     @refs.textarea.getDOMNode().value
+
+  handleValidationErrors: (text) ->
+    errors = @getValidationErrors(text)
+    @setState validationErrors: errors
+    !!errors.length
+
+  getValidationErrors: (text) ->
+    @validations.reduce (errors, validation) ->
+      if validation.check(text)
+        return errors.concat validation.error
+      errors
+    , []

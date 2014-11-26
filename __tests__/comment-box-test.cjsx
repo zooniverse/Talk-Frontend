@@ -76,3 +76,10 @@ describe 'CommentBox', ->
     Simulate.click(helpBtn)
     imageSelectorAfterSecondClick = scryRenderedComponentsWithType(commentBox, CommentImageSelector)
     expect(imageSelectorAfterSecondClick.length).toBe(0)
+
+  describe 'comment validations', ->
+    it 'ensures comments have content', ->
+      textarea.getDOMNode().innerHTML = ""
+      Simulate.submit(form)
+      expect(commentBox.state.validationErrors.length).toBe(1)
+      expect(commentBox.state.validationErrors[0].match('must have content')).toBeTruthy()
