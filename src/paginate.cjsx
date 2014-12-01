@@ -4,9 +4,9 @@ module?.exports = React.createClass
   displayName: 'TalkPaginate'
 
   propTypes:
-    onPageChange: React.PropTypes.func # Triggered on page changes and passes {page: number, range: array}
-    perPage: React.PropTypes.number    # Number of items to display per page
-    collLength: React.PropTypes.number # length of collection to paginate
+    onPageChange: React.PropTypes.func.isRequired # Triggered on page changes and passes {page: number, range: array}
+    perPage: React.PropTypes.number.isRequired    # Number of items to display per page
+    collLength: React.PropTypes.number.isRequired # length of collection to paginate
 
   getInitialState: ->
     activePage: 1
