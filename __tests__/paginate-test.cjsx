@@ -14,9 +14,15 @@ describe 'Paginate', ->
       paginator = renderIntoDocument(<Paginate onPageChange={(data) => return data} perPage={3} collLength={9} />)
       expect(paginator.pageCount()).toEqual(3)
 
-    it 'rounds down the page count for non evenly divisble nums', ->
+    it 'rounds up the page count for non evenly divisble nums', ->
       paginator = renderIntoDocument(<Paginate onPageChange={(data) => return data} perPage={4} collLength={13} />)
-      expect(paginator.pageCount()).toEqual(3)
+      expect(paginator.pageCount()).toEqual(4)
+
+    it 'returns extra items if there are more items than pages', ->
+      paginator = renderIntoDocument(<Paginate onPageChange={(data) => return data} perPage={4} collLength={14} />)
+      paginator.setState activePage: paginator.pageCount()
+
+      expect(paginator.displayItems(paginator.state.activePage)).toEqual([12, 13])
 
   describe 'changing pages', ->
     paginatorCallback = (data) -> data

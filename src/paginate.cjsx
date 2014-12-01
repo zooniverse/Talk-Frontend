@@ -18,7 +18,7 @@ module?.exports = React.createClass
     [firstItem...lastItem]
 
   pageCount: ->
-    Math.floor(@props.collLength / @props.perPage)
+    Math.ceil(@props.collLength / @props.perPage)
 
   nextPage: ->
     pageCount = @pageCount()
