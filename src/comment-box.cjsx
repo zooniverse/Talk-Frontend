@@ -26,7 +26,7 @@ module?.exports = React.createClass
 
   onSubmitComment: (e) ->
     e.preventDefault()
-    return if @handleValidationErrors(@refs.textarea.getDOMNode().value)
+    return if @setValidationErrors(@refs.textarea.getDOMNode().value)
     @refs.textarea.getDOMNode().value = ""
     @setState showing: null
 
@@ -41,7 +41,6 @@ module?.exports = React.createClass
 
   onSelectImage: (image) ->
     @setState focusImage: image.location
-
 
   render: ->
     validationErrors = @state.validationErrors.map (message, i) =>
@@ -81,7 +80,7 @@ module?.exports = React.createClass
   previewContent: ->
     @refs.textarea.getDOMNode().value
 
-  handleValidationErrors: (text) ->
+  setValidationErrors: (text) ->
     errors = @getValidationErrors(text)
     @setState validationErrors: errors
     !!errors.length
