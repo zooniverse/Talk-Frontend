@@ -21,7 +21,8 @@
   "jest": {
     "scriptPreprocessor": "<rootDir>/preprocessor.js",
     "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules/react"
+        "<rootDir>/node_modules/react",
+        "<rootDir>/node_modules/marked"
     ],
     "testFileExtensions": [
       "coffee",
@@ -46,6 +47,7 @@
   },
   "homepage": "https://github.com/zooniverse/Talk-Frontend",
   "dependencies": {
+    "marked": "^0.3.2",
     "react": "^0.12.1"
   },
   "devDependencies": {

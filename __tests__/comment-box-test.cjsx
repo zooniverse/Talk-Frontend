@@ -36,7 +36,8 @@ describe 'CommentBox', ->
     Simulate.click(previewBtn)
 
     preview = findRenderedComponentWithType(commentBox, CommentPreview)
-    expect(preview.getDOMNode().textContent.match("test comment")).toBeTruthy()
+
+    expect(preview.props.content).toEqual("test comment")
 
   it 'hides the comment preview on submit', ->
     commentBox.setState showing: 'preview'
