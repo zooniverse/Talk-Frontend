@@ -1,10 +1,13 @@
 React = require 'react'
+ToggleChildren = require './mixins/toggle-children'
+
 CommentPreview = require './comment-preview'
 CommentHelp = require './comment-help'
 CommentImageSelector = require './comment-image-selector'
 
 module?.exports = React.createClass
   displayName: 'Commentbox'
+  mixins: [ToggleChildren]
 
   validations: [
     {
@@ -20,7 +23,6 @@ module?.exports = React.createClass
     cols: 100
 
   getInitialState: ->
-    showing: null # name of child to show
     focusImage: 'http://placehold.it/200X200'
     validationErrors: []
 
@@ -63,19 +65,15 @@ module?.exports = React.createClass
       </div>
 
       <div className="talk-comment-children">
-        {if @state.showing is 'image-selector'
-          <CommentImageSelector onSelectImage={@onSelectImage}/>}
-
-        {if @state.showing is 'preview'
-          <CommentPreview content={@previewContent()} />}
-
-        {if @state.showing is 'help'
-          <CommentHelp />}
+        {switch @state.showing
+          when 'image-selector'
+            <CommentImageSelector onSelectImage={@onSelectImage}/>
+          when 'preview'
+            <CommentPreview content={@previewContent()} />
+          when 'help'
+            <CommentHelp />}
       </div>
     </div>
-
-  toggleComponent: (name) ->
-    @setState showing: if @state.showing is name then null else name
 
   previewContent: ->
     @refs.textarea.getDOMNode().value
