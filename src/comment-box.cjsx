@@ -1,5 +1,6 @@
 React = require 'react'
 ToggleChildren = require './mixins/toggle-children'
+Validations  = require './mixins/validations'
 
 CommentPreview = require './comment-preview'
 CommentHelp = require './comment-help'
@@ -7,7 +8,7 @@ CommentImageSelector = require './comment-image-selector'
 
 module?.exports = React.createClass
   displayName: 'Commentbox'
-  mixins: [ToggleChildren]
+  mixins: [ToggleChildren, Validations]
 
   validations: [
     {
@@ -24,7 +25,6 @@ module?.exports = React.createClass
 
   getInitialState: ->
     focusImage: 'http://placehold.it/200X200'
-    validationErrors: []
 
   onSubmitComment: (e) ->
     e.preventDefault()
@@ -77,15 +77,3 @@ module?.exports = React.createClass
 
   previewContent: ->
     @refs.textarea.getDOMNode().value
-
-  setValidationErrors: (text) ->
-    errors = @getValidationErrors(text)
-    @setState validationErrors: errors
-    !!errors.length
-
-  getValidationErrors: (text) ->
-    @validations.reduce (errors, validation) ->
-      if validation.check(text)
-        return errors.concat validation.error
-      errors
-    , []
