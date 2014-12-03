@@ -43,7 +43,7 @@ module?.exports = React.createClass
 
       <div className="talk-comment-display-children">
         {switch @state.showing
-           when 'reply' then <CommentBox />
+           when 'reply' then <CommentBox header="Reply to #{@props.author}" />
            when 'link' then <CommentLink />
            when 'report' then <CommentReportForm />}
       </div>
