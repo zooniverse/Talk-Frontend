@@ -1,5 +1,5 @@
 React = require 'react'
-{CommentBox, CommentDisplay} = require '../src/index'
+{CommentBox, CommentDisplay, UserDisplay} = require '../src/index'
 
 Components = React.createClass
   displayName: 'TalkComponentsExamples'
@@ -13,6 +13,8 @@ Components = React.createClass
         author="example_user"
         date={(new Date)}
         html={"<h1>Example Comment HTML</h1>"}/>
+
+      <UserDisplay name="example_user" formattedName="Example User"/>
 
     </div>
 
