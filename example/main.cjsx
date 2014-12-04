@@ -1,5 +1,5 @@
 React = require 'react'
-{CommentBox, CommentDisplay, UserDisplay} = require '../src/index'
+{CommentBox, CommentDisplay, UserDisplay, BoardPreview} = require '../src/index'
 
 Components = React.createClass
   displayName: 'TalkComponentsExamples'
@@ -15,6 +15,8 @@ Components = React.createClass
         html={"<h1>Example Comment HTML</h1>"}/>
 
       <UserDisplay name="example_user" formattedName="Example User"/>
+
+      <BoardPreview />
 
     </div>
 
