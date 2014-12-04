@@ -3,6 +3,7 @@ exports.CommentDisplay = require './comment-display'
 exports.UserDisplay = require './user-display'
 exports.BoardPreview = require './board-preview'
 exports.PostPreview = require './post-preview'
+exports.CollectionPreview = require './collection-preview'
 
 exports.SubjectDisplay = require './subject-display'
 exports.CommentPreview = require './comment-preview'

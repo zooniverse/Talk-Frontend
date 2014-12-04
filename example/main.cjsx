@@ -1,5 +1,12 @@
 React = require 'react'
-{CommentBox, CommentDisplay, UserDisplay, BoardPreview, PostPreview, SubjectDisplay} = require '../src/index'
+
+{CommentBox
+CommentDisplay
+UserDisplay
+BoardPreview
+PostPreview
+CollectionPreview
+SubjectDisplay} = require '../src/index'
 
 Components = React.createClass
   displayName: 'TalkComponentsExamples'
@@ -20,6 +27,8 @@ Components = React.createClass
       <PostPreview />
 
       <SubjectDisplay />
+
+      <CollectionPreview />
 
     </div>
 
