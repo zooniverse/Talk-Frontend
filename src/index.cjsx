@@ -4,6 +4,7 @@ exports.UserDisplay = require './user-display'
 exports.BoardPreview = require './board-preview'
 exports.PostPreview = require './post-preview'
 
+exports.SubjectDisplay = require './subject-display'
 exports.CommentPreview = require './comment-preview'
 exports.CommentHelp = require './comment-help'
 exports.CommentImageSelector = require './comment-image-selector'
