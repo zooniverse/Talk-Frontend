@@ -6,6 +6,7 @@ UserDisplay
 BoardPreview
 PostPreview
 CollectionPreview
+CollectionCreate
 SubjectDisplay} = require '../src/index'
 
 Components = React.createClass
@@ -29,6 +30,8 @@ Components = React.createClass
       <SubjectDisplay />
 
       <CollectionPreview />
+
+      <CollectionCreate />
 
     </div>
 

@@ -1,9 +1,9 @@
 exports.CommentBox = require './comment-box'
 exports.CommentDisplay = require './comment-display'
-
 exports.BoardPreview = require './board-preview'
 exports.PostPreview = require './post-preview'
 exports.CollectionPreview = require './collection-preview'
+exports.CollectionCreate = require './collection-create'
 
 exports.SubjectDisplay = require './subject-display'
 exports.UserDisplay = require './user-display'
