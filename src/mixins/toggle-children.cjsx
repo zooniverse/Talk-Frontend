@@ -6,3 +6,6 @@ module?.exports =
 
   toggleComponent: (name) ->
     @setState showing: if @state.showing is name then null else name
+
+  hideChildren: ->
+    @setState showing: null

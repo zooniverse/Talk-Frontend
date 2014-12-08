@@ -24,3 +24,9 @@ describe 'ToggleChildren', ->
     it 'sets showing state to null if the passed arg is already showing', ->
       testComponent.toggleComponent('component-name')
       expect(testComponent.state.showing).toEqual(null)
+
+  describe '#hideChildren', ->
+    it 'sets showing state to null', ->
+      testComponent.setState showing: 'test'
+      testComponent.hideChildren()
+      expect(testComponent.state.showing).toEqual(null)

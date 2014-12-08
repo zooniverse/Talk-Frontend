@@ -6,4 +6,10 @@ describe 'CollectionPreview', ->
   {findRenderedDOMComponentWithTag, scryRenderedComponentsWithType, findRenderedComponentWithType, findRenderedDOMComponentWithClass, renderIntoDocument, Simulate} = React.addons.TestUtils
   {CollectionPreview} = require '../src/index'
 
-  xit 'add tests here', ->
+  preview = renderIntoDocument(<CollectionPreview />)
+  deleteButton = findRenderedDOMComponentWithClass(preview, 'talk-collection-preview-delete-button')
+
+  it 'calls window confirm before deleting a collection', ->
+    spyOn(window, 'confirm')
+    Simulate.click(deleteButton)
+    expect(window.confirm).toHaveBeenCalled()

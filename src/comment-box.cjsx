@@ -30,7 +30,7 @@ module?.exports = React.createClass
     e.preventDefault()
     return if @setValidationErrors(@refs.textarea.getDOMNode().value)
     @refs.textarea.getDOMNode().value = ""
-    @setState showing: null
+    @hideChildren()
 
   onPreviewClick: (e) ->
     @toggleComponent('preview')
