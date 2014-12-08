@@ -3,6 +3,9 @@ React = require 'react'
 module?.exports = React.createClass
   displayName: 'TalkActiveButton'
 
+  propTypes: ->
+    active: React.PropTypes.bool
+
   getInitialState: ->
     active: @props.active ? false
 

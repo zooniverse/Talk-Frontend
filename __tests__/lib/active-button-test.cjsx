@@ -29,7 +29,7 @@ describe 'ActiveButton', ->
   describe 'css "active" class', ->
     activeButton = renderIntoDocument(<ActiveButton active={true} />)
 
-    it 'adds an "active class" when the state is "active"', ->
+    it 'adds an "active" class when the state is "active"', ->
       activeClassElems = scryRenderedDOMComponentsWithClass(activeButton, 'active')
       expect(activeClassElems.length).toEqual(1)
 
@@ -47,4 +47,3 @@ describe 'ActiveButton', ->
       spyOn(activeButton.props, 'onClick')
       Simulate.click(domBtn)
       expect(activeButton.props.onClick).toHaveBeenCalled()
-  
