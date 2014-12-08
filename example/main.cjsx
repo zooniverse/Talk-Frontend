@@ -7,12 +7,16 @@ BoardPreview
 PostPreview
 CollectionPreview
 CollectionCreate
+PrivateMessagePreview
+PrivateMessageDisplay
 SubjectDisplay} = require '../src/index'
 
 Components = React.createClass
   displayName: 'TalkComponentsExamples'
 
   render: ->
+    pm = {title: 'Example Private Message', content: 'Example PM Content'}
+
     <div className="talk-components-examples">
       <CommentBox />
 
@@ -32,6 +36,10 @@ Components = React.createClass
       <CollectionPreview />
 
       <CollectionCreate />
+
+      <PrivateMessagePreview message={pm} />
+
+      <PrivateMessageDisplay message={pm} />
 
     </div>
 

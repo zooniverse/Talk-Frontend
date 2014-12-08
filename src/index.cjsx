@@ -4,6 +4,8 @@ exports.BoardPreview = require './board-preview'
 exports.PostPreview = require './post-preview'
 exports.CollectionPreview = require './collection-preview'
 exports.CollectionCreate = require './collection-create'
+exports.PrivateMessagePreview = require './private-message-preview'
+exports.PrivateMessageDisplay = require './private-message-display'
 
 exports.SubjectDisplay = require './subject-display'
 exports.UserDisplay = require './user-display'
