@@ -12,6 +12,7 @@ module?.exports = React.createClass
   render: ->
     <div className="talk-private-message-display">
       <h1>{@props.message.title}</h1>
+      <p>on {(new Date).toString()}</p>
       <p>{@props.message.content}</p>
 
       <button onClick={@onClickReply}>Reply</button>

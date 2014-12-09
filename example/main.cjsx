@@ -9,6 +9,7 @@ CollectionPreview
 CollectionCreate
 PrivateMessagePreview
 PrivateMessageDisplay
+Paginate
 SubjectDisplay} = require '../src/index'
 
 Components = React.createClass
@@ -40,6 +41,8 @@ Components = React.createClass
       <PrivateMessagePreview message={pm} />
 
       <PrivateMessageDisplay message={pm} />
+
+      <Paginate collLength={9} perPage={3} onPageChange={(data) => console.log data}/>
 
     </div>
 
