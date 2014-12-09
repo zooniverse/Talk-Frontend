@@ -44,6 +44,9 @@ module?.exports = React.createClass
   onSelectImage: (image) ->
     @setState focusImage: image.location
 
+  onClearImageClick: (e) ->
+    @setState focusImage: null
+
   render: ->
     validationErrors = @state.validationErrors.map (message, i) =>
       <p key={i}>{message}</p>
@@ -62,6 +65,7 @@ module?.exports = React.createClass
         <button className='talk-comment-preview-button' onClick={@onPreviewClick}>Preview</button>
         <button className='talk-comment-help-button' onClick={@onHelpClick}>Help</button>
         <button className='talk-comment-image-select-button' onClick={@onImageSelectClick}>Select an Image</button>
+        <button className='talk-comment-clear-image-button' onClick={@onClearImageClick}>Clear image</button>
       </div>
 
       <div className="talk-comment-children">
