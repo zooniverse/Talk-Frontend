@@ -4,6 +4,7 @@ ToggleChildren = require './mixins/toggle-children'
 CommentBox = require './comment-box'
 CommentReportForm = require './comment-report-form'
 CommentLink = require './comment-link'
+SubjectDisplay = require './subject-display'
 
 module?.exports = React.createClass
   displayName: 'TalkCommentDisplay'
@@ -32,6 +33,9 @@ module?.exports = React.createClass
       <p className="talk-comment-display-author">
         by {@props.author} {@formatDate(@props.date)} ago
       </p>
+
+      {if @props.comment?.focusImage
+        <SubjectDisplay subject="put-subject-here..."/>}
 
       <div className="talk-comment-display-content" dangerouslySetInnerHTML={__html: @props.html}></div>
 

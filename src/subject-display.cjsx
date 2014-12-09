@@ -16,7 +16,9 @@ module?.exports = React.createClass
       <h1>Subject EX123123</h1>
       <p>metadata</p>
       <p>stats, favorite count, etc</p>
-      <img src="http://placehold.it/200X200&text=GZ12384" />
+      <a href="http://placehold.it/200X200&text=GZ12384"  target="_blank">
+        <img src="http://placehold.it/200X200&text=GZ12384" />
+      </a>
 
       <ActiveButton
         className="talk-subject-display-favorite-button"
