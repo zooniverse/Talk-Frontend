@@ -1,5 +1,5 @@
 jest
-  .dontMock '../src/index'
+  .dontMock '../../src/index'
 
 indexOf = (elem) ->
   (elem while elem = elem.previousSibling).length
@@ -7,7 +7,7 @@ indexOf = (elem) ->
 describe 'Paginate', ->
   React = require 'react/addons'
   {findRenderedDOMComponentWithTag, scryRenderedComponentsWithType, scryRenderedDOMComponentsWithClass, findRenderedComponentWithType, findRenderedDOMComponentWithClass, renderIntoDocument, Simulate} = React.addons.TestUtils
-  {Paginate} = require '../src/index'
+  {Paginate} = require '../../src/index'
    
   describe 'page count', ->
     it 'has the correct number of pages for evenly divisible nums', ->

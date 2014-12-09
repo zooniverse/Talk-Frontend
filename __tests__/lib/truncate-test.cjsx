@@ -6,7 +6,7 @@ truncate = require '../../src/lib/truncate'
 describe '#truncate', ->
   testString = [1..100].map(-> 'test').join('')
 
-  it 'trims a string to the given length and adds and elipses', ->
+  it 'trims a string to the given length and adds elipses', ->
     expect(truncate(testString, 8)).toEqual('testtest...')
 
   it 'defaults to 250 chars', ->
@@ -16,7 +16,7 @@ describe '#truncate', ->
     wsString = 'whitespace        '
     expect(truncate(wsString)).toEqual('whitespace...')
 
-  it 'doesn\'t modify strings shorter than the charLength', ->
+  it 'does not modify strings shorter than the charLength', ->
     expect(truncate('shortstring', 30)).toEqual('shortstring')
     
     

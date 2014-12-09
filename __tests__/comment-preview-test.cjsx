@@ -32,7 +32,7 @@ describe 'CommentPreview', ->
 
       expect(markdown.trim()).toEqual("<p>test content</p>")
 
-    it 'calls the #replaceSymbols callback with transformed markdown', ->
+    it 'calls #replaceSymbols with transformed markdown', ->
       commentPreview = renderIntoDocument(<CommentPreview content="test content" />)
       spyOn(commentPreview, 'replaceSymbols')
 
