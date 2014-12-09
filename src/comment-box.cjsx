@@ -5,6 +5,7 @@ Validations  = require './mixins/validations'
 CommentPreview = require './comment-preview'
 CommentHelp = require './comment-help'
 CommentImageSelector = require './comment-image-selector'
+{insertAtCursor, hrefLink, imageLink} = require './lib/markdown-insert'
 
 module?.exports = React.createClass
   displayName: 'Commentbox'
@@ -66,6 +67,8 @@ module?.exports = React.createClass
         <button className='talk-comment-help-button' onClick={@onHelpClick}>Help</button>
         <button className='talk-comment-image-select-button' onClick={@onImageSelectClick}>Select an Image</button>
         <button className='talk-comment-clear-image-button' onClick={@onClearImageClick}>Clear image</button>
+        <button onClick={@insertLink}>Insert Link</button>
+        <button onClick={@insertImageLink}>Insert Image Link</button>
       </div>
 
       <div className="talk-comment-children">
@@ -81,3 +84,10 @@ module?.exports = React.createClass
 
   previewContent: ->
     @refs.textarea.getDOMNode().value
+
+  insertLink: ->
+    insertAtCursor(hrefLink(), @refs.textarea.getDOMNode())
+
+  insertImageLink: ->
+    insertAtCursor(imageLink(), @refs.textarea.getDOMNode())
+
