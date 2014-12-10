@@ -3,7 +3,7 @@ module?.exports =
     ' [http://www.example.com](Example Title) '
 
   imageLink: ->
-    ' ![alt text](www.example.com/image.jpg "Title") '
+    ' ![alt text](http://www.example.com/image.jpg "Title") '
 
   insertAtCursor: (text, input) ->
     inputVal = input.value

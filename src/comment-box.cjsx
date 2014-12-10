@@ -21,8 +21,6 @@ module?.exports = React.createClass
   getDefaultProps: ->
     submit: "Submit"
     header: "Add to the discussion"
-    rows: 10
-    cols: 100
 
   getInitialState: ->
     focusImage: 'http://placehold.it/200X200'
@@ -57,7 +55,7 @@ module?.exports = React.createClass
       <img className="talk-comment-focus-image" src={@state.focusImage} />
 
       <form className="talk-comment-form" onSubmit={@onSubmitComment}>
-        <textarea ref="textarea" rows={@props.rows} cols={@props.cols} />
+        <textarea ref="textarea" />
         <button type="submit">{@props.submit}</button>
         {validationErrors}
       </form>
