@@ -1,4 +1,5 @@
 React = require 'react'
+{timeStamp} = require './lib/time'
 
 module?.exports = React.createClass
   displayName: 'TalkBoardDisplay'
@@ -19,5 +20,5 @@ module?.exports = React.createClass
       <p>{Math.round Math.random() * 1000} Comments</p>
       <p>Board Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
-      <p>Last Updated: {(new Date).toString()}</p>
+      <p>Last Updated: {timeStamp (new Date).toString()}</p>
     </div>

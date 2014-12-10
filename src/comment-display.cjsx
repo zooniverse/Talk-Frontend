@@ -5,6 +5,7 @@ CommentBox = require './comment-box'
 CommentReportForm = require './comment-report-form'
 CommentLink = require './comment-link'
 SubjectDisplay = require './subject-display'
+{timeStamp} = require './lib/time'
 
 module?.exports = React.createClass
   displayName: 'TalkCommentDisplay'
@@ -14,10 +15,6 @@ module?.exports = React.createClass
     author: React.PropTypes.string
     time: React.PropTypes.string
     html: React.PropTypes.string
-
-  formatDate: (date) ->
-    # TODO: update with actual date formatting, move to a mixin
-    date.toString()
 
   onClickReply: (e) ->
     @toggleComponent('reply')
@@ -31,7 +28,7 @@ module?.exports = React.createClass
   render: ->
     <div className="talk-comment-display">
       <p className="talk-comment-display-author">
-        by {@props.author} {@formatDate(@props.date)} ago
+        by {@props.author} {timeStamp @props.date.toString()}
       </p>
 
       {if @props.comment?.focusImage
