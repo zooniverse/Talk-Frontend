@@ -8,6 +8,8 @@ var source = require("vinyl-source-stream");
 var exampleWebpackConfig = require("./example/webpack.example.js");
 var nib = require("nib");
 var stylus = require("gulp-stylus");
+var merge = require("lodash.merge");
+var del = require("del");
 
 var execWebpack = function(config) {
     webpack((config), function(err, stats) {
@@ -15,6 +17,12 @@ var execWebpack = function(config) {
         // gutil.log(stats.toString({colors: true}));
     });
 };
+
+gulp.task('clean', function(){
+    del(['./example/build'], function(){
+        gutil.log('Removed build directory');
+    })
+});
 
 /* Build /src into dist/talk.js */
 gulp.task('build', function() {
@@ -61,6 +69,11 @@ gulp.task('webpack', function(callback){
     callback();
 });
 
+gulp.task('webpack-build-once', function(){
+    execWebpack(merge(exampleWebpackConfig, {watch: false}));
+    gutil.log('Webpack Build');
+});
+
 gulp.task('dev-server', function(){
     browserSync({
         open: false,
@@ -74,3 +87,4 @@ gulp.task('dev-server', function(){
 });
 
 gulp.task('default', ['webpack', 'dev-server', 'watch-css']);
+
