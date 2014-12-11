@@ -1,19 +1,20 @@
 React = require 'react'
 {timeStamp} = require './lib/time'
+links = require './lib/links'
 
 module?.exports = React.createClass
   displayName: 'TalkBoardDisplay'
 
   render: ->
     <div className="talk-board-preview">
-      <a href="http://www.zooniverse.org/link-to-board">
+      <a href={links.board('put-board-id-here')}>
         <h1>Example Board</h1>
       </a>
 
       <p>Latest Post: 
-        <a href="http://www.zooniverse.org/link-to-post">(Post.title)</a>
+        <a href={links.post('board-name', 'thread-name', 'post-id')}>(Post.title)</a>
         <span> by </span>
-        <a href="http://www.zooniverse.org/link-to-user">(Post.user)</a>
+        <a href={links.user('user-name-here')}>(Post.user)</a>
       </p>
 
       <p>{Math.round Math.random() * 1000} Users</p>

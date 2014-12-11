@@ -23,4 +23,3 @@ describe 'markdown insert', ->
       textarea.value = "Before"
       insertAtCursor("After", textarea)
       expect(textarea.value).toEqual("BeforeAfter")
-

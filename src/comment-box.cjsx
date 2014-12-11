@@ -55,7 +55,7 @@ module?.exports = React.createClass
       <img className="talk-comment-focus-image" src={@state.focusImage} />
 
       <form className="talk-comment-form" onSubmit={@onSubmitComment}>
-        <textarea ref="textarea" />
+        <textarea ref="textarea" placeholder="Type your comment here" />
         <button type="submit">{@props.submit}</button>
         {validationErrors}
       </form>

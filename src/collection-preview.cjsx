@@ -1,6 +1,7 @@
 React = require 'react'
 SubjectDisplay = require './subject-display'
 ToggleChildren = require './mixins/toggle-children'
+links = require './lib/links'
 
 module?.exports = React.createClass
   displayName: 'TalkCollectionPreview'
@@ -23,7 +24,7 @@ module?.exports = React.createClass
 
   render: ->
     <div className="talk-collection-preview">
-      <a href="http://www.zooniverse.org/link-to-collection">
+      <a href={links.collection('user-here', 'collection-here')}>
         <h1>Talk Collection Preview</h1>
       </a>
 
