@@ -25,6 +25,7 @@ module?.exports = React.createClass
   getInitialState: ->
     focusImage: 'http://placehold.it/200X200'
     previewContent: ''
+    feedback: null
 
   onSubmitComment: (e) ->
     e.preventDefault()
@@ -54,7 +55,7 @@ module?.exports = React.createClass
 
   render: ->
     validationErrors = @state.validationErrors.map (message, i) =>
-      <p key={i}>{message}</p>
+      <p key={i} className="talk-validation-error">{message}</p>
 
     <div className="talk-comment-box">
       <h1>{@props.header}</h1>
