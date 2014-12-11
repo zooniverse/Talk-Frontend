@@ -12,13 +12,16 @@ describe 'CommentBox', ->
   previewBtn = findRenderedDOMComponentWithClass(commentBox, 'talk-comment-preview-button')
   clearImageBtn = findRenderedDOMComponentWithClass(commentBox, 'talk-comment-clear-image-button')
 
-  it 'clears the textarea on submit', ->
+  describe 'on submit', ->
     submitBtn = findRenderedDOMComponentWithTag(form, 'button')
-
     textarea.getDOMNode().innerHTML = "a comment"
-    expect(textarea.getDOMNode().textContent).toEqual("a comment")
     Simulate.submit(form)
-    expect(textarea.getDOMNode().textContent).toEqual("")
+
+    it 'clears the textarea', ->
+      expect(textarea.getDOMNode().textContent).toEqual("")
+
+    it 'sends feedback on success', ->
+      expect(commentBox.state.feedback).toBeTruthy()
 
   it 'toggles a CommentPreview component', ->
     preview = scryRenderedComponentsWithType(commentBox, CommentPreview)

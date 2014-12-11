@@ -29,9 +29,10 @@ module?.exports = React.createClass
   onSubmitComment: (e) ->
     e.preventDefault()
     return if @setValidationErrors(@refs.textarea.getDOMNode().value)
+
     @refs.textarea.getDOMNode().value = ""
     @hideChildren()
-    @setState previewContent: ""
+    @setState {previewContent: "", feedback: "Comment Successfully Submitted"}
 
   onPreviewClick: (e) ->
     @toggleComponent('preview')
@@ -57,6 +58,10 @@ module?.exports = React.createClass
 
     <div className="talk-comment-box">
       <h1>{@props.header}</h1>
+
+      {if @state.feedback
+        <p className="talk-feedback">{@state.feedback}</p>}
+
       <img className="talk-comment-focus-image" src={@state.focusImage} />
 
       <form className="talk-comment-form" onSubmit={@onSubmitComment}>
