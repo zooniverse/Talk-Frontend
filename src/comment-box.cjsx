@@ -24,12 +24,14 @@ module?.exports = React.createClass
 
   getInitialState: ->
     focusImage: 'http://placehold.it/200X200'
+    previewContent: ''
 
   onSubmitComment: (e) ->
     e.preventDefault()
     return if @setValidationErrors(@refs.textarea.getDOMNode().value)
     @refs.textarea.getDOMNode().value = ""
     @hideChildren()
+    @setState previewContent: ""
 
   onPreviewClick: (e) ->
     @toggleComponent('preview')
@@ -46,6 +48,9 @@ module?.exports = React.createClass
   onClearImageClick: (e) ->
     @setState focusImage: null
 
+  onInputChange: ->
+    @setState previewContent: @previewContent()
+
   render: ->
     validationErrors = @state.validationErrors.map (message, i) =>
       <p key={i}>{message}</p>
@@ -55,7 +60,7 @@ module?.exports = React.createClass
       <img className="talk-comment-focus-image" src={@state.focusImage} />
 
       <form className="talk-comment-form" onSubmit={@onSubmitComment}>
-        <textarea ref="textarea" placeholder="Type your comment here" />
+        <textarea onInput={@onInputChange} ref="textarea" placeholder="Type your comment here" />
         <button type="submit">{@props.submit}</button>
         {validationErrors}
       </form>
@@ -74,7 +79,7 @@ module?.exports = React.createClass
           when 'image-selector'
             <CommentImageSelector onSelectImage={@onSelectImage}/>
           when 'preview'
-            <CommentPreview content={@previewContent()} />
+            <CommentPreview content={@state.previewContent} />
           when 'help'
             <CommentHelp />}
       </div>

@@ -33,23 +33,17 @@ describe 'CommentBox', ->
     expect(previewAfterSecondClick.length).toBe(0)
 
   it 'sends the textarea content to the preview component', ->
-    textarea.getDOMNode().innerHTML = "test comment"
+    commentBox.setState previewContent: "test comment"
     Simulate.click(previewBtn)
 
     preview = findRenderedComponentWithType(commentBox, CommentPreview)
-
     expect(preview.props.content).toEqual("test comment")
 
-  it 'hides the comment preview on submit', ->
-    commentBox.setState showing: 'preview'
-
-    previewBeforeSubmit = scryRenderedComponentsWithType(commentBox, CommentPreview)
-    expect(previewBeforeSubmit.length).toBe(1)
-
+  it 'hides children on submit', ->
+    expect(commentBox.state.showing).toEqual('preview')
+    textarea.getDOMNode().innerHTML = "test commenent"
     Simulate.submit(form)
-
-    previewAfterSubmit = scryRenderedComponentsWithType(commentBox, CommentPreview)
-    expect(previewAfterSubmit.length).toBe(0)
+    expect(commentBox.state.showing).toBeNull()
 
   it 'toggles a comment help component', ->
     helpBtn = findRenderedDOMComponentWithClass(commentBox, 'talk-comment-help-button')
