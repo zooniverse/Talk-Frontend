@@ -23,7 +23,7 @@ module?.exports = React.createClass
     header: "Add to the discussion"
 
   getInitialState: ->
-    focusImage: 'http://placehold.it/200X200'
+    focusImage: null
     previewContent: ''
     feedback: null
 
