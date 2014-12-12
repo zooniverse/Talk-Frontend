@@ -5,6 +5,7 @@ CommentDisplay
 UserDisplay
 BoardPreview
 PostPreview
+DiscussionCreate
 CollectionPreview
 CollectionCreate
 PrivateMessagePreview
@@ -44,6 +45,8 @@ Components = React.createClass
       <PrivateMessageDisplay message={pm} />
 
       <PrivateMessageCreate />
+
+      <DiscussionCreate />
 
       <Paginate collLength={9} perPage={3} onPageChange={(data) => console.log data}/>
 
