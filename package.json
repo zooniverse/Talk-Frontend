@@ -49,6 +49,7 @@
   },
   "homepage": "https://github.com/zooniverse/Talk-Frontend",
   "dependencies": {
+    "emojify.js": "^0.9.5",
     "marked": "^0.3.2",
     "moment": "^2.8.4",
     "react": "^0.12.1"

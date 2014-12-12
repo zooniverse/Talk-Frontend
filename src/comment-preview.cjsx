@@ -1,5 +1,8 @@
 React = require 'react'
 marked = require 'marked'
+emojify = require 'emojify.js'
+
+EMOJI_ROOT = 'http://www.tortue.me/emoji'
 
 module?.exports = React.createClass
   displayName: 'TalkCommentPreview'
@@ -16,8 +19,11 @@ module?.exports = React.createClass
       throw err if err
       return @replaceSymbols(content)
 
+  emojify: (input) ->
+    emojify.replace input, (match, icon) ->
+      "<img class='talk-emoji' src='#{EMOJI_ROOT}/#{icon}.png' alt='#{match}' title='#{match}' />"
   render: ->
-    html = @markdownify(@props.content)
+    html = @emojify(@markdownify(@props.content))
 
     <div className='talk-comment-preview'>
       <h1>Preview</h1>
