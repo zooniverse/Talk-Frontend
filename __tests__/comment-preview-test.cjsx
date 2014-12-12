@@ -39,3 +39,9 @@ describe 'CommentPreview', ->
       commentPreview.markdownify(commentPreview.props.content)
       expect(commentPreview.replaceSymbols).toHaveBeenCalled()
       expect(commentPreview.replaceSymbols).toHaveBeenCalledWith("<p>test content</p>\n")
+
+  describe '#emojify', ->
+    it 'replaces emoji', ->
+      commentPreview = renderIntoDocument(<CommentPreview content=":smile:" />)
+      emojiOutput = commentPreview.emojify(commentPreview.props.content)
+      expect(emojiOutput.trim()).toEqual("<img class='talk-emoji' src='http://www.tortue.me/emoji/smile.png' alt=':smile:' title=':smile:' />")
