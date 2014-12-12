@@ -18,6 +18,10 @@ module?.exports = React.createClass
     }
   ]
 
+  propTypes:
+    submit: React.PropTypes.string
+    header: React.PropTypes.string
+
   getDefaultProps: ->
     submit: "Submit"
     header: "Add to the discussion"
