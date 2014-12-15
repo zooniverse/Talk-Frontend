@@ -76,7 +76,6 @@
     "publisssh": "^0.2.6",
     "stylus": "^0.49.3",
     "vinyl-source-stream": "^1.0.0",
-    "watchify": "^2.1.1",
     "webpack": "^1.4.13"
   },
   "browserify-shim": {
