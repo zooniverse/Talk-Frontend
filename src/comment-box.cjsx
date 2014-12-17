@@ -99,8 +99,14 @@ module?.exports = React.createClass
     @refs.textarea.getDOMNode().value
 
   insertLink: ->
-    insertAtCursor(hrefLink(), @refs.textarea.getDOMNode())
+    textarea = @refs.textarea.getDOMNode()
+    selection = textarea.value.substring(textarea.selectionStart, textarea.selectionEnd)
+
+    insertAtCursor(hrefLink(selection), textarea)
 
   insertImageLink: ->
-    insertAtCursor(imageLink(), @refs.textarea.getDOMNode())
+    textarea = @refs.textarea.getDOMNode()
+    selection = textarea.value.substring(textarea.selectionStart, textarea.selectionEnd)
+
+    insertAtCursor(imageLink(selection), textarea)
 
