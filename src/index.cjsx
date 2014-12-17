@@ -10,6 +10,7 @@ exports.PrivateMessageDisplay = require './private-message-display'
 exports.PrivateMessageCreate = require './private-message-create'
 
 exports.SubjectDisplay = require './subject-display'
+exports.SubjectCollections = require './subject-collections'
 exports.UserDisplay = require './user-display'
 exports.CommentPreview = require './comment-preview'
 exports.CommentHelp = require './comment-help'

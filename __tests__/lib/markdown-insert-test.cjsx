@@ -34,7 +34,7 @@ describe 'markdown insert', ->
       expect(link).toEqual(" [Example Title](http://www.example.com) ")
 
   describe '#imageLink', ->
-    it 'formats an image when href and title args are passed', ->
+    it 'formats an image when a title arg is passed', ->
       image = imageLink("Test Image")
       expect(image).toEqual(" ![Test Image](http://www.example.com/image.png) ")
 

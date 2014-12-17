@@ -11,6 +11,7 @@ CollectionCreate
 PrivateMessagePreview
 PrivateMessageDisplay
 PrivateMessageCreate
+SubjectCollections
 Paginate
 SubjectDisplay} = require '../src/index'
 
@@ -39,6 +40,8 @@ Components = React.createClass
       <CollectionPreview />
 
       <CollectionCreate />
+
+      <SubjectCollections />
 
       <PrivateMessagePreview message={pm} />
 
