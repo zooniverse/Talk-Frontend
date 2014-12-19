@@ -81,6 +81,7 @@ module?.exports = React.createClass
         <button className='talk-comment-image-select-button' onClick={@onImageSelectClick}>Select an Image</button>
         <button className='talk-comment-clear-image-button' onClick={@onClearImageClick}>Clear image</button>
         <button onClick={@insertLink}>Insert Link</button>
+
         <button onClick={@insertImageLink}>Insert Image Link</button>
       </div>
 

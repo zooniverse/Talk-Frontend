@@ -27,27 +27,32 @@ module?.exports = React.createClass
 
   getInitialState: ->
     collections: user.project.subject.collections
+    feedback: null
 
   onChangeInput: (e) ->
-    console.log "asd"
-    collections = @state.collections
-    collections = collections.map (coll, i) ->
-      if coll.id is +e.target.getAttribute('value')
+    collections = @state.collections.map (coll, i) ->
+      if +coll.id is +e.target.getAttribute('value')
         coll.member = !coll.member
       coll
 
     @setState collections: collections
 
+  pluckAttribute: (nodeList, attrName) ->
+    [].slice.call(nodeList).map (node) ->
+      node.getAttribute(attrName)
+
   getSelectedInputValues: ->
     selectedInputNodes = @refs.collectionsList.getDOMNode().querySelectorAll("input:checked")
 
-    [].slice.call(selectedInputNodes).map (input) ->
-      input.getAttribute('value')
+    @pluckAttribute(selectedInputNodes, 'value')
 
   onSubmit: (e) ->
     e.preventDefault()
 
-    console.log "save these collections on subject", @getSelectedInputValues()
+    # save these collections on subject:
+    @getSelectedInputValues()
+
+    @setState feedback: "Subject collection list saved"
 
   collectionItem: (coll, i) ->
     <li key={i}>
@@ -59,6 +64,10 @@ module?.exports = React.createClass
   render: ->
     <div className="talk-subject-collections">
       <h1>Add Subject To collection</h1>
+
+      {if @state.feedback
+        <p className="talk-feedback">{@state.feedback}</p>}
+
       <form onSubmit={@onSubmit} className="talk-subject-collections-form">
         <ul ref="collectionsList">
           {@state.collections.map(@collectionItem)}
