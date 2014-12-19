@@ -8,6 +8,7 @@ PostPreview
 DiscussionCreate
 CollectionPreview
 CollectionCreate
+HashtagsList
 PrivateMessagePreview
 PrivateMessageDisplay
 PrivateMessageCreate
@@ -50,6 +51,8 @@ Components = React.createClass
       <PrivateMessageCreate />
 
       <DiscussionCreate />
+
+      <HashtagsList title="Popular Hashtags" hashtags={["kelp", "help", "yelp", "welp"]} />
 
       <Paginate collLength={9} perPage={3} onPageChange={(data) => console.log data}/>
 

@@ -8,6 +8,7 @@ exports.CollectionCreate = require './collection-create'
 exports.PrivateMessagePreview = require './private-message-preview'
 exports.PrivateMessageDisplay = require './private-message-display'
 exports.PrivateMessageCreate = require './private-message-create'
+exports.HashtagsList = require './hashtags-list'
 
 exports.SubjectDisplay = require './subject-display'
 exports.SubjectCollections = require './subject-collections'
