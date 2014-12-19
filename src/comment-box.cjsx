@@ -6,6 +6,8 @@ CommentPreview = require './comment-preview'
 CommentHelp = require './comment-help'
 CommentImageSelector = require './comment-image-selector'
 {insertAtCursor, hrefLink, imageLink} = require './lib/markdown-insert'
+MarkdownLink = require './lib/markdown-link'
+MarkdownImage = require './lib/markdown-image'
 
 module?.exports = React.createClass
   displayName: 'Commentbox'
@@ -48,6 +50,12 @@ module?.exports = React.createClass
   onImageSelectClick: (e) ->
     @toggleComponent('image-selector')
 
+  onInsertLinkClick: (e) ->
+    @toggleComponent('markdown-link')
+
+  onInsertImageClick: (e) ->
+    @toggleComponent('markdown-image')
+
   onSelectImage: (image) ->
     @setState focusImage: image.location
 
@@ -80,9 +88,9 @@ module?.exports = React.createClass
         <button className='talk-comment-help-button' onClick={@onHelpClick}>Help</button>
         <button className='talk-comment-image-select-button' onClick={@onImageSelectClick}>Select an Image</button>
         <button className='talk-comment-clear-image-button' onClick={@onClearImageClick}>Clear image</button>
-        <button onClick={@insertLink}>Insert Link</button>
+        <button onClick={@onInsertLinkClick}>Insert Link</button>
 
-        <button onClick={@insertImageLink}>Insert Image Link</button>
+        <button onClick={@onInsertImageClick}>Insert Image Link</button>
       </div>
 
       <div className="talk-comment-children">
@@ -92,22 +100,23 @@ module?.exports = React.createClass
           when 'preview'
             <CommentPreview content={@state.previewContent} />
           when 'help'
-            <CommentHelp />}
+            <CommentHelp />
+          when 'markdown-link'
+            <MarkdownLink onCreateLink={@onCreateLink} />
+          when 'markdown-image'
+            <MarkdownImage onCreateImage={@onCreateImage} />}
       </div>
     </div>
 
   previewContent: ->
     @refs.textarea.getDOMNode().value
 
-  insertLink: ->
+  onCreateLink: (e, url, title) ->
     textarea = @refs.textarea.getDOMNode()
-    selection = textarea.value.substring(textarea.selectionStart, textarea.selectionEnd)
+    # selection = textarea.value.substring(textarea.selectionStart, textarea.selectionEnd)
+    insertAtCursor(hrefLink(url, title), textarea)
 
-    insertAtCursor(hrefLink(selection), textarea)
-
-  insertImageLink: ->
+  onCreateImage: (e, alt, title) ->
     textarea = @refs.textarea.getDOMNode()
-    selection = textarea.value.substring(textarea.selectionStart, textarea.selectionEnd)
 
-    insertAtCursor(imageLink(selection), textarea)
-
+    insertAtCursor(imageLink(alt, title), textarea)

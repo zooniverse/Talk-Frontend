@@ -1,15 +1,15 @@
 module?.exports =
-  hrefLink: (title) ->
-    if title
-      " [#{title}](http://www.example.com) "
-    else
-      " [Example Title](http://www.example.com) "
+  hrefLink: (title, url) ->
+    linkTitle = title or "Example Title"
+    linkUrl = url or "http://www.example.com"
 
-  imageLink: (title) ->
-    if title
-      " ![#{title}](http://www.example.com/image.png) "
-    else
-      " ![Example Image](http://www.example.com/image.png) "
+    " [#{linkTitle}](#{linkUrl}) "
+
+  imageLink: (title, url) ->
+    imageTitle = title or "Example Image"
+    imageUrl = url or "http://www.example.com/image.png"
+
+    " ![#{imageTitle}](#{imageUrl}) "
 
   insertAtCursor: (text, input) ->
     inputVal = input.value
