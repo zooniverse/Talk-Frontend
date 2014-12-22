@@ -16,3 +16,13 @@ describe 'MarkdownLink', ->
     Simulate.submit(form)
 
     expect(mdlink.props.onCreateLink).toHaveBeenCalled()
+
+  it 'clears the form on submit', ->
+    mdlink.refs.title.getDOMNode().value = "test title"
+    mdlink.refs.url.getDOMNode().value = "test url"
+
+    Simulate.submit(form)
+
+    expect(mdlink.refs.title.getDOMNode().value).toEqual('')
+    expect(mdlink.refs.url.getDOMNode().value).toEqual('')
+

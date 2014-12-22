@@ -13,6 +13,15 @@ module?.exports = React.createClass
 
     @props.onCreateImage(e, alt, url)
 
+    @resetForm()
+
+  clearInputValue: (ref) ->
+    @refs[ref].getDOMNode().value = ''
+
+  resetForm: ->
+    refsToClear = ['url', 'alt']
+    refsToClear.forEach @clearInputValue
+
   render: ->
     <div className="talk-markdown-image">
       <form className="talk-markdown-image-form" onSubmit={@onSubmit}>

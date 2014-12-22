@@ -16,3 +16,13 @@ describe 'MarkdownImage', ->
     Simulate.submit(form)
 
     expect(mdimage.props.onCreateImage).toHaveBeenCalled()
+
+  it 'clears the form on submit', ->
+    mdimage.refs.alt.getDOMNode().value = "test title"
+    mdimage.refs.url.getDOMNode().value = "test url"
+
+    Simulate.submit(form)
+
+    expect(mdimage.refs.alt.getDOMNode().value).toEqual('')
+    expect(mdimage.refs.url.getDOMNode().value).toEqual('')
+    

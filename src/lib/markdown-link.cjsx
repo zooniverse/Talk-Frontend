@@ -13,6 +13,15 @@ module?.exports = React.createClass
 
     @props.onCreateLink(e, url, title)
 
+    @resetForm()
+
+  clearInputValue: (ref) ->
+    @refs[ref].getDOMNode().value = ''
+
+  resetForm: ->
+    refsToClear = ['url', 'title']
+    refsToClear.forEach @clearInputValue
+
   render: ->
     <div className="talk-markdown-link">
       <form className="talk-markdown-link-form" onSubmit={@onSubmit}>
