@@ -115,9 +115,9 @@ module?.exports = React.createClass
     textarea = @refs.textarea.getDOMNode()
     # selection = textarea.value.substring(textarea.selectionStart, textarea.selectionEnd)
     insertAtCursor(hrefLink(url, title), textarea)
+    @setState previewContent: textarea.value # simulate input change to update preview
 
   onCreateImage: (e, alt, title) ->
     textarea = @refs.textarea.getDOMNode()
-
     insertAtCursor(imageLink(alt, title), textarea)
-
+    @setState previewContent: textarea.value # simulate input change to update preview
