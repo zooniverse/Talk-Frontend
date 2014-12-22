@@ -1,7 +1,7 @@
 jest
   .dontMock '../../src/lib/markdown-insert'
 
-{insertAtCursor, hrefLink, imageLink} = require '../../src/lib/markdown-insert'
+{insertAtCursor, hrefLink, bold, italic, imageLink} = require '../../src/lib/markdown-insert'
 
 describe 'markdown insert', ->
   React = require 'react/addons'
@@ -53,3 +53,13 @@ describe 'markdown insert', ->
     it 'returns an example link when no args are passed', ->
       image = imageLink()
       expect(image).toEqual(" ![Example Image](http://www.example.com/image.png) ")
+
+  describe '#bold', ->
+    it 'wraps text in double earmuffs', ->
+      boldText = bold("text")
+      expect(boldText).toEqual(" **text** ")
+
+  describe '#italic', ->
+    it 'wraps text in earmuffs', ->
+      italicText = italic("text")
+      expect(italicText).toEqual(" *text* ")

@@ -5,7 +5,7 @@ Validations  = require './mixins/validations'
 CommentPreview = require './comment-preview'
 CommentHelp = require './comment-help'
 CommentImageSelector = require './comment-image-selector'
-{insertAtCursor, hrefLink, imageLink} = require './lib/markdown-insert'
+{insertAtCursor, getSelection, hrefLink, imageLink, bold, italic} = require './lib/markdown-insert'
 MarkdownLink = require './lib/markdown-link'
 MarkdownImage = require './lib/markdown-image'
 
@@ -56,6 +56,20 @@ module?.exports = React.createClass
   onInsertImageClick: (e) ->
     @toggleComponent('markdown-image')
 
+  onBoldClick: (e) ->
+    textarea = @refs.textarea.getDOMNode()
+    selection = getSelection(textarea)
+
+    insertAtCursor(bold(selection), textarea)
+    @onInputChange()
+
+  onItalicClick: (e) ->
+    textarea = @refs.textarea.getDOMNode()
+    selection = getSelection(textarea)
+
+    insertAtCursor(italic(selection), textarea)
+    @onInputChange()
+
   onSelectImage: (image) ->
     @setState focusImage: image.location
 
@@ -63,7 +77,7 @@ module?.exports = React.createClass
     @setState focusImage: null
 
   onInputChange: ->
-    @setState previewContent: @previewContent()
+    @setState previewContent: @refs.textarea.getDOMNode().value
 
   render: ->
     validationErrors = @state.validationErrors.map (message, i) =>
@@ -88,9 +102,10 @@ module?.exports = React.createClass
         <button className='talk-comment-help-button' onClick={@onHelpClick}>Help</button>
         <button className='talk-comment-image-select-button' onClick={@onImageSelectClick}>Select an Image</button>
         <button className='talk-comment-clear-image-button' onClick={@onClearImageClick}>Clear image</button>
-        <button onClick={@onInsertLinkClick}>Insert Link</button>
-
-        <button onClick={@onInsertImageClick}>Insert Image Link</button>
+        <button className='talk-comment-insert-link-button' onClick={@onInsertLinkClick}>Insert Link</button>
+        <button className='talk-comment-insert-image-button' onClick={@onInsertImageClick}>Insert Image Link</button>
+        <button className='talk-comment-bold-button' onClick={@onBoldClick}>Bold</button>
+        <button className='talk-comment-italic-button' onClick={@onItalicClick}>Italicize</button>
       </div>
 
       <div className="talk-comment-children">
@@ -108,16 +123,12 @@ module?.exports = React.createClass
       </div>
     </div>
 
-  previewContent: ->
-    @refs.textarea.getDOMNode().value
-
   onCreateLink: (e, url, title) ->
     textarea = @refs.textarea.getDOMNode()
-    # selection = textarea.value.substring(textarea.selectionStart, textarea.selectionEnd)
     insertAtCursor(hrefLink(url, title), textarea)
-    @setState previewContent: textarea.value # simulate input change to update preview
+    @onInputChange()
 
   onCreateImage: (e, alt, title) ->
     textarea = @refs.textarea.getDOMNode()
     insertAtCursor(imageLink(alt, title), textarea)
-    @setState previewContent: textarea.value # simulate input change to update preview
+    @onInputChange()

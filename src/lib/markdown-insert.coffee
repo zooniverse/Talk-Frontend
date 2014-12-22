@@ -11,9 +11,19 @@ module?.exports =
 
     " ![#{imageTitle}](#{imageUrl}) "
 
+  bold: (text) ->
+    " **#{text}** "
+
+  italic: (text) ->
+    " *#{text}* "
+
+  getSelection: (input) ->
+    input.value.substring(input.selectionStart, input.selectionEnd)
+
   insertAtCursor: (text, input) ->
     inputVal = input.value
     cursorPos = input.selectionStart ? inputVal.length
     cursorEnd = input.selectionEnd ? inputVal.length
 
     input.value = (inputVal.substring(0, cursorPos) + text + inputVal.substring(cursorEnd, inputVal.length))
+    input.focus()
