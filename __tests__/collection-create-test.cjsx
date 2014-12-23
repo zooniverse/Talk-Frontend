@@ -21,4 +21,3 @@ describe 'CollectionCreate', ->
       input.getDOMNode().value = ""
       Simulate.submit(form)
       expect(!!~collectionCreate.state.validationErrors[0].indexOf('must have content')).toBeTruthy()
-      

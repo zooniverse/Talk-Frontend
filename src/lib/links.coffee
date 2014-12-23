@@ -45,6 +45,9 @@ module?.exports =
   collectionSubject: (userLogin, collectionName, subjectId) ->
     @collection(userLogin, collectionName) + '/' + subjectId
 
+  hashtag: (tagName) ->
+    @root() + '/hashtag/' + tagName
+
   # User
 
   user: (userLogin) ->

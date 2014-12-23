@@ -1,10 +1,13 @@
 React = require 'react'
+links = require './lib/links'
 
 module?.exports = React.createClass
   displayName: 'HashtagsList'
 
   hashtagItem: (tagName, i) ->
-    <p key={i} className="talk-hashtags-list-item">#{tagName}</p>
+    <a key={i} href={links.hashtag(tagName)} className="talk-hashtags-list-item">
+      <p>#{tagName}</p>
+    </a>
 
   render: ->
     <div className="talk-hashtags-list">
