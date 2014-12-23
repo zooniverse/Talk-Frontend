@@ -23,10 +23,14 @@ module?.exports = React.createClass
   propTypes:
     submit: React.PropTypes.string
     header: React.PropTypes.string
+    placeholder: React.PropTypes.string
+    submitFeedback: React.PropTypes.string
 
   getDefaultProps: ->
     submit: "Submit"
     header: "Add to the discussion"
+    placeholder: "Type your comment here"
+    submitFeedback: "Comment Successfully Submitted"
 
   getInitialState: ->
     focusImage: null
@@ -39,7 +43,7 @@ module?.exports = React.createClass
 
     @refs.textarea.getDOMNode().value = ""
     @hideChildren()
-    @setState {previewContent: "", feedback: "Comment Successfully Submitted"}
+    @setState previewContent: "", feedback: @props.submitFeedback
 
   onPreviewClick: (e) ->
     @toggleComponent('preview')
@@ -103,11 +107,10 @@ module?.exports = React.createClass
       <img className="talk-comment-focus-image" src={@state.focusImage} />
 
       <form className="talk-comment-form" onSubmit={@onSubmitComment}>
-        <textarea onInput={@onInputChange} ref="textarea" placeholder="Type your comment here" />
+        <textarea onInput={@onInputChange} ref="textarea" placeholder={@props.placeholder} />
         <button type="submit">{@props.submit}</button>
         {validationErrors}
       </form>
-
 
       <div className="talk-comment-children">
         {switch @state.showing
