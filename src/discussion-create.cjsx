@@ -5,7 +5,7 @@ CommentBox = require './comment-box'
 
 module?.exports = React.createClass
   displayName: 'DiscussionCreate'
-  mixins: [ToggleChildren, Validations]
+  mixins: [Validations]
 
   validations: [
     {
@@ -23,17 +23,11 @@ module?.exports = React.createClass
     header: "Create a discussion"
     commentPlaceholder: "Start the discussion with a comment"
 
-  onSubmitDiscussion: (e) ->
+  onSubmitDiscussion: (e, text, focusImage) ->
     e.preventDefault()
     return if @setValidationErrors(@refs.title.getDOMNode().value)
 
-    # title & focus-image will be the discussion itself
-    # textarea value will be top discussion comment
-
     @refs.title.getDOMNode().value = ""
-    @refs.textarea.getDOMNode().value = ""
-
-    @hideChildren()
     @setState feedback: "Discussion Successfully Created"
 
   render: ->
@@ -46,14 +40,12 @@ module?.exports = React.createClass
       {if @state.feedback
         <p className="talk-feedback">{@state.feedback}</p>}
 
-
       <form className="talk-discussion-form" onSubmit={@onSubmitDiscussion}>
         <input ref="title" placeholder="Discussion Title" />
-
-        {validationErrors}
       </form>
 
       <CommentBox header={null} placeholder={@props.commentPlaceholder} />
+      {validationErrors}
     </div>
 
   previewContent: ->

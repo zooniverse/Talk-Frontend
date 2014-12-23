@@ -25,6 +25,7 @@ module?.exports = React.createClass
     header: React.PropTypes.string
     placeholder: React.PropTypes.string
     submitFeedback: React.PropTypes.string
+    onSubmitComment: React.PropTypes.func # called on submit and passed (e, textarea-content)
 
   getDefaultProps: ->
     submit: "Submit"
@@ -39,7 +40,12 @@ module?.exports = React.createClass
 
   onSubmitComment: (e) ->
     e.preventDefault()
-    return if @setValidationErrors(@refs.textarea.getDOMNode().value)
+    textareaValue = @refs.textarea.getDOMNode().value
+    return if @setValidationErrors(textareaValue)
+
+    @props.onSubmitComment?(e, textareaValue, @state.focusImage)
+    # optional function called on submit ^
+    # TODO: update this submit stuff for better reuse / prod
 
     @refs.textarea.getDOMNode().value = ""
     @hideChildren()

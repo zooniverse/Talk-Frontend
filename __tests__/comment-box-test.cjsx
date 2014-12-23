@@ -6,7 +6,7 @@ describe 'CommentBox', ->
   {findRenderedDOMComponentWithTag, scryRenderedComponentsWithType, findRenderedComponentWithType, findRenderedDOMComponentWithClass, renderIntoDocument, Simulate} = React.addons.TestUtils
   {CommentBox, CommentPreview, CommentHelp, CommentImageSelector} = require '../src/index'
 
-  commentBox = renderIntoDocument(<CommentBox />)
+  commentBox = renderIntoDocument(<CommentBox onSubmitComment={=> return false}/>)
   form = findRenderedDOMComponentWithClass(commentBox, 'talk-comment-form')
   textarea = findRenderedDOMComponentWithTag(form, 'textarea')
   previewBtn = findRenderedDOMComponentWithClass(commentBox, 'talk-comment-preview-button')
@@ -22,6 +22,12 @@ describe 'CommentBox', ->
 
     it 'sends feedback on success', ->
       expect(commentBox.state.feedback).toBeTruthy()
+
+    it 'fires a props.onSubmitComment fn on a successful comment submit', ->
+      textarea.getDOMNode().innerHTML = "a comment"
+      spyOn(commentBox.props, 'onSubmitComment')
+      Simulate.submit(form)
+      expect(commentBox.props.onSubmitComment).toHaveBeenCalled()
 
   it 'toggles a CommentPreview component', ->
     preview = scryRenderedComponentsWithType(commentBox, CommentPreview)
