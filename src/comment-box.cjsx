@@ -136,3 +136,4 @@ module?.exports = React.createClass
     textarea = @refs.textarea.getDOMNode()
     insertAtCursor(imageLink(alt, title), textarea)
     @onInputChange()
+

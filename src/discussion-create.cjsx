@@ -1,11 +1,7 @@
 React = require 'react'
 ToggleChildren = require './mixins/toggle-children'
 Validations  = require './mixins/validations'
-
-CommentPreview = require './comment-preview'
-CommentHelp = require './comment-help'
-CommentImageSelector = require './comment-image-selector'
-{insertAtCursor, hrefLink, imageLink} = require './lib/markdown-insert'
+CommentBox = require './comment-box'
 
 module?.exports = React.createClass
   displayName: 'DiscussionCreate'
@@ -25,11 +21,7 @@ module?.exports = React.createClass
   getDefaultProps: ->
     submit: "Submit"
     header: "Create a discussion"
-
-  getInitialState: ->
-    focusImage: null
-    previewContent: ''
-    feedback: null
+    commentPlaceholder: "Start the discussion with a comment"
 
   onSubmitDiscussion: (e) ->
     e.preventDefault()
@@ -42,25 +34,7 @@ module?.exports = React.createClass
     @refs.textarea.getDOMNode().value = ""
 
     @hideChildren()
-    @setState {previewContent: "", feedback: "Discussion Successfully Created"}
-
-  onPreviewClick: (e) ->
-    @toggleComponent('preview')
-
-  onHelpClick: (e) ->
-    @toggleComponent('help')
-
-  onImageSelectClick: (e) ->
-    @toggleComponent('image-selector')
-
-  onSelectImage: (image) ->
-    @setState focusImage: image.location
-
-  onClearImageClick: (e) ->
-    @setState focusImage: null
-
-  onInputChange: ->
-    @setState previewContent: @previewContent()
+    @setState feedback: "Discussion Successfully Created"
 
   render: ->
     validationErrors = @state.validationErrors.map (message, i) =>
@@ -72,33 +46,14 @@ module?.exports = React.createClass
       {if @state.feedback
         <p className="talk-feedback">{@state.feedback}</p>}
 
-      <img className="talk-discussion-focus-image" src={@state.focusImage} />
 
       <form className="talk-discussion-form" onSubmit={@onSubmitDiscussion}>
         <input ref="title" placeholder="Discussion Title" />
-        <textarea onInput={@onInputChange} ref="textarea" placeholder="Discussion Body [Optional]" />
-        <button type="submit">{@props.submit}</button>
+
         {validationErrors}
       </form>
 
-      <div className="talk-discussion-buttons-container">
-        <button className='talk-discussion-preview-button' onClick={@onPreviewClick}>Preview</button>
-        <button className='talk-discussion-help-button' onClick={@onHelpClick}>Help</button>
-        <button className='talk-discussion-image-select-button' onClick={@onImageSelectClick}>Select an Image</button>
-        <button className='talk-discussion-clear-image-button' onClick={@onClearImageClick}>Clear image</button>
-        <button onClick={@insertLink}>Insert Link</button>
-        <button onClick={@insertImageLink}>Insert Image Link</button>
-      </div>
-
-      <div className="talk-discussion-children">
-        {switch @state.showing
-          when 'image-selector'
-            <CommentImageSelector onSelectImage={@onSelectImage}/>
-          when 'preview'
-            <CommentPreview content={@state.previewContent} />
-          when 'help'
-            <CommentHelp />}
-      </div>
+      <CommentBox header={null} placeholder={@props.commentPlaceholder} />
     </div>
 
   previewContent: ->

@@ -21,6 +21,9 @@ module?.exports = React.createClass
   getInitialState: ->
     images: []
 
+  getDefaultProps: ->
+    header: "Select a focus image"
+
   componentWillMount: ->
     @setInitialImages()
 
@@ -50,7 +53,7 @@ module?.exports = React.createClass
 
   render: ->
     <div className="talk-comment-image-selector">
-      <h1>Select an image focus for this comment</h1>
+      <h1>{@props.header}</h1>
 
       <form onSubmit={@onSubmitSearch}>
         <input ref="imageSearch" type="search" placeholder="Search by ID"/>
