@@ -89,14 +89,6 @@ module?.exports = React.createClass
       {if @state.feedback
         <p className="talk-feedback">{@state.feedback}</p>}
 
-      <img className="talk-comment-focus-image" src={@state.focusImage} />
-
-      <form className="talk-comment-form" onSubmit={@onSubmitComment}>
-        <textarea onInput={@onInputChange} ref="textarea" placeholder="Type your comment here" />
-        <button type="submit">{@props.submit}</button>
-        {validationErrors}
-      </form>
-
       <div className="talk-comment-buttons-container">
         <button className='talk-comment-preview-button' onClick={@onPreviewClick}>Preview</button>
         <button className='talk-comment-help-button' onClick={@onHelpClick}>Help</button>
@@ -107,6 +99,15 @@ module?.exports = React.createClass
         <button className='talk-comment-bold-button' onClick={@onBoldClick}>Bold</button>
         <button className='talk-comment-italic-button' onClick={@onItalicClick}>Italicize</button>
       </div>
+
+      <img className="talk-comment-focus-image" src={@state.focusImage} />
+
+      <form className="talk-comment-form" onSubmit={@onSubmitComment}>
+        <textarea onInput={@onInputChange} ref="textarea" placeholder="Type your comment here" />
+        <button type="submit">{@props.submit}</button>
+        {validationErrors}
+      </form>
+
 
       <div className="talk-comment-children">
         {switch @state.showing
