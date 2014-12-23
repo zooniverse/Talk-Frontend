@@ -58,6 +58,10 @@ describe 'links', ->
       collectionSubject = root + '/testuser/testcollection/testsubject'
       expect(links.collectionSubject('testuser', 'testcollection', 'testsubject')).toEqual(collectionSubject)
 
+    it '#hashtag', ->
+      tagUrl = root + '/hashtag/tag'
+      expect(links.hashtag('tag')).toEqual(tagUrl)
+
   describe 'user', ->
     it '#user', ->
       user = root + '/users/testuser'

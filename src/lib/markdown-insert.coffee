@@ -27,9 +27,3 @@ module?.exports =
 
     input.value = (inputVal.substring(0, cursorPos) + text + inputVal.substring(cursorEnd, inputVal.length))
     input.focus()
-
-    # search from cursor position forward for selection at beginning of method,
-    # or maybe cursor position as fallback
-    # re-focus and
-    # add cursor back at that the index of the end of that spot
-    # plus any characters that were appended before it by markdown (length)
