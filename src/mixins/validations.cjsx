@@ -13,3 +13,6 @@ module?.exports =
         return errors.concat validation.error
       errors
     , []
+
+  clearValidationErrors: ->
+    @setState validationErrors: []

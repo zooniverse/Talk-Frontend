@@ -45,3 +45,12 @@ describe 'Validations', ->
     it 'returns falsy if there are no errors errors', ->
       setValidErrors = testComponent.setValidationErrors("A valid test comment")
       expect(setValidErrors).toBeFalsy()
+
+  describe '#clearValidationErrors', ->
+    componentToClear = renderIntoDocument(<TestComponent />)
+
+    it 'sets state.validationErrors to []', ->
+      componentToClear.setValidationErrors("") # has 1 validation error
+      componentToClear.clearValidationErrors()
+      expect(componentToClear.state.validationErrors).toEqual([])
+
