@@ -23,12 +23,16 @@ module?.exports = React.createClass
     header: "Create a discussion"
     commentPlaceholder: "Start the discussion with a comment"
 
-  onSubmitDiscussion: (e, text, focusImage) ->
+  onSubmitDiscussion: (e, commentText, focusImage) ->
     e.preventDefault()
-    return if @setValidationErrors(@refs.title.getDOMNode().value)
+    discussionTitle = @refs.title.getDOMNode().value
+    # send to server: commentText, focusImage, discussionTitle
 
     @refs.title.getDOMNode().value = ""
     @setState feedback: "Discussion Successfully Created"
+
+  validationErrors: ->
+    @setValidationErrors(@refs.title.getDOMNode().value)
 
   render: ->
     validationErrors = @state.validationErrors.map (message, i) =>
@@ -44,7 +48,11 @@ module?.exports = React.createClass
         <input ref="title" placeholder="Discussion Title" />
       </form>
 
-      <CommentBox header={null} placeholder={@props.commentPlaceholder} />
+      <CommentBox
+        header={null}
+        onSubmitComment={@onSubmitDiscussion}
+        parentValidationErrors={@validationErrors}
+        placeholder={@props.commentPlaceholder} />
       {validationErrors}
     </div>
 

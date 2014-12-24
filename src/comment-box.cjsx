@@ -25,7 +25,8 @@ module?.exports = React.createClass
     header: React.PropTypes.string
     placeholder: React.PropTypes.string
     submitFeedback: React.PropTypes.string
-    onSubmitComment: React.PropTypes.func # called on submit and passed (e, textarea-content)
+    onSubmitComment: React.PropTypes.func # called on submit and passed (e, textarea-content, focusImage)
+    parentValidationErrors: React.PropTypes.func # runs on submit, should return a bool if should continue to run onSubmitComment
 
   getDefaultProps: ->
     submit: "Submit"
@@ -41,7 +42,7 @@ module?.exports = React.createClass
   onSubmitComment: (e) ->
     e.preventDefault()
     textareaValue = @refs.textarea.getDOMNode().value
-    return if @setValidationErrors(textareaValue)
+    return if @setValidationErrors(textareaValue) or @props.parentValidationErrors?()
 
     @props.onSubmitComment?(e, textareaValue, @state.focusImage)
     # optional function called on submit ^
