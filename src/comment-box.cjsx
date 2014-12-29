@@ -36,9 +36,6 @@ module?.exports = React.createClass
     content: null
     focusImage: null
 
-  componentDidMount: ->
-    @onInputChange() # ensure preview update if editing
-
   getInitialState: ->
     feedback: null
     focusImage: @props.focusImage

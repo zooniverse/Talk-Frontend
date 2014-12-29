@@ -22,8 +22,8 @@ module?.exports =
 
   insertAtCursor: (text, input) ->
     inputVal = input.value
-    cursorPos = input.selectionStart ? inputVal.length
-    cursorEnd = input.selectionEnd ? inputVal.length
+    cursorPos = input.selectionStart or inputVal.length
+    cursorEnd = input.selectionEnd or inputVal.length
 
     input.value = (inputVal.substring(0, cursorPos) + text + inputVal.substring(cursorEnd, inputVal.length))
     input.focus()
