@@ -14,7 +14,9 @@ var del = require("del");
 var execWebpack = function(config) {
     webpack((config), function(err, stats) {
         if (err) new gutil.PluginError("execWebpack", err);
-        // gutil.log(stats.toString({colors: true}));
+        var jsonStats = stats.toJson()
+        if (jsonStats.errors.length > 0)
+            gutil.log(gutil.colors.red(jsonStats.errors.toString()));
     });
 };
 

@@ -13,7 +13,6 @@ module?.exports = React.createClass
       .replace(/\^([A-Za-z]+[0-9]+)/g, "<a href='http://www.zooniverse.org/subjects/$1'>$1</a>") # subject mentions
       .replace(/\#(\w+)/g, "<a href='http://www.zooniverse.org/tags/$1'>#$1</a>") # hashtags
 
-
   markdownify: (input) ->
     marked input, {sanitize: true}, (err, content) =>
       throw err if err
@@ -22,6 +21,7 @@ module?.exports = React.createClass
   emojify: (input) ->
     emojify.replace input, (match, icon) ->
       "<img class='talk-emoji' src='#{EMOJI_ROOT}/#{icon}.png' alt='#{match}' title='#{match}' />"
+
   render: ->
     html = @emojify(@markdownify(@props.content))
 
