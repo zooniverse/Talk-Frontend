@@ -24,8 +24,8 @@
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react",
       "<rootDir>/node_modules/marked",
-        "<rootDir>/node_modules/moment",
-        "<rootDir>/node_modules/emojify.js"
+      "<rootDir>/node_modules/moment",
+      "<rootDir>/node_modules/emojify.js"
     ],
     "testFileExtensions": [
       "coffee",
