@@ -52,6 +52,7 @@ module?.exports = React.createClass
         header={null}
         onSubmitComment={@onSubmitDiscussion}
         parentValidationErrors={@validationErrors}
+        submitFeedback={null}
         placeholder={@props.commentPlaceholder} />
       {validationErrors}
     </div>
