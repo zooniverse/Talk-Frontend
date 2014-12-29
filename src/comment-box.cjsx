@@ -33,17 +33,16 @@ module?.exports = React.createClass
     header: "Add to the discussion"
     placeholder: "Type your comment here"
     submitFeedback: "Comment Successfully Submitted"
-    editContent: null
+    content: null
     focusImage: null
 
   componentDidMount: ->
     @onInputChange() # ensure preview update if editing
 
   getInitialState: ->
-    previewContent: ''
     feedback: null
     focusImage: @props.focusImage
-    editContent: @props.editContent
+    content: @props.content
 
   onSubmitComment: (e) ->
     e.preventDefault()
@@ -56,7 +55,7 @@ module?.exports = React.createClass
 
     @refs.textarea.getDOMNode().value = ""
     @hideChildren()
-    @setState previewContent: "", feedback: @props.submitFeedback
+    @setState content: "", feedback: @props.submitFeedback
 
   onPreviewClick: (e) ->
     @toggleComponent('preview')
@@ -94,7 +93,7 @@ module?.exports = React.createClass
     @setState focusImage: null
 
   onInputChange: ->
-    @setState previewContent: @refs.textarea.getDOMNode().value
+    @setState content: @refs.textarea.getDOMNode().value
 
   render: ->
     validationErrors = @state.validationErrors.map (message, i) =>
@@ -120,8 +119,8 @@ module?.exports = React.createClass
       <img className="talk-comment-focus-image" src={@state.focusImage} />
 
       <form className="talk-comment-form" onSubmit={@onSubmitComment}>
-        <textarea onInput={@onInputChange} ref="textarea" placeholder={@props.placeholder}>
-          {@state.editContent}
+        <textarea onChange={@onInputChange} ref="textarea" placeholder={@props.placeholder}>
+          {@state.content}
         </textarea>
         <button type="submit">{@props.submit}</button>
         {validationErrors}
@@ -132,7 +131,7 @@ module?.exports = React.createClass
           when 'image-selector'
             <CommentImageSelector onSelectImage={@onSelectImage}/>
           when 'preview'
-            <CommentPreview content={@state.previewContent} />
+            <CommentPreview content={@state.content} />
           when 'help'
             <CommentHelp />
           when 'markdown-link'

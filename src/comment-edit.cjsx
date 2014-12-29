@@ -11,7 +11,7 @@ module?.exports = React.createClass
     <div className="talk-comment-edit">
       <CommentBox
         header={"Edit a comment"}
-        editContent={"Sample comment to edit"}
+        content={"Sample comment to edit"}
         submitFeedback={"Comment successfully Updated"}
         submit={"Update Comment"}
         onSubmitComment={@onSubmitComment}/>

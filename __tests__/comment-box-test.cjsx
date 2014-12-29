@@ -42,7 +42,7 @@ describe 'CommentBox', ->
     expect(previewAfterSecondClick.length).toBe(0)
 
   it 'sends the textarea content to the preview component', ->
-    commentBox.setState previewContent: "test comment"
+    commentBox.setState content: "test comment"
     Simulate.click(previewBtn)
 
     preview = findRenderedComponentWithType(commentBox, CommentPreview)
@@ -96,9 +96,8 @@ describe 'CommentBox', ->
       expect(commentBox.state.validationErrors[0].match('must have content')).toBeTruthy()
 
   describe 'editing', ->
-    editComment = renderIntoDocument(<CommentBox editContent="test edit content" />)
+    editComment = renderIntoDocument(<CommentBox content="test edit content" />)
     editTextarea = findRenderedDOMComponentWithTag(editComment, 'textarea')
 
     it 'fills in the textarea with optional props.editContent', ->
       expect(editTextarea.getDOMNode().textContent).toEqual('test edit content')
-      
