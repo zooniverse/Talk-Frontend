@@ -1,5 +1,6 @@
 exports.CommentBox = require './comment-box'
 exports.CommentDisplay = require './comment-display'
+exports.CommentEdit = require './comment-edit'
 exports.BoardPreview = require './board-preview'
 exports.PostPreview = require './post-preview'
 exports.DiscussionCreate = require './discussion-create'

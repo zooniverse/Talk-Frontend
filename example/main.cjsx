@@ -2,6 +2,7 @@ React = require 'react'
 
 {CommentBox
 CommentDisplay
+CommentEdit
 UserDisplay
 BoardPreview
 PostPreview
@@ -53,6 +54,8 @@ Components = React.createClass
       <DiscussionCreate />
 
       <HashtagsList title="Popular Hashtags" hashtags={["kelp", "help", "yelp", "welp"]} />
+
+      <CommentEdit />
 
       <Paginate collLength={9} perPage={3} onPageChange={(data) => console.log data}/>
 

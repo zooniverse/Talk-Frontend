@@ -33,11 +33,17 @@ module?.exports = React.createClass
     header: "Add to the discussion"
     placeholder: "Type your comment here"
     submitFeedback: "Comment Successfully Submitted"
+    editContent: null
+    focusImage: null
+
+  componentDidMount: ->
+    @onInputChange() # ensure preview update if editing
 
   getInitialState: ->
-    focusImage: null
     previewContent: ''
     feedback: null
+    focusImage: @props.focusImage
+    editContent: @props.editContent
 
   onSubmitComment: (e) ->
     e.preventDefault()
@@ -114,7 +120,9 @@ module?.exports = React.createClass
       <img className="talk-comment-focus-image" src={@state.focusImage} />
 
       <form className="talk-comment-form" onSubmit={@onSubmitComment}>
-        <textarea onInput={@onInputChange} ref="textarea" placeholder={@props.placeholder} />
+        <textarea onInput={@onInputChange} ref="textarea" placeholder={@props.placeholder}>
+          {@state.editContent}
+        </textarea>
         <button type="submit">{@props.submit}</button>
         {validationErrors}
       </form>

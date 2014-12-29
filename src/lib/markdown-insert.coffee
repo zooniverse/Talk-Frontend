@@ -27,3 +27,4 @@ module?.exports =
 
     input.value = (inputVal.substring(0, cursorPos) + text + inputVal.substring(cursorEnd, inputVal.length))
     input.focus()
+

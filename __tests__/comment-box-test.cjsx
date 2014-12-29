@@ -94,3 +94,11 @@ describe 'CommentBox', ->
       Simulate.submit(form)
       expect(commentBox.state.validationErrors.length).toBe(1)
       expect(commentBox.state.validationErrors[0].match('must have content')).toBeTruthy()
+
+  describe 'editing', ->
+    editComment = renderIntoDocument(<CommentBox editContent="test edit content" />)
+    editTextarea = findRenderedDOMComponentWithTag(editComment, 'textarea')
+
+    it 'fills in the textarea with optional props.editContent', ->
+      expect(editTextarea.getDOMNode().textContent).toEqual('test edit content')
+      
