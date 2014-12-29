@@ -6,10 +6,10 @@ react components for use in the next version of talk
 
 `npm i` to install dependencies
 
-`npm start` or for a local development setup
+`npm start` for a local development setup
 
 ### tests
 
 `npm t` to run the test suite
 
-`jest` or  `jest path_to_a_test_file`  if you have jest-cli installed globally 
+`jest` or `jest path_to_a_test_file` if you have jest-cli installed globally
