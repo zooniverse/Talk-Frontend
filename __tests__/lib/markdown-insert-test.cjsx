@@ -26,40 +26,57 @@ describe 'markdown insert', ->
 
   describe '#hrefLink', ->
     it 'formats a complete link when 2 args are passed', ->
-      link = hrefLink("Test Link", "http://www.test.com")
-      expect(link).toEqual(' [Test Link](http://www.test.com) ')
+      {text} = hrefLink("Test Link", "http://www.test.com")
+      expect(text).toEqual(' [Test Link](http://www.test.com) ')
 
     it 'formats a partial link when only one arg is passed', ->
-      link = hrefLink("Test Link")
-      expect(link).toEqual(' [Test Link](http://www.example.com) ')
+      {text} = hrefLink("Test Link")
+      expect(text).toEqual(' [Test Link](http://www.example.com) ')
 
     it 'accepts blank strings (for forms) as non-args', ->
-      link = hrefLink("", "Test Image")
-      expect(link).toEqual(" [Example Title](Test Image) ")
+      {text} = hrefLink("", "Test Image")
+      expect(text).toEqual(" [Example Title](Test Image) ")
 
     it 'returns an example link when no args are passed', ->
-      link = hrefLink()
-      expect(link).toEqual(" [Example Title](http://www.example.com) ")
+      {text} = hrefLink()
+      expect(text).toEqual(" [Example Title](http://www.example.com) ")
+
+    it 'returns cursor position at end of input', ->
+      {text, cursor} = hrefLink("Test Link", "http://www.test.com")
+      expect(cursor).toEqual(text.length)
 
   describe '#imageLink', ->
     it 'formats a complete imagelink when 2 args are passed', ->
-      link = imageLink("Test Image Link", "http://www.test.com/image.jpg")
-      expect(link).toEqual(' ![Test Image Link](http://www.test.com/image.jpg) ')
+      {text} = imageLink("Test Image Link", "http://www.test.com/image.jpg")
+      expect(text).toEqual(' ![Test Image Link](http://www.test.com/image.jpg) ')
 
     it 'accepts blank strings (for forms) as non-args', ->
-      image = imageLink("", "Test Image")
-      expect(image).toEqual(" ![Example Image](Test Image) ")
+      {text} = imageLink("", "Test Image")
+      expect(text).toEqual(" ![Example Image](Test Image) ")
 
     it 'returns an example link when no args are passed', ->
-      image = imageLink()
-      expect(image).toEqual(" ![Example Image](http://www.example.com/image.png) ")
+      {text} = imageLink()
+      expect(text).toEqual(" ![Example Image](http://www.example.com/image.png) ")
+
+    it 'returns cursor positionat end of input', ->
+      {text, cursor} = imageLink("Test Image Link", "http://www.test.com/image.jpg")
+      expect(cursor).toEqual(text.length)
+
 
   describe '#bold', ->
+    {text, cursor} = bold("text")
+
     it 'wraps text in double earmuffs', ->
-      boldText = bold("text")
-      expect(boldText).toEqual(" **text** ")
+      expect(text).toEqual(" **text** ")
+
+    it 'returns cursor position at end of text, but before closing earmuffs', ->
+      expect(cursor).toEqual(7)
 
   describe '#italic', ->
+    {text, cursor} = italic("text")
+    
     it 'wraps text in earmuffs', ->
-      italicText = italic("text")
-      expect(italicText).toEqual(" *text* ")
+      expect(text).toEqual(" *text* ")
+
+    it 'returns cursor position at end of text, but before closing earmuff', ->
+      expect(cursor).toEqual(6)

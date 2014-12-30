@@ -72,15 +72,17 @@ module?.exports = React.createClass
   onBoldClick: (e) ->
     textarea = @refs.textarea.getDOMNode()
     selection = getSelection(textarea)
+    {text, cursor} = bold(selection)
 
-    insertAtCursor(bold(selection), textarea)
+    insertAtCursor(text, textarea, cursor)
     @onInputChange()
 
   onItalicClick: (e) ->
     textarea = @refs.textarea.getDOMNode()
     selection = getSelection(textarea)
+    {text, cursor} = italic(selection)
 
-    insertAtCursor(italic(selection), textarea)
+    insertAtCursor(text, textarea, cursor)
     @onInputChange()
 
   onSelectImage: (image) ->
@@ -140,10 +142,14 @@ module?.exports = React.createClass
 
   onCreateLink: (e, url, title) ->
     textarea = @refs.textarea.getDOMNode()
-    insertAtCursor(hrefLink(url, title), textarea)
+    {text, cursor} = hrefLink(url, title)
+
+    insertAtCursor(text, textarea, cursor)
     @onInputChange()
 
   onCreateImage: (e, alt, title) ->
     textarea = @refs.textarea.getDOMNode()
-    insertAtCursor(imageLink(alt, title), textarea)
+    {text, cursor} = imageLink(alt, title)
+
+    insertAtCursor(text, textarea, cursor)
     @onInputChange()
