@@ -29,8 +29,7 @@ Components = React.createClass
       <CommentDisplay
         author="example_user"
         date={(new Date)}
-        markdown={"# Example Comment Markdown"}
-        html={"<h1>Example Comment HTML</h1>"}/>
+        markdown={"# Example Comment Markdown"}/>
 
       <UserDisplay name="example_user" formattedName="Example User"/>
 
