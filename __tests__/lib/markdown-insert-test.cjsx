@@ -58,7 +58,7 @@ describe 'markdown insert', ->
       {text} = imageLink()
       expect(text).toEqual(" ![Example Image](http://www.example.com/image.png) ")
 
-    it 'returns cursor positionat end of input', ->
+    it 'returns cursor position at end of input', ->
       {text, cursor} = imageLink("Test Image Link", "http://www.test.com/image.jpg")
       expect(cursor).toEqual(text.length)
 

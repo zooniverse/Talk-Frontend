@@ -6,12 +6,8 @@ describe 'CommentDisplay', ->
   {findRenderedDOMComponentWithTag, scryRenderedComponentsWithType, findRenderedComponentWithType, findRenderedDOMComponentWithClass, renderIntoDocument, Simulate} = React.addons.TestUtils
   {CommentDisplay, CommentBox, CommentLink, CommentReportForm} = require '../src/index'
 
-  commentDisplay = renderIntoDocument(<CommentDisplay date={(new Date)} html="<h1>Test Header</h1>"/>)
+  commentDisplay = renderIntoDocument(<CommentDisplay date={(new Date)} markdown="# Test Header"/>)
 
-  it 'renders talk comments as HTML', ->
-    displayContent = findRenderedDOMComponentWithClass(commentDisplay, "talk-comment-display-content")
-    expect(displayContent.getDOMNode().innerHTML).toEqual("<h1>Test Header</h1>")
-  
   describe 'toggling children', ->
     replyButton = findRenderedDOMComponentWithClass(commentDisplay, 'talk-comment-display-reply-button')
     linkButton = findRenderedDOMComponentWithClass(commentDisplay, 'talk-comment-display-link-button')
@@ -29,3 +25,18 @@ describe 'CommentDisplay', ->
       Simulate.click(linkButton)
       expect(commentDisplay.state.showing).toEqual('link')
 
+
+  describe 'editing', ->
+    editButton = findRenderedDOMComponentWithClass(commentDisplay, 'talk-comment-display-edit-button')
+
+    it 'sets state.editing to true when the button is clicked', ->
+      Simulate.click(editButton)
+      expect(commentDisplay.state.editing).toEqual(true)
+
+    it 'shows a CommentBox to make edits', ->
+      commentBox = findRenderedComponentWithType(commentDisplay, CommentBox)
+      expect(commentBox?).toBeTruthy()
+
+    it 'sets state.editing to false when a comment is submitted', ->
+      commentDisplay.onSubmitComment()
+      expect(commentDisplay.state.editing).toEqual(false)

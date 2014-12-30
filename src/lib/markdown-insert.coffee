@@ -22,12 +22,12 @@ module?.exports =
 
   bold: (string) ->
     text = " **#{string}** "
-    cursor = string.length + 3 # 3 chars added in front
+    cursor = string.length + 3 # 3 chars added in front: ' **'
     {text, cursor}
 
   italic: (string) ->
     text = " *#{string}* "
-    cursor = string.length + 2 # 2 chars added in front
+    cursor = string.length + 2 # 2 chars added in front: ' *'
     {text, cursor}
 
   getSelection: (input) ->

@@ -7,6 +7,13 @@ EMOJI_ROOT = 'http://www.tortue.me/emoji'
 module?.exports = React.createClass
   displayName: 'TalkCommentPreview'
 
+  propTypes:
+    content: React.PropTypes.string
+    header: React.PropTypes.string
+
+  getDefaultProps: ->
+    header: "Preview"
+
   replaceSymbols: (string) ->
     string
       .replace(/@(\w+)/g, "<a href='http://www.zooniverse.org/user/$1'>$1</a>") # user mentions
@@ -26,6 +33,6 @@ module?.exports = React.createClass
     html = @emojify(@markdownify(@props.content))
 
     <div className='talk-comment-preview'>
-      <h1>Preview</h1>
+      <h1>{@props.header}</h1>
       <div className='talk-comment-preview-content' dangerouslySetInnerHTML={__html: html}></div>
     </div>
