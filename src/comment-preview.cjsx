@@ -30,7 +30,7 @@ module?.exports = React.createClass
       "<img class='talk-emoji' src='#{EMOJI_ROOT}/#{icon}.png' alt='#{match}' title='#{match}' />"
 
   render: ->
-    html = @emojify(@markdownify(@props.content))
+    html = @emojify(@markdownify(@props.content ? ''))
 
     <div className='talk-comment-preview'>
       <h1>{@props.header}</h1>
