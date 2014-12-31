@@ -1,4 +1,5 @@
 React = require 'react'
+Feedback = require './mixins/feedback'
 
 user =
   project:
@@ -25,9 +26,10 @@ user =
 module?.exports = React.createClass
   displayName: 'TalkSubjectCollections'
 
+  mixins: [Feedback]
+
   getInitialState: ->
     collections: user.project.subject.collections
-    feedback: null
 
   onChangeInput: (e) ->
     collections = @state.collections.map (coll, i) ->
@@ -52,7 +54,7 @@ module?.exports = React.createClass
     # save these collections on subject:
     @getSelectedInputValues()
 
-    @setState feedback: "Subject collection list saved"
+    @setFeedback "Subject collection list saved"
 
   collectionItem: (coll, i) ->
     <li key={i}>
@@ -62,11 +64,12 @@ module?.exports = React.createClass
     </li>
 
   render: ->
+    feedback = @renderFeedback()
+
     <div className="talk-subject-collections">
       <h1>Add Subject To collection</h1>
 
-      {if @state.feedback
-        <p className="talk-feedback">{@state.feedback}</p>}
+      {feedback}
 
       <form onSubmit={@onSubmit} className="talk-subject-collections-form">
         <ul ref="collectionsList">

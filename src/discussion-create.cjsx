@@ -1,11 +1,12 @@
 React = require 'react'
 ToggleChildren = require './mixins/toggle-children'
 Validations  = require './mixins/validations'
+Feedback = require './mixins/feedback'
 CommentBox = require './comment-box'
 
 module?.exports = React.createClass
   displayName: 'DiscussionCreate'
-  mixins: [Validations]
+  mixins: [Validations, Feedback]
 
   validations: [
     {
@@ -29,7 +30,7 @@ module?.exports = React.createClass
     # send to server: commentText, focusImage, discussionTitle
 
     @refs.title.getDOMNode().value = ""
-    @setState feedback: "Discussion Successfully Created"
+    @setFeedback "Discussion Successfully Created"
 
   validationErrors: ->
     @setValidationErrors(@refs.title.getDOMNode().value)
@@ -38,11 +39,12 @@ module?.exports = React.createClass
     validationErrors = @state.validationErrors.map (message, i) =>
       <p key={i} className="talk-validation-error">{message}</p>
 
+    feedback = @renderFeedback()
+
     <div className="talk-discussion-create">
       <h1>{@props.header}</h1>
 
-      {if @state.feedback
-        <p className="talk-feedback">{@state.feedback}</p>}
+      {feedback}
 
       <form className="talk-discussion-form" onSubmit={@onSubmitDiscussion}>
         <input ref="title" placeholder="Discussion Title" />

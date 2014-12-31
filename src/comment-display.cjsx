@@ -1,5 +1,6 @@
 React = require 'react'
 ToggleChildren = require './mixins/toggle-children'
+Feedback = require './mixins/feedback'
 CommentBox = require './comment-box'
 CommentReportForm = require './comment-report-form'
 CommentLink = require './comment-link'
@@ -9,7 +10,7 @@ SubjectDisplay = require './subject-display'
 
 module?.exports = React.createClass
   displayName: 'TalkCommentDisplay'
-  mixins: [ToggleChildren]
+  mixins: [ToggleChildren, Feedback]
 
   propTypes:
     author: React.PropTypes.string
@@ -29,20 +30,23 @@ module?.exports = React.createClass
     @toggleComponent('report')
 
   onClickEdit: (e) ->
-    @setState editing: true, feedback: null
+    @setState editing: true
+    @removeFeedback()
 
   onSubmitComment: (e, textContent, focusImage) ->
     # update comment here...
-    @setState editing: false, feedback: "Comment Updated"
+    @setState editing: false
+    @setFeedback "Comment Updated"
 
   render: ->
+    feedback = @renderFeedback()
+
     <div className="talk-comment-display">
       <p className="talk-comment-display-author">
         by {@props.author} {timeStamp @props.date.toString()}
       </p>
 
-      {if @state.feedback
-        <p className="talk-feedback">{@state.feedback}</p>}
+      {feedback}
 
       {if not @state.editing
         <div className="talk-comment-display-content">

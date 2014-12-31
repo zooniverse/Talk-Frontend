@@ -1,6 +1,7 @@
 React = require 'react'
 ToggleChildren = require './mixins/toggle-children'
 Validations  = require './mixins/validations'
+Feedback = require './mixins/feedback'
 
 CommentPreview = require './comment-preview'
 CommentHelp = require './comment-help'
@@ -11,7 +12,7 @@ MarkdownImage = require './lib/markdown-image'
 
 module?.exports = React.createClass
   displayName: 'Commentbox'
-  mixins: [ToggleChildren, Validations]
+  mixins: [ToggleChildren, Validations, Feedback]
 
   validations: [
     {
@@ -37,7 +38,6 @@ module?.exports = React.createClass
     focusImage: null
 
   getInitialState: ->
-    feedback: null
     focusImage: @props.focusImage
     content: @props.content
 
@@ -52,7 +52,8 @@ module?.exports = React.createClass
 
     @refs.textarea.getDOMNode().value = ""
     @hideChildren()
-    @setState content: "", feedback: @props.submitFeedback
+    @setState content: ""
+    @setFeedback @props.submitFeedback
 
   onPreviewClick: (e) ->
     @toggleComponent('preview')
@@ -98,11 +99,12 @@ module?.exports = React.createClass
     validationErrors = @state.validationErrors.map (message, i) =>
       <p key={i} className="talk-validation-error">{message}</p>
 
+    feedback = @renderFeedback()
+
     <div className="talk-comment-box">
       <h1>{@props.header}</h1>
 
-      {if @state.feedback
-        <p className="talk-feedback">{@state.feedback}</p>}
+      {feedback}
 
       <div className="talk-comment-buttons-container">
         <button className='talk-comment-preview-button' onClick={@onPreviewClick}>Preview</button>
@@ -118,9 +120,7 @@ module?.exports = React.createClass
       <img className="talk-comment-focus-image" src={@state.focusImage} />
 
       <form className="talk-comment-form" onSubmit={@onSubmitComment}>
-        <textarea onChange={@onInputChange} ref="textarea" placeholder={@props.placeholder}>
-          {@state.content}
-        </textarea>
+        <textarea value={@state.content} onChange={@onInputChange} ref="textarea" placeholder={@props.placeholder} />
         <button type="submit">{@props.submit}</button>
         {validationErrors}
       </form>

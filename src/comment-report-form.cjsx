@@ -1,10 +1,11 @@
 React = require 'react'
 Validations = require './mixins/validations'
+Feedback = require './mixins/feedback'
 
 module?.exports = React.createClass
   displayName: 'TalkCommentReportForm'
 
-  mixins: [Validations]
+  mixins: [Validations, Feedback]
 
   validations: [
     {
@@ -19,20 +20,21 @@ module?.exports = React.createClass
     return if @setValidationErrors(comment)
 
     @refs.textarea.getDOMNode().value = ''
-    @setState feedback: "Comment Report successfully submitted"
+    @setFeedback "Comment Report successfully submitted"
     # send comment id and report to server here
 
   render: ->
     validationErrors = @state.validationErrors.map (message, i) =>
       <p key={i} className="talk-validation-error">{message}</p>
 
+    feedback = @renderFeedback()
+
     <div className="talk-comment-report-form">
       <h1>Report a comment here</h1>
 
       {validationErrors}
 
-      {if @state.feedback
-        <p className="talk-feedback">{@state.feedback}</p>}
+      {feedback}
 
       <form className="talk-comment-report-form-form" onSubmit={@onSubmit}>
         <textarea ref="textarea" placeholder="Why are you reporting this comment?"></textarea>
