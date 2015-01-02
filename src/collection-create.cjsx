@@ -27,9 +27,7 @@ module?.exports = React.createClass
     @setFeedback "#{collectionName} collection successfully added"
 
   render: ->
-    validationErrors = @state.validationErrors?.map (message, i) =>
-      <p key={i} className="talk-validation-error">{message}</p>
-
+    validationErrors = @renderValidations()
     feedback = @renderFeedback()
 
     <div className="talk-collection-create">

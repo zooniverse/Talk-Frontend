@@ -1,3 +1,5 @@
+React = require 'react'
+
 module?.exports =
   getInitialState: ->
     validationErrors: []
@@ -16,3 +18,7 @@ module?.exports =
 
   clearValidationErrors: ->
     @setState validationErrors: []
+
+  renderValidations: ->
+    @state.validationErrors.map (message, i) =>
+      <p key={i} className="talk-validation-error">{message}</p>

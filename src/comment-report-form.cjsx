@@ -24,9 +24,7 @@ module?.exports = React.createClass
     # send comment id and report to server here
 
   render: ->
-    validationErrors = @state.validationErrors.map (message, i) =>
-      <p key={i} className="talk-validation-error">{message}</p>
-
+    validationErrors = @renderValidations()
     feedback = @renderFeedback()
 
     <div className="talk-comment-report-form">

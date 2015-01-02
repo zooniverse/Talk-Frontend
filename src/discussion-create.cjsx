@@ -36,9 +36,7 @@ module?.exports = React.createClass
     @setValidationErrors(@refs.title.getDOMNode().value)
 
   render: ->
-    validationErrors = @state.validationErrors.map (message, i) =>
-      <p key={i} className="talk-validation-error">{message}</p>
-
+    validationErrors = @renderValidations()
     feedback = @renderFeedback()
 
     <div className="talk-discussion-create">

@@ -96,9 +96,7 @@ module?.exports = React.createClass
     @setState content: @refs.textarea.getDOMNode().value
 
   render: ->
-    validationErrors = @state.validationErrors.map (message, i) =>
-      <p key={i} className="talk-validation-error">{message}</p>
-
+    validationErrors = @renderValidations()
     feedback = @renderFeedback()
 
     <div className="talk-comment-box">
