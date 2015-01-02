@@ -9,7 +9,11 @@ module?.exports =
     linkUrl = url or "http://www.example.com"
 
     text = " [#{linkTitle}](#{linkUrl}) "
-    cursor = text.length
+
+    start = ' ['.length
+    end = start + linkTitle.length
+
+    cursor = {start, end}
     {text, cursor}
 
   imageLink: (title, url) ->
@@ -17,17 +21,27 @@ module?.exports =
     imageUrl = url or "http://www.example.com/image.png"
 
     text = " ![#{imageTitle}](#{imageUrl}) "
-    cursor = text.length
+
+    start = ' !['.length
+    end = start + imageTitle.length
+
+    cursor = {start, end}
     {text, cursor}
 
   bold: (string) ->
     text = " **#{string}** "
-    cursor = string.length + 3 # 3 chars added in front: ' **'
+    start = ' **'.length
+    end = start + string.length
+
+    cursor = {start, end}
     {text, cursor}
 
   italic: (string) ->
     text = " *#{string}* "
-    cursor = string.length + 2 # 2 chars added in front: ' *'
+    start = ' *'.length
+    end = start + string.length
+
+    cursor = {start, end}
     {text, cursor}
 
   getSelection: (input) ->
@@ -35,13 +49,15 @@ module?.exports =
 
   insertAtCursor: (text, input, cursor) ->
     inputVal = input.value                              # input text value
-    cursorPos = input.selectionStart or inputVal.length # current cursor position
+    cursorPos = input.selectionStart                    # current cursor position
     cursorEnd = input.selectionEnd or inputVal.length   # end of highlight, if so
-    newCursorPos = cursorPos + cursor                   # index to place cursor after update
+
+    newSelectionStart = cursorPos + cursor.start        # post update selection start
+    newSelectionEnd   = cursorPos + cursor.end          # post update selection end
 
     # set input value to existing text with new text at current cursor position, or append
     input.value = (inputVal.substring(0, cursorPos) + text + inputVal.substring(cursorEnd, inputVal.length))
 
     # set cursor back to a meaningful location for continued typing
     input.focus()
-    input.setSelectionRange?(newCursorPos, newCursorPos)
+    input.setSelectionRange?(newSelectionStart, newSelectionEnd)

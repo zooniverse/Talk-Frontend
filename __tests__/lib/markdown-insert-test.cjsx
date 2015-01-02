@@ -16,12 +16,12 @@ describe 'markdown insert', ->
 
   describe '#insertAtCursor', ->
     it 'adds text to an input', ->
-      insertAtCursor("Test Input", textarea)
+      insertAtCursor("Test Input", textarea, {start: 0, end: 0})
       expect(textarea.value).toEqual("Test Input")
 
     it 'retains existing text', ->
       textarea.value = "Before"
-      insertAtCursor("After", textarea)
+      insertAtCursor("After", textarea, {start: 'Before'.length, end: 'Before'.length})
       expect(textarea.value).toEqual("BeforeAfter")
 
   describe '#hrefLink', ->
@@ -43,7 +43,7 @@ describe 'markdown insert', ->
 
     it 'returns cursor position at end of input', ->
       {text, cursor} = hrefLink("Test Link", "http://www.test.com")
-      expect(cursor).toEqual(text.length)
+      expect(cursor).toEqual(start: ' ['.length, end: ' [Test Link'.length)
 
   describe '#imageLink', ->
     it 'formats a complete imagelink when 2 args are passed', ->
@@ -58,10 +58,9 @@ describe 'markdown insert', ->
       {text} = imageLink()
       expect(text).toEqual(" ![Example Image](http://www.example.com/image.png) ")
 
-    it 'returns cursor position at end of input', ->
+    it 'highlights the title text', ->
       {text, cursor} = imageLink("Test Image Link", "http://www.test.com/image.jpg")
-      expect(cursor).toEqual(text.length)
-
+      expect(cursor).toEqual(start: ' !['.length, end: " ![Test Image Link".length)
 
   describe '#bold', ->
     {text, cursor} = bold("text")
@@ -70,7 +69,7 @@ describe 'markdown insert', ->
       expect(text).toEqual(" **text** ")
 
     it 'returns cursor position at end of text, but before closing earmuffs', ->
-      expect(cursor).toEqual(7)
+      expect(cursor).toEqual(start: ' **'.length, end: (' **text'.length))
 
   describe '#italic', ->
     {text, cursor} = italic("text")
@@ -79,4 +78,4 @@ describe 'markdown insert', ->
       expect(text).toEqual(" *text* ")
 
     it 'returns cursor position at end of text, but before closing earmuff', ->
-      expect(cursor).toEqual(6)
+      expect(cursor).toEqual(start: ' *'.length, end: (' *text'.length))
