@@ -63,36 +63,16 @@ module?.exports = React.createClass
     @toggleComponent('image-selector')
 
   onInsertLinkClick: (e) ->
-    textarea = @refs.textarea.getDOMNode()
-    selection = getSelection(textarea)
-    {text, cursor} = hrefLink(selection)
-
-    insertAtCursor(text, textarea, cursor)
-    @onInputChange()
+    @wrapSelectionIn(hrefLink)
 
   onInsertImageClick: (e) ->
-    textarea = @refs.textarea.getDOMNode()
-    selection = getSelection(textarea)
-    {text, cursor} = imageLink(selection)
-
-    insertAtCursor(text, textarea, cursor)
-    @onInputChange()
+    @wrapSelectionIn(imageLink)
 
   onBoldClick: (e) ->
-    textarea = @refs.textarea.getDOMNode()
-    selection = getSelection(textarea)
-    {text, cursor} = bold(selection)
-
-    insertAtCursor(text, textarea, cursor)
-    @onInputChange()
+    @wrapSelectionIn(bold)
 
   onItalicClick: (e) ->
-    textarea = @refs.textarea.getDOMNode()
-    selection = getSelection(textarea)
-    {text, cursor} = italic(selection)
-
-    insertAtCursor(text, textarea, cursor)
-    @onInputChange()
+    @wrapSelectionIn(italic)
 
   onSelectImage: (image) ->
     @setState focusImage: image.location
@@ -142,16 +122,14 @@ module?.exports = React.createClass
       </div>
     </div>
 
-  onCreateLink: (e, url, title) ->
+  wrapSelectionIn: (wrapFn) ->
+    # helper to call markdown-insert functions on the textarea
+    # wrapFn takes / returns a string (from ./lib/markdown-insert.cjsx)
+
     textarea = @refs.textarea.getDOMNode()
-    {text, cursor} = hrefLink(url, title)
+    selection = getSelection(textarea)
+    {text, cursor} = wrapFn(selection)
 
     insertAtCursor(text, textarea, cursor)
     @onInputChange()
 
-  onCreateImage: (e, alt, title) ->
-    textarea = @refs.textarea.getDOMNode()
-    {text, cursor} = imageLink(alt, title)
-
-    insertAtCursor(text, textarea, cursor)
-    @onInputChange()

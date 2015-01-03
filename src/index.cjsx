@@ -21,5 +21,3 @@ exports.CommentReportForm = require './comment-report-form'
 
 exports.Paginate = require './lib/paginate'
 exports.ActiveButton = require './lib/active-button'
-exports.MarkdownLink = require './lib/markdown-link'
-exports.MarkdownImage = require './lib/markdown-image'
