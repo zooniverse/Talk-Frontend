@@ -26,41 +26,41 @@ describe 'markdown insert', ->
 
   describe '#hrefLink', ->
     it 'formats a complete link when 2 args are passed', ->
-      {text} = hrefLink("Test Link", "http://www.test.com")
+      {text} = hrefLink("http://www.test.com", "Test Link")
       expect(text).toEqual(' [Test Link](http://www.test.com) ')
 
     it 'formats a partial link when only one arg is passed', ->
-      {text} = hrefLink("Test Link")
-      expect(text).toEqual(' [Test Link](http://www.example.com) ')
+      {text} = hrefLink("url")
+      expect(text).toEqual(' [Example Title](url) ')
 
     it 'accepts blank strings (for forms) as non-args', ->
-      {text} = hrefLink("", "Test Image")
-      expect(text).toEqual(" [Example Title](Test Image) ")
+      {text} = hrefLink("Test Url", "")
+      expect(text).toEqual(" [Example Title](Test Url) ")
 
     it 'returns an example link when no args are passed', ->
       {text} = hrefLink()
       expect(text).toEqual(" [Example Title](http://www.example.com) ")
 
     it 'returns cursor position at end of input', ->
-      {text, cursor} = hrefLink("Test Link", "http://www.test.com")
-      expect(cursor).toEqual(start: ' ['.length, end: ' [Test Link'.length)
+      {text, cursor} = hrefLink("url", "Test Link")
+      expect(cursor).toEqual(start: ' [Test Link]('.length, end: ' [Test Link](url'.length)
 
   describe '#imageLink', ->
     it 'formats a complete imagelink when 2 args are passed', ->
-      {text} = imageLink("Test Image Link", "http://www.test.com/image.jpg")
+      {text} = imageLink("http://www.test.com/image.jpg", "Test Image Link")
       expect(text).toEqual(' ![Test Image Link](http://www.test.com/image.jpg) ')
 
     it 'accepts blank strings (for forms) as non-args', ->
       {text} = imageLink("", "Test Image")
-      expect(text).toEqual(" ![Example Image](Test Image) ")
+      expect(text).toEqual(" ![Test Image](http://www.example.com/image.png) ")
 
     it 'returns an example link when no args are passed', ->
       {text} = imageLink()
       expect(text).toEqual(" ![Example Image](http://www.example.com/image.png) ")
 
     it 'highlights the title text', ->
-      {text, cursor} = imageLink("Test Image Link", "http://www.test.com/image.jpg")
-      expect(cursor).toEqual(start: ' !['.length, end: " ![Test Image Link".length)
+      {text, cursor} = imageLink("location", "Test Image Link")
+      expect(cursor).toEqual(start: ' ![Test Image Link]('.length, end: " ![Test Image Link](location".length)
 
   describe '#bold', ->
     {text, cursor} = bold("text")

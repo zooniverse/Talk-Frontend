@@ -4,26 +4,26 @@ module?.exports =
   # cursor is the position in that string to put the cursor back
   # probably easiest to access them with {text, cursor} = func()
 
-  hrefLink: (title, url) ->
+  hrefLink: (url, title) ->
     linkTitle = title or "Example Title"
     linkUrl = url or "http://www.example.com"
 
     text = " [#{linkTitle}](#{linkUrl}) "
 
-    start = ' ['.length
-    end = start + linkTitle.length
+    start = " [#{linkTitle}](".length
+    end = start + linkUrl.length
 
     cursor = {start, end}
     {text, cursor}
 
-  imageLink: (title, url) ->
+  imageLink: (url, title) ->
     imageTitle = title or "Example Image"
     imageUrl = url or "http://www.example.com/image.png"
 
     text = " ![#{imageTitle}](#{imageUrl}) "
 
-    start = ' !['.length
-    end = start + imageTitle.length
+    start = " ![#{imageTitle}](".length
+    end = start + imageUrl.length
 
     cursor = {start, end}
     {text, cursor}

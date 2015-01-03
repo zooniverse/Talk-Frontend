@@ -7,8 +7,6 @@ CommentPreview = require './comment-preview'
 CommentHelp = require './comment-help'
 CommentImageSelector = require './comment-image-selector'
 {insertAtCursor, getSelection, hrefLink, imageLink, bold, italic} = require './lib/markdown-insert'
-MarkdownLink = require './lib/markdown-link'
-MarkdownImage = require './lib/markdown-image'
 
 module?.exports = React.createClass
   displayName: 'Commentbox'
@@ -65,10 +63,20 @@ module?.exports = React.createClass
     @toggleComponent('image-selector')
 
   onInsertLinkClick: (e) ->
-    @toggleComponent('markdown-link')
+    textarea = @refs.textarea.getDOMNode()
+    selection = getSelection(textarea)
+    {text, cursor} = hrefLink(selection)
+
+    insertAtCursor(text, textarea, cursor)
+    @onInputChange()
 
   onInsertImageClick: (e) ->
-    @toggleComponent('markdown-image')
+    textarea = @refs.textarea.getDOMNode()
+    selection = getSelection(textarea)
+    {text, cursor} = imageLink(selection)
+
+    insertAtCursor(text, textarea, cursor)
+    @onInputChange()
 
   onBoldClick: (e) ->
     textarea = @refs.textarea.getDOMNode()
@@ -130,11 +138,7 @@ module?.exports = React.createClass
           when 'preview'
             <CommentPreview content={@state.content} />
           when 'help'
-            <CommentHelp />
-          when 'markdown-link'
-            <MarkdownLink onCreateLink={@onCreateLink} />
-          when 'markdown-image'
-            <MarkdownImage onCreateImage={@onCreateImage} />}
+            <CommentHelp />}
       </div>
     </div>
 
