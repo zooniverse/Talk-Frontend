@@ -6,7 +6,7 @@ Feedback = require './mixins/feedback'
 CommentPreview = require './comment-preview'
 CommentHelp = require './comment-help'
 CommentImageSelector = require './comment-image-selector'
-{horizontalRule, insertAtCursor, getSelection, heading, hrefLink, imageLink, quote, bold, italic} = require './lib/markdown-insert'
+{horizontalRule, insertAtCursor, getSelection, heading, hrefLink, imageLink, quote, bold, italic, strikethrough} = require './lib/markdown-insert'
 
 module?.exports = React.createClass
   displayName: 'Commentbox'
@@ -83,6 +83,9 @@ module?.exports = React.createClass
   onHorizontalRuleClick: (e) ->
     @wrapSelectionIn(horizontalRule)
 
+  onStrikethroughClick: (e) ->
+    @wrapSelectionIn(strikethrough)
+
   onSelectImage: (image) ->
     @setState focusImage: image.location
 
@@ -110,6 +113,7 @@ module?.exports = React.createClass
         <button className='talk-comment-insert-quote-button' onClick={@onQuoteClick}>Quote</button>
         <button className='talk-comment-heading-button' onClick={@onHeadingClick}>Heading</button>
         <button className='talk-comment-hr-button' onClick={@onHorizontalRuleClick}>Horizontal Rule</button>
+        <button className='talk-comment-strikethrough-button' onClick={@onStrikethroughClick}>Strikethrough</button>
       </div>
 
       <img className="talk-comment-focus-image" src={@state.focusImage} />

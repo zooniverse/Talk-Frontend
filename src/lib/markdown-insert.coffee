@@ -47,6 +47,9 @@ module?.exports =
   horizontalRule: (string) ->
     makeMarkdownHelper('----------\n', string)
 
+  strikethrough: (string) ->
+    makeMarkdownHelper(' ~~', string, '~~ ') # github-flavored specific
+
   getSelection: (input) ->
     input.value.substring(input.selectionStart, input.selectionEnd)
 

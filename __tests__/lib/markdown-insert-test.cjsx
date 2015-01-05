@@ -1,7 +1,7 @@
 jest
   .dontMock '../../src/lib/markdown-insert'
 
-{insertAtCursor, heading, horizontalRule, quote, hrefLink, bold, italic, imageLink, bullet, numberedList} = require '../../src/lib/markdown-insert'
+{insertAtCursor, strikethrough, heading, horizontalRule, quote, hrefLink, bold, italic, imageLink, bullet, numberedList} = require '../../src/lib/markdown-insert'
 
 describe 'markdown insert', ->
   React = require 'react/addons'
@@ -124,3 +124,13 @@ describe 'markdown insert', ->
 
     it 'returns cursor position at end of text', ->
       expect(cursor).toEqual(start: "----------\n".length, end: ("----------text\n".length))
+
+
+  describe '#strikethrough', ->
+    {text, cursor} = strikethrough("text")
+
+    it 'adds 10 hyphens before the text, and a new line', ->
+      expect(text).toEqual(" ~~text~~ ")
+
+    it 'returns cursor position at end of text', ->
+      expect(cursor).toEqual(start: " ~~".length, end: (" ~~text".length))
