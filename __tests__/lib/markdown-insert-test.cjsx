@@ -1,7 +1,7 @@
 jest
   .dontMock '../../src/lib/markdown-insert'
 
-{insertAtCursor, quote, hrefLink, bold, italic, imageLink} = require '../../src/lib/markdown-insert'
+{insertAtCursor, quote, hrefLink, bold, italic, imageLink, bullet, numberedList} = require '../../src/lib/markdown-insert'
 
 describe 'markdown insert', ->
   React = require 'react/addons'
@@ -83,9 +83,28 @@ describe 'markdown insert', ->
   describe '#quote', ->
     {text, cursor} = quote("text")
 
-    it 'puts a new line and > symbol before text', ->
-      expect(text).toEqual("\n> text")
+    it 'puts a > symbol before text', ->
+      expect(text).toEqual("> text")
 
     it 'returns cursor position at end of text', ->
-      expect(cursor).toEqual(start: '\n> '.length, end: ('\n> text'.length))
+      expect(cursor).toEqual(start: '> '.length, end: ('> text'.length))
+
+  describe '#bullet', ->
+    {text, cursor} = bullet("text")
+
+    it 'puts a > symbol before text', ->
+      expect(text).toEqual("- text")
+
+    it 'returns cursor position at end of text', ->
+      expect(cursor).toEqual(start: '- '.length, end: ('- text'.length))
+
+  describe '#numberedList', ->
+    {text, cursor} = numberedList("text")
+
+    it 'puts a > symbol before text', ->
+      expect(text).toEqual("1. text")
+
+    it 'returns cursor position at end of text', ->
+      expect(cursor).toEqual(start: '1. '.length, end: ('1. text'.length))
+
 

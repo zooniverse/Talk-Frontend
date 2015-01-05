@@ -1,56 +1,45 @@
-module?.exports =
-  # for funcs that return {text, cursor}
+makeMarkdownHelper = (prefix, string, suffix = '') ->
+  # (string) -> {text, cursor}
   # text is the formatted markdown string
   # cursor is the position in that string to put the cursor back
-  # probably easiest to access them with {text, cursor} = func()
 
+  # wraps string in prefix & suffix
+  # returns object with {text: output string, cursor: index to put cursor back}
+  # probably easiest to access data with {text, cursor} = func()
+
+  text = prefix + string + suffix
+  start = prefix.length
+  end = start + string.length
+
+  cursor = {start, end}
+  {text, cursor}
+
+module?.exports =
   hrefLink: (url, title) ->
     linkTitle = title or "Example Title"
     linkUrl = url or "http://www.example.com"
+    makeMarkdownHelper(" [#{linkTitle}](", linkUrl, ") ")
 
-    text = " [#{linkTitle}](#{linkUrl}) "
-
-    start = " [#{linkTitle}](".length
-    end = start + linkUrl.length
-
-    cursor = {start, end}
-    {text, cursor}
 
   imageLink: (url, title) ->
     imageTitle = title or "Example Image"
     imageUrl = url or "http://www.example.com/image.png"
-
-    text = " ![#{imageTitle}](#{imageUrl}) "
-
-    start = " ![#{imageTitle}](".length
-    end = start + imageUrl.length
-
-    cursor = {start, end}
-    {text, cursor}
+    makeMarkdownHelper(" ![#{imageTitle}](", imageUrl, ') ')
 
   bold: (string) ->
-    text = " **#{string}** "
-    start = ' **'.length
-    end = start + string.length
-
-    cursor = {start, end}
-    {text, cursor}
+    makeMarkdownHelper(' **', string, '** ')
 
   italic: (string) ->
-    text = " *#{string}* "
-    start = ' *'.length
-    end = start + string.length
-
-    cursor = {start, end}
-    {text, cursor}
+    makeMarkdownHelper(' *', string, '* ')
 
   quote: (string) ->
-    text = "\n> #{string}"
-    start = '\n> '.length
-    end = start + string.length
+    makeMarkdownHelper('> ', string)
 
-    cursor = {start, end}
-    {text, cursor}
+  bullet: (string) ->
+    makeMarkdownHelper('- ', string)
+
+  numberedList: (string) ->
+    makeMarkdownHelper('1. ', string)
 
   getSelection: (input) ->
     input.value.substring(input.selectionStart, input.selectionEnd)
