@@ -12,7 +12,7 @@ describe 'CommentBox', ->
   previewBtn = findRenderedDOMComponentWithClass(commentBox, 'talk-comment-preview-button')
 
   describe 'on submit', ->
-    submitBtn = findRenderedDOMComponentWithTag(form, 'button')
+    submitBtn = findRenderedDOMComponentWithClass(form, 'talk-comment-submit-button')
     textarea.getDOMNode().innerHTML = "a comment"
     Simulate.submit(form)
 

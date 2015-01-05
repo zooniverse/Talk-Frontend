@@ -120,7 +120,7 @@ module?.exports = React.createClass
           <button type="button" className='talk-comment-preview-button' onClick={@onPreviewClick}>Preview</button>
           <button type="button" className='talk-comment-help-button' onClick={@onHelpClick}>Help</button>
 
-          <button type="submit">{@props.submit}</button>
+          <button type="submit" className='talk-comment-submit-button'>{@props.submit}</button>
         </section>
         {validationErrors}
       </form>
