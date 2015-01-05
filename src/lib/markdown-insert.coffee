@@ -44,6 +44,14 @@ module?.exports =
     cursor = {start, end}
     {text, cursor}
 
+  quote: (string) ->
+    text = "\n> #{string}"
+    start = '\n> '.length
+    end = start + string.length
+
+    cursor = {start, end}
+    {text, cursor}
+
   getSelection: (input) ->
     input.value.substring(input.selectionStart, input.selectionEnd)
 

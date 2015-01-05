@@ -1,7 +1,7 @@
 jest
   .dontMock '../../src/lib/markdown-insert'
 
-{insertAtCursor, hrefLink, bold, italic, imageLink} = require '../../src/lib/markdown-insert'
+{insertAtCursor, quote, hrefLink, bold, italic, imageLink} = require '../../src/lib/markdown-insert'
 
 describe 'markdown insert', ->
   React = require 'react/addons'
@@ -79,3 +79,13 @@ describe 'markdown insert', ->
 
     it 'returns cursor position at end of text, but before closing earmuff', ->
       expect(cursor).toEqual(start: ' *'.length, end: (' *text'.length))
+
+  describe '#quote', ->
+    {text, cursor} = quote("text")
+
+    it 'puts a new line and > symbol before text', ->
+      expect(text).toEqual("\n> text")
+
+    it 'returns cursor position at end of text', ->
+      expect(cursor).toEqual(start: '\n> '.length, end: ('\n> text'.length))
+
