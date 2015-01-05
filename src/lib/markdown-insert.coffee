@@ -43,6 +43,9 @@ module?.exports =
   heading: (string) ->
     makeMarkdownHelper(' ## ', string, ' ## ')
 
+  horizontalRule: (string) ->
+    makeMarkdownHelper('----------\n', string)
+
   getSelection: (input) ->
     input.value.substring(input.selectionStart, input.selectionEnd)
 
