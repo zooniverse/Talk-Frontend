@@ -22,7 +22,7 @@ module?.exports = React.createClass
     images: []
 
   getDefaultProps: ->
-    header: "Select a focus image"
+    header: "Select a featured image"
 
   componentWillMount: ->
     @setInitialImages()

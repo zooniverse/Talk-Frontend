@@ -20,7 +20,6 @@ module?.exports =
     linkUrl = url or "http://www.example.com"
     makeMarkdownHelper(" [#{linkTitle}](", linkUrl, ") ")
 
-
   imageLink: (url, title) ->
     imageTitle = title or "Example Image"
     imageUrl = url or "http://www.example.com/image.png"
