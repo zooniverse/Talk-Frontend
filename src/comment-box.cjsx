@@ -6,7 +6,7 @@ Feedback = require './mixins/feedback'
 CommentPreview = require './comment-preview'
 CommentHelp = require './comment-help'
 CommentImageSelector = require './comment-image-selector'
-{insertAtCursor, getSelection, hrefLink, imageLink, quote, bold, italic} = require './lib/markdown-insert'
+{insertAtCursor, getSelection, heading, hrefLink, imageLink, quote, bold, italic} = require './lib/markdown-insert'
 
 module?.exports = React.createClass
   displayName: 'Commentbox'
@@ -74,6 +74,9 @@ module?.exports = React.createClass
   onItalicClick: (e) ->
     @wrapSelectionIn(italic)
 
+  onHeadingClick: (e) ->
+    @wrapSelectionIn(heading)
+
   onQuoteClick: ->
     @wrapSelectionIn(quote)
 
@@ -104,6 +107,7 @@ module?.exports = React.createClass
         <button className='talk-comment-bold-button' onClick={@onBoldClick}>Bold</button>
         <button className='talk-comment-italic-button' onClick={@onItalicClick}>Italicize</button>
         <button className='talk-comment-insert-quote-button' onClick={@onQuoteClick}>Quote</button>
+        <button className='talk-comment-heading-button' onClick={@onHeadingClick}>Heading</button>
       </div>
 
       <img className="talk-comment-focus-image" src={@state.focusImage} />

@@ -1,7 +1,7 @@
 jest
   .dontMock '../../src/lib/markdown-insert'
 
-{insertAtCursor, quote, hrefLink, bold, italic, imageLink, bullet, numberedList} = require '../../src/lib/markdown-insert'
+{insertAtCursor, heading, quote, hrefLink, bold, italic, imageLink, bullet, numberedList} = require '../../src/lib/markdown-insert'
 
 describe 'markdown insert', ->
   React = require 'react/addons'
@@ -107,4 +107,11 @@ describe 'markdown insert', ->
     it 'returns cursor position at end of text', ->
       expect(cursor).toEqual(start: '1. '.length, end: ('1. text'.length))
 
+  describe '#heading', ->
+    {text, cursor} = heading("text")
 
+    it 'wraps text in double pound symbols', ->
+      expect(text).toEqual(" ## text ## ")
+
+    it 'returns cursor position at end of text', ->
+      expect(cursor).toEqual(start: ' ## '.length, end: (' ## text'.length))

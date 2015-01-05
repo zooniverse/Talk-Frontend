@@ -40,6 +40,9 @@ module?.exports =
   numberedList: (string) ->
     makeMarkdownHelper('1. ', string)
 
+  heading: (string) ->
+    makeMarkdownHelper(' ## ', string, ' ## ')
+
   getSelection: (input) ->
     input.value.substring(input.selectionStart, input.selectionEnd)
 
