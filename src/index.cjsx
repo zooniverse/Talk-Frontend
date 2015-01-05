@@ -21,3 +21,5 @@ exports.CommentReportForm = require './comment-report-form'
 
 exports.Paginate = require './lib/paginate'
 exports.ActiveButton = require './lib/active-button'
+
+exports.ObjectView = require './views/object-view'

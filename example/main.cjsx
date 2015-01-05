@@ -15,6 +15,7 @@ PrivateMessageDisplay
 PrivateMessageCreate
 SubjectCollections
 Paginate
+ObjectView
 SubjectDisplay} = require '../src/index'
 
 Components = React.createClass
@@ -61,6 +62,27 @@ Components = React.createClass
 
     </div>
 
-React.render <Components />, document.getElementById('app')
+App = React.createClass
+  getInitialState: -> active: location.hash
+  onHashChange: -> @setState active: location.hash
+  componentDidMount: -> addEventListener 'hashchange', @onHashChange
+  componentWillUnmount: -> removeEventListener 'hashchange', @onHashChange
+
+  render: ->
+    <div>
+      <h1>Talk Frontend Components</h1>
+      <nav>
+        <a href="#/">components</a>
+        <a href="#/object-view">object view</a>
+      </nav>
+
+      {switch @state.active
+         when '#/object-view'
+           <ObjectView />
+         else
+           <Components />}
+    </div>
+
+React.render <App />, document.getElementById('app')
 
 console.log 'main'
