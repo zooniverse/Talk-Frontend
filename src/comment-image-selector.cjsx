@@ -59,6 +59,8 @@ module?.exports = React.createClass
         <input ref="imageSearch" type="search" placeholder="Search by ID"/>
       </form>
 
+      <button className='talk-comment-clear-image-button' onClick={@props.onClearImageClick}>Clear image</button>
+
       <div className="talk-comment-suggested-images">
         {@state.images.map(@imageItem)}
       </div>

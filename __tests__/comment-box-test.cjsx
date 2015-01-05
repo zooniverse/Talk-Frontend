@@ -10,7 +10,6 @@ describe 'CommentBox', ->
   form = findRenderedDOMComponentWithClass(commentBox, 'talk-comment-form')
   textarea = findRenderedDOMComponentWithTag(form, 'textarea')
   previewBtn = findRenderedDOMComponentWithClass(commentBox, 'talk-comment-preview-button')
-  clearImageBtn = findRenderedDOMComponentWithClass(commentBox, 'talk-comment-clear-image-button')
 
   describe 'on submit', ->
     submitBtn = findRenderedDOMComponentWithTag(form, 'button')
@@ -85,7 +84,7 @@ describe 'CommentBox', ->
   describe 'clicking clear image', ->
     it 'clears the focus image', ->
       commentBox.setState(focusImage: 'fake-test-image-source.jpg')
-      Simulate.click(clearImageBtn)
+      commentBox.onClearImageClick()
       expect(commentBox.state.focusImage).toEqual(null)
 
   describe 'comment validations', ->
