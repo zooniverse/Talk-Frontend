@@ -4,7 +4,8 @@ makeMarkdownHelper = (prefix, string, suffix = '') ->
   # cursor is the position in that string to put the cursor back
 
   # wraps string in prefix & suffix
-  # returns object with {text: output string, cursor: index to put cursor back}
+  # returns object with {text: output string, cursor: {start, end}}
+  # * start and end are selection indexes
   # probably easiest to access data with {text, cursor} = func()
 
   text = prefix + string + suffix
