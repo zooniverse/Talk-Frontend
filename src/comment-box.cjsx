@@ -6,7 +6,7 @@ Feedback = require './mixins/feedback'
 CommentPreview = require './comment-preview'
 CommentHelp = require './comment-help'
 CommentImageSelector = require './comment-image-selector'
-{horizontalRule, insertAtCursor, getSelection, heading, hrefLink, imageLink, quote, bold, italic, strikethrough} = require './lib/markdown-insert'
+{horizontalRule, insertAtCursor, getSelection, bullet, heading, hrefLink, imageLink, quote, bold, italic, strikethrough} = require './lib/markdown-insert'
 
 module?.exports = React.createClass
   displayName: 'Commentbox'
@@ -86,6 +86,9 @@ module?.exports = React.createClass
   onStrikethroughClick: (e) ->
     @wrapSelectionIn(strikethrough)
 
+  onBulletClick: (e) ->
+    @wrapSelectionIn(bullet)
+
   onSelectImage: (image) ->
     @setState focusImage: image.location
 
@@ -114,6 +117,7 @@ module?.exports = React.createClass
         <button className='talk-comment-heading-button' onClick={@onHeadingClick}>Heading</button>
         <button className='talk-comment-hr-button' onClick={@onHorizontalRuleClick}>Horizontal Rule</button>
         <button className='talk-comment-strikethrough-button' onClick={@onStrikethroughClick}>Strikethrough</button>
+        <button className='talk-comment-bullet-button' onClick={@onBulletClick}>Bullet</button>
       </div>
 
       <img className="talk-comment-focus-image" src={@state.focusImage} />
