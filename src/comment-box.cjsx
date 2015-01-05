@@ -98,7 +98,7 @@ module?.exports = React.createClass
         <button className='talk-comment-image-select-button' onClick={@onImageSelectClick}>Select an Image</button>
         <button className='talk-comment-clear-image-button' onClick={@onClearImageClick}>Clear image</button>
         <button className='talk-comment-insert-link-button' onClick={@onInsertLinkClick}>Insert Link</button>
-        <button className='talk-comment-insert-image-button' onClick={@onInsertImageClick}>Insert Image Link</button>
+        <button className='talk-comment-insert-image-button' onClick={@onInsertImageClick}>Insert Image</button>
         <button className='talk-comment-bold-button' onClick={@onBoldClick}>Bold</button>
         <button className='talk-comment-italic-button' onClick={@onItalicClick}>Italicize</button>
       </div>

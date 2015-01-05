@@ -11,6 +11,11 @@ module?.exports = React.createClass
     content: React.PropTypes.string
     header: React.PropTypes.string
 
+  markdownOptions:
+    sanitize: true
+    gfm: true
+    tables: true
+
   getDefaultProps: ->
     header: "Preview"
 
@@ -21,7 +26,7 @@ module?.exports = React.createClass
       .replace(/\#(\w+)/g, "<a href='http://www.zooniverse.org/tags/$1'>#$1</a>") # hashtags
 
   markdownify: (input) ->
-    marked input, {sanitize: true}, (err, content) =>
+    marked input, @markdownOptions, (err, content) =>
       throw err if err
       return @replaceSymbols(content)
 
