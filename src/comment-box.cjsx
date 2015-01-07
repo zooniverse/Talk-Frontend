@@ -75,10 +75,10 @@ module?.exports = React.createClass
     @wrapSelectionIn(italic)
 
   onHeadingClick: (e) ->
-    @wrapSelectionIn(heading)
+    @wrapSelectionIn(heading, ensureNewLine: true)
 
   onQuoteClick: ->
-    @wrapSelectionIn(quote)
+    @wrapSelectionIn(quote, ensureNewLine: true)
 
   onHorizontalRuleClick: (e) ->
     @wrapSelectionIn(horizontalRule)
@@ -87,7 +87,7 @@ module?.exports = React.createClass
     @wrapSelectionIn(strikethrough)
 
   onBulletClick: (e) ->
-    @wrapSelectionIn(bullet)
+    @wrapSelectionIn(bullet, ensureNewLine: true)
 
   onSelectImage: (image) ->
     @setState focusImage: image.location
@@ -147,7 +147,7 @@ module?.exports = React.createClass
       </div>
     </div>
 
-  wrapSelectionIn: (wrapFn) ->
+  wrapSelectionIn: (wrapFn, opts = {}) ->
     # helper to call markdown-insert functions on the textarea
     # wrapFn takes / returns a string (from ./lib/markdown-insert.cjsx)
 
@@ -155,5 +155,5 @@ module?.exports = React.createClass
     selection = getSelection(textarea)
     {text, cursor} = wrapFn(selection)
 
-    insertAtCursor(text, textarea, cursor)
+    insertAtCursor(text, textarea, cursor, opts)
     @onInputChange()

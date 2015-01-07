@@ -24,6 +24,11 @@ describe 'markdown insert', ->
       insertAtCursor("After", textarea, {start: 'Before'.length, end: 'Before'.length})
       expect(textarea.value).toEqual("BeforeAfter")
 
+    it 'optionally ensures content is on new line', ->
+      textarea.value = "Before"
+      insertAtCursor("After", textarea, {start: 'Before'.length, end: 'Before'.length}, {ensureNewLine: true})
+      expect(textarea.value).toEqual("Before\nAfter")
+
   describe '#hrefLink', ->
     it 'formats a complete link when 2 args are passed', ->
       {text} = hrefLink("http://www.test.com", "Test Link")

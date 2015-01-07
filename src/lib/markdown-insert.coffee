@@ -15,6 +15,10 @@ makeMarkdownHelper = (prefix, string, suffix = '') ->
   cursor = {start, end}
   {text, cursor}
 
+onNewLine = (string, cursorIndex) ->
+  charAtCursor = string.charAt(cursorIndex - 1)
+  (charAtCursor is '\n') or (cursorIndex is 0)
+
 module?.exports =
   hrefLink: (url, title) ->
     linkTitle = title or "Example Title"
@@ -53,16 +57,27 @@ module?.exports =
   getSelection: (input) ->
     input.value.substring(input.selectionStart, input.selectionEnd)
 
-  insertAtCursor: (text, input, cursor) ->
+  insertAtCursor: (text, input, cursor, opts = {}) ->
     inputVal = input.value                              # input text value
     cursorPos = input.selectionStart                    # current cursor position
     cursorEnd = input.selectionEnd or inputVal.length   # end of highlight, if so
+    notOnNewLine = not onNewLine(inputVal, cursorPos)
 
-    newSelectionStart = cursorPos + cursor.start        # post update selection start
-    newSelectionEnd   = cursorPos + cursor.end          # post update selection end
+    # optional char for newline switch
+    newLineChar = if (opts.ensureNewLine and notOnNewLine) then '\n' else ''
+
+    # values to update input.value with
+    begInputValue = inputVal.substring(0, cursorPos) + newLineChar
+    midInputValue = text
+    endInputValue = inputVal.substring(cursorEnd, inputVal.length)
+    # post update selection start
+    newSelectionStart = cursorPos + cursor.start + newLineChar.length
+
+    # post update selection end
+    newSelectionEnd = cursorPos + cursor.end + newLineChar.length
 
     # set input value to existing text with new text at current cursor position, or append
-    input.value = (inputVal.substring(0, cursorPos) + text + inputVal.substring(cursorEnd, inputVal.length))
+    input.value = begInputValue + midInputValue + endInputValue
 
     # set cursor back to a meaningful location for continued typing
     input.focus()
