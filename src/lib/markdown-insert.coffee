@@ -58,9 +58,9 @@ module?.exports =
     input.value.substring(input.selectionStart, input.selectionEnd)
 
   insertAtCursor: (text, input, cursor, opts = {}) ->
-    inputVal = input.value                              # input text value
-    cursorPos = input.selectionStart                    # current cursor position
-    cursorEnd = input.selectionEnd or inputVal.length   # end of highlight, if so
+    inputVal = input.value                                 # input text value
+    cursorPos = input.selectionStart                       # current cursor position
+    cursorEnd = input.selectionEnd                         # end of highlight, if so
     notOnNewLine = not onNewLine(inputVal, cursorPos)
 
     # optional char for newline switch
@@ -70,6 +70,7 @@ module?.exports =
     begInputValue = inputVal.substring(0, cursorPos) + newLineChar
     midInputValue = text
     endInputValue = inputVal.substring(cursorEnd, inputVal.length)
+
     # post update selection start
     newSelectionStart = cursorPos + cursor.start + newLineChar.length
 
