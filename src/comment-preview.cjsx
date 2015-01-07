@@ -2,6 +2,16 @@ React = require 'react'
 marked = require 'marked'
 emojify = require 'emojify.js'
 
+renderer = new marked.Renderer()
+
+renderer.image = (href, title, text) ->
+  [width, height] = title.split(/[x]/i) if title
+
+  widthAttr = if width then "width=#{width}" else ''
+  heightAttr = if height then "height=#{height}" else ''
+
+  "<img src=#{href} alt=#{text} #{widthAttr} #{heightAttr} />"
+
 EMOJI_ROOT = 'http://www.tortue.me/emoji'
 
 module?.exports = React.createClass
@@ -15,6 +25,7 @@ module?.exports = React.createClass
     sanitize: true
     gfm: true
     tables: true
+    renderer: renderer
 
   getDefaultProps: ->
     header: "Preview"

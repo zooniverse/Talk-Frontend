@@ -40,8 +40,24 @@ describe 'CommentPreview', ->
       expect(commentPreview.replaceSymbols).toHaveBeenCalled()
       expect(commentPreview.replaceSymbols).toHaveBeenCalledWith("<p>test content</p>\n")
 
+    describe 'custom image sizing', ->
+      it 'sets width and height when a "widthXheight" argument is passed', ->
+        image = "![Example Image](/image.jpg '100x200')"
+        commentPreview = renderIntoDocument(<CommentPreview content={image} />)
+        markdown = commentPreview.markdownify(commentPreview.props.content)
+
+        expect(markdown.trim()).toEqual("<p><img src=/image.jpg alt=Example Image width=100 height=200 /></p>")
+
+      it 'sets width when a "width" argument is passed', ->
+        image = "![Example Image](/image.jpg '100')"
+        commentPreview = renderIntoDocument(<CommentPreview content={image} />)
+        markdown = commentPreview.markdownify(commentPreview.props.content)
+
+        expect(markdown.trim()).toEqual("<p><img src=/image.jpg alt=Example Image width=100  /></p>")
+
   describe '#emojify', ->
     it 'replaces emoji', ->
       commentPreview = renderIntoDocument(<CommentPreview content=":smile:" />)
       emojiOutput = commentPreview.emojify(commentPreview.props.content)
       expect(emojiOutput.trim()).toEqual("<img class='talk-emoji' src='http://www.tortue.me/emoji/smile.png' alt=':smile:' title=':smile:' />")
+
