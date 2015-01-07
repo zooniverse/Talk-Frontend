@@ -30,7 +30,7 @@ Components = React.createClass
       <CommentDisplay
         author="example_user"
         date={(new Date)}
-        markdown={"# Example Comment Markdown"}/>
+        markdown={"# Example Comment"}/>
 
       <UserDisplay name="example_user" formattedName="Example User"/>
 

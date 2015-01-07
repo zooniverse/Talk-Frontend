@@ -108,7 +108,6 @@ module?.exports = React.createClass
       {feedback}
 
       <div className="talk-comment-buttons-container">
-        <button className='talk-comment-image-select-button' onClick={@onImageSelectClick}>Featured Image</button>
         <button className='talk-comment-insert-link-button' onClick={@onInsertLinkClick}>Insert Link</button>
         <button className='talk-comment-insert-image-button' onClick={@onInsertImageClick}>Insert Image</button>
         <button className='talk-comment-bold-button' onClick={@onBoldClick}>Bold</button>
@@ -125,6 +124,8 @@ module?.exports = React.createClass
       <form className="talk-comment-form" onSubmit={@onSubmitComment}>
         <textarea value={@state.content} onChange={@onInputChange} ref="textarea" placeholder={@props.placeholder} />
         <section>
+          <button type="button" className='talk-comment-image-select-button' onClick={@onImageSelectClick}>Featured Image</button>
+
           <button type="button" className='talk-comment-preview-button' onClick={@onPreviewClick}>Preview</button>
           <button type="button" className='talk-comment-help-button' onClick={@onHelpClick}>Help</button>
 
@@ -156,4 +157,3 @@ module?.exports = React.createClass
 
     insertAtCursor(text, textarea, cursor)
     @onInputChange()
-
