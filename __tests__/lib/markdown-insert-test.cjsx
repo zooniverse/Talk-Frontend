@@ -21,6 +21,9 @@ describe 'markdown insert', ->
 
     it 'retains existing text', ->
       textarea.value = "Before"
+      textarea.selectionStart = textarea.value.length # fake it for jsdom
+      textarea.selectionEnd = textarea.value.length   # fake it for jsdom
+
       insertAtCursor("After", textarea, {start: 'Before'.length, end: 'Before'.length})
       expect(textarea.value).toEqual("BeforeAfter")
 
