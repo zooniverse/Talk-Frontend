@@ -31,13 +31,16 @@ module?.exports =
     makeMarkdownHelper(" ![#{imageTitle}](", imageUrl, ') ')
 
   bold: (string) ->
-    makeMarkdownHelper(' **', string, '** ')
+    text = string or "Bold Text"
+    makeMarkdownHelper(' **', text, '** ')
 
   italic: (string) ->
-    makeMarkdownHelper(' *', string, '* ')
+    text = "Italic Text"
+    makeMarkdownHelper(' *', text, '* ')
 
   quote: (string) ->
-    makeMarkdownHelper('> ', string)
+    text = string or "Quoted Text"
+    makeMarkdownHelper('> ', text)
 
   bullet: (string) ->
     makeMarkdownHelper('- ', string)
