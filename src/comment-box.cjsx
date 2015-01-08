@@ -2,7 +2,6 @@ React = require 'react'
 ToggleChildren = require './mixins/toggle-children'
 Validations  = require './mixins/validations'
 Feedback = require './mixins/feedback'
-
 CommentPreview = require './comment-preview'
 CommentHelp = require './comment-help'
 CommentImageSelector = require './comment-image-selector'
@@ -124,10 +123,25 @@ module?.exports = React.createClass
       <form className="talk-comment-form" onSubmit={@onSubmitComment}>
         <textarea value={@state.content} onChange={@onInputChange} ref="textarea" placeholder={@props.placeholder} />
         <section>
-          <button type="button" className='talk-comment-image-select-button' onClick={@onImageSelectClick}>Featured Image</button>
+          <button
+            type="button"
+            className="talk-comment-image-select-button #{if @state.showing is 'image-selector' then 'active' else ''}"
+            onClick={@onImageSelectClick}>
+            Featured Image
+          </button>
 
-          <button type="button" className='talk-comment-preview-button' onClick={@onPreviewClick}>Preview</button>
-          <button type="button" className='talk-comment-help-button' onClick={@onHelpClick}>Help</button>
+          <button
+            type="button"
+            className="talk-comment-preview-button #{if @state.showing is 'preview' then 'active' else ''}"
+            onClick={@onPreviewClick}>
+            Preview
+          </button>
+
+          <button type="button"
+            className="talk-comment-help-button #{if @state.showing is 'help' then 'active' else ''}"
+            onClick={@onHelpClick}>
+            Help
+          </button>
 
           <button type="submit" className='talk-comment-submit-button'>{@props.submit}</button>
         </section>
