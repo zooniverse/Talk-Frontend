@@ -20,13 +20,13 @@ onNewLine = (string, cursorIndex) ->
   (charAtCursor is '\n') or (cursorIndex is 0)
 
 module?.exports =
-  hrefLink: (url, title) ->
-    linkTitle = title or "Example Title"
+  hrefLink: (title, url) ->
+    linkTitle = title or "Example Text"
     linkUrl = url or "http://www.example.com"
     makeMarkdownHelper(" [#{linkTitle}](", linkUrl, ") ")
 
   imageLink: (url, title) ->
-    imageTitle = title or "Example Image"
+    imageTitle = title or "Example Alt Text"
     imageUrl = url or "http://www.example.com/image.png"
     makeMarkdownHelper(" ![#{imageTitle}](", imageUrl, ') ')
 
@@ -35,7 +35,7 @@ module?.exports =
     makeMarkdownHelper(' **', text, '** ')
 
   italic: (string) ->
-    text = "Italic Text"
+    text = string or "Italic Text"
     makeMarkdownHelper(' *', text, '* ')
 
   quote: (string) ->

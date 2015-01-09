@@ -104,6 +104,8 @@ module?.exports = React.createClass
     <div className="talk-comment-box">
       <h1>{@props.header}</h1>
 
+      <img className="talk-comment-focus-image" src={@state.focusImage} />
+
       {feedback}
 
       <div className="talk-comment-buttons-container">
@@ -113,12 +115,10 @@ module?.exports = React.createClass
         <button className='talk-comment-italic-button' onClick={@onItalicClick}>Italicize</button>
         <button className='talk-comment-insert-quote-button' onClick={@onQuoteClick}>Quote</button>
         <button className='talk-comment-heading-button' onClick={@onHeadingClick}>Heading</button>
-        <button className='talk-comment-hr-button' onClick={@onHorizontalRuleClick}>Horizontal Rule</button>
+        <button className='talk-comment-hr-button' onClick={@onHorizontalRuleClick}>Insert Line</button>
         <button className='talk-comment-strikethrough-button' onClick={@onStrikethroughClick}>Strikethrough</button>
         <button className='talk-comment-bullet-button' onClick={@onBulletClick}>Bullet</button>
       </div>
-
-      <img className="talk-comment-focus-image" src={@state.focusImage} />
 
       <form className="talk-comment-form" onSubmit={@onSubmitComment}>
         <textarea value={@state.content} onChange={@onInputChange} ref="textarea" placeholder={@props.placeholder} />

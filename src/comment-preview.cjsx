@@ -25,6 +25,7 @@ module?.exports = React.createClass
     sanitize: true
     gfm: true
     tables: true
+    breaks: true
     renderer: renderer
 
   getDefaultProps: ->

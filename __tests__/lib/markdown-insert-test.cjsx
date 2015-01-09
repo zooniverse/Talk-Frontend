@@ -34,23 +34,23 @@ describe 'markdown insert', ->
 
   describe '#hrefLink', ->
     it 'formats a complete link when 2 args are passed', ->
-      {text} = hrefLink("http://www.test.com", "Test Link")
+      {text} = hrefLink("Test Link", "http://www.test.com")
       expect(text).toEqual(' [Test Link](http://www.test.com) ')
 
     it 'formats a partial link when only one arg is passed', ->
-      {text} = hrefLink("url")
-      expect(text).toEqual(' [Example Title](url) ')
+      {text} = hrefLink("title")
+      expect(text).toEqual(' [title](http://www.example.com) ')
 
     it 'accepts blank strings (for forms) as non-args', ->
-      {text} = hrefLink("Test Url", "")
-      expect(text).toEqual(" [Example Title](Test Url) ")
+      {text} = hrefLink("Test title", "")
+      expect(text).toEqual(" [Test title](http://www.example.com) ")
 
     it 'returns an example link when no args are passed', ->
       {text} = hrefLink()
-      expect(text).toEqual(" [Example Title](http://www.example.com) ")
+      expect(text).toEqual(" [Example Text](http://www.example.com) ")
 
     it 'returns cursor position at end of input', ->
-      {text, cursor} = hrefLink("url", "Test Link")
+      {text, cursor} = hrefLink("Test Link", "url")
       expect(cursor).toEqual(start: ' [Test Link]('.length, end: ' [Test Link](url'.length)
 
   describe '#imageLink', ->
@@ -64,7 +64,7 @@ describe 'markdown insert', ->
 
     it 'returns an example link when no args are passed', ->
       {text} = imageLink()
-      expect(text).toEqual(" ![Example Image](http://www.example.com/image.png) ")
+      expect(text).toEqual(" ![Example Alt Text](http://www.example.com/image.png) ")
 
     it 'highlights the title text', ->
       {text, cursor} = imageLink("location", "Test Image Link")
