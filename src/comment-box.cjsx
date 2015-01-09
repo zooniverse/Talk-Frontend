@@ -104,7 +104,8 @@ module?.exports = React.createClass
     <div className="talk-comment-box">
       <h1>{@props.header}</h1>
 
-      <img className="talk-comment-focus-image" src={@state.focusImage} />
+      {if @state.focusImage
+        <img className="talk-comment-focus-image" src={@state.focusImage} />}
 
       {feedback}
 
