@@ -23,20 +23,20 @@ module?.exports =
   hrefLink: (title, url) ->
     linkTitle = title or "Example Text"
     linkUrl = url or "http://www.example.com"
-    makeMarkdownHelper(" [#{linkTitle}](", linkUrl, ") ")
+    makeMarkdownHelper("[#{linkTitle}](", linkUrl, ")")
 
   imageLink: (url, title) ->
     imageTitle = title or "Example Alt Text"
     imageUrl = url or "http://www.example.com/image.png"
-    makeMarkdownHelper(" ![#{imageTitle}](", imageUrl, ') ')
+    makeMarkdownHelper("![#{imageTitle}](", imageUrl, ')')
 
   bold: (string) ->
     text = string or "Bold Text"
-    makeMarkdownHelper(' **', text, '** ')
+    makeMarkdownHelper('**', text, '**')
 
   italic: (string) ->
     text = string or "Italic Text"
-    makeMarkdownHelper(' *', text, '* ')
+    makeMarkdownHelper('*', text, '*')
 
   quote: (string) ->
     text = string or "Quoted Text"
@@ -49,13 +49,13 @@ module?.exports =
     makeMarkdownHelper('1. ', string)
 
   heading: (string) ->
-    makeMarkdownHelper(' ## ', string, ' ## ')
+    makeMarkdownHelper('## ', string, ' ##')
 
   horizontalRule: (string) ->
     makeMarkdownHelper('----------\n', string)
 
   strikethrough: (string) ->
-    makeMarkdownHelper(' ~~', string, '~~ ') # github-flavored specific
+    makeMarkdownHelper('~~', string, '~~') # github-flavored specific
 
   getSelection: (input) ->
     input.value.substring(input.selectionStart, input.selectionEnd)

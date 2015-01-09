@@ -35,58 +35,58 @@ describe 'markdown insert', ->
   describe '#hrefLink', ->
     it 'formats a complete link when 2 args are passed', ->
       {text} = hrefLink("Test Link", "http://www.test.com")
-      expect(text).toEqual(' [Test Link](http://www.test.com) ')
+      expect(text).toEqual('[Test Link](http://www.test.com)')
 
     it 'formats a partial link when only one arg is passed', ->
       {text} = hrefLink("title")
-      expect(text).toEqual(' [title](http://www.example.com) ')
+      expect(text).toEqual('[title](http://www.example.com)')
 
     it 'accepts blank strings (for forms) as non-args', ->
       {text} = hrefLink("Test title", "")
-      expect(text).toEqual(" [Test title](http://www.example.com) ")
+      expect(text).toEqual("[Test title](http://www.example.com)")
 
     it 'returns an example link when no args are passed', ->
       {text} = hrefLink()
-      expect(text).toEqual(" [Example Text](http://www.example.com) ")
+      expect(text).toEqual("[Example Text](http://www.example.com)")
 
     it 'returns cursor position at end of input', ->
       {text, cursor} = hrefLink("Test Link", "url")
-      expect(cursor).toEqual(start: ' [Test Link]('.length, end: ' [Test Link](url'.length)
+      expect(cursor).toEqual(start: '[Test Link]('.length, end: '[Test Link](url'.length)
 
   describe '#imageLink', ->
     it 'formats a complete imagelink when 2 args are passed', ->
       {text} = imageLink("http://www.test.com/image.jpg", "Test Image Link")
-      expect(text).toEqual(' ![Test Image Link](http://www.test.com/image.jpg) ')
+      expect(text).toEqual('![Test Image Link](http://www.test.com/image.jpg)')
 
     it 'accepts blank strings (for forms) as non-args', ->
       {text} = imageLink("", "Test Image")
-      expect(text).toEqual(" ![Test Image](http://www.example.com/image.png) ")
+      expect(text).toEqual("![Test Image](http://www.example.com/image.png)")
 
     it 'returns an example link when no args are passed', ->
       {text} = imageLink()
-      expect(text).toEqual(" ![Example Alt Text](http://www.example.com/image.png) ")
+      expect(text).toEqual("![Example Alt Text](http://www.example.com/image.png)")
 
     it 'highlights the title text', ->
       {text, cursor} = imageLink("location", "Test Image Link")
-      expect(cursor).toEqual(start: ' ![Test Image Link]('.length, end: " ![Test Image Link](location".length)
+      expect(cursor).toEqual(start: '![Test Image Link]('.length, end: "![Test Image Link](location".length)
 
   describe '#bold', ->
     {text, cursor} = bold("text")
 
     it 'wraps text in double earmuffs', ->
-      expect(text).toEqual(" **text** ")
+      expect(text).toEqual("**text**")
 
     it 'returns cursor position at end of text, but before closing earmuffs', ->
-      expect(cursor).toEqual(start: ' **'.length, end: (' **text'.length))
+      expect(cursor).toEqual(start: '**'.length, end: ('**text'.length))
 
   describe '#italic', ->
     {text, cursor} = italic("text")
     
     it 'wraps text in earmuffs', ->
-      expect(text).toEqual(" *text* ")
+      expect(text).toEqual("*text*")
 
     it 'returns cursor position at end of text, but before closing earmuff', ->
-      expect(cursor).toEqual(start: ' *'.length, end: (' *text'.length))
+      expect(cursor).toEqual(start: '*'.length, end: ('*text'.length))
 
   describe '#quote', ->
     {text, cursor} = quote("text")
@@ -119,10 +119,10 @@ describe 'markdown insert', ->
     {text, cursor} = heading("text")
 
     it 'wraps text in double pound symbols', ->
-      expect(text).toEqual(" ## text ## ")
+      expect(text).toEqual("## text ##")
 
     it 'returns cursor position at end of text', ->
-      expect(cursor).toEqual(start: ' ## '.length, end: (' ## text'.length))
+      expect(cursor).toEqual(start: '## '.length, end: ('## text'.length))
 
   describe '#horizontalRule', ->
     {text, cursor} = horizontalRule("text")
@@ -138,7 +138,7 @@ describe 'markdown insert', ->
     {text, cursor} = strikethrough("text")
 
     it 'adds 10 hyphens before the text, and a new line', ->
-      expect(text).toEqual(" ~~text~~ ")
+      expect(text).toEqual("~~text~~")
 
     it 'returns cursor position at end of text', ->
-      expect(cursor).toEqual(start: " ~~".length, end: (" ~~text".length))
+      expect(cursor).toEqual(start: "~~".length, end: ("~~text".length))
