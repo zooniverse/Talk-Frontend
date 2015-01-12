@@ -10,6 +10,7 @@ DiscussionCreate
 CollectionPreview
 CollectionCreate
 HashtagsList
+ImageViewer
 PrivateMessagePreview
 PrivateMessageDisplay
 PrivateMessageCreate
@@ -17,6 +18,12 @@ SubjectCollections
 Paginate
 ObjectView
 SubjectDisplay} = require '../src/index'
+
+# exampleImages = [
+#   {title: "test 1", src: "http://placehold.it/600X400"}
+#   {title: "test 1", src: "http://placehold.it/600X400", description: "sadasd"}
+#   {src: "http://placehold.it/600X400", description: "sadasd"}
+#   ]
 
 Components = React.createClass
   displayName: 'TalkComponentsExamples'
@@ -84,5 +91,3 @@ App = React.createClass
     </div>
 
 React.render <App />, document.getElementById('app')
-
-console.log 'main'

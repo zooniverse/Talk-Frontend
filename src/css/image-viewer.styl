@@ -1,0 +1,39 @@
+.talk-image-viewer
+  position: relative
+  background-color: #000
+  color: #fff
+
+  .talk-image-viewer-image-view
+    text-align: center
+    margin: 0 auto
+    width: 80%
+
+    img
+      width: 100%
+
+    h1
+      min-height: 1em
+      margin: 0
+
+  .talk-image-viewer-prev, .talk-image-viewer-next
+    &:disabled
+      opacity: 0.4
+
+  .talk-image-viewer-prev
+    position: absolute
+    left: 0
+    top: 50%
+
+  .talk-image-viewer-next
+    position: absolute
+    right: 0
+    top: 50%
+
+  .talk-image-viewer-close
+    position: absolute
+    top: 0
+    right: 0
+
+  .talk-image-viewer-active-num
+    width: 100%
+    text-align: center

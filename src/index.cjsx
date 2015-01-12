@@ -18,6 +18,7 @@ exports.CommentPreview = require './comment-preview'
 exports.CommentHelp = require './comment-help'
 exports.CommentImageSelector = require './comment-image-selector'
 exports.CommentReportForm = require './comment-report-form'
+exports.ImageViewer = require './lib/image-viewer'
 
 exports.Paginate = require './lib/paginate'
 exports.ActiveButton = require './lib/active-button'
