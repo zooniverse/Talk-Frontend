@@ -1,19 +1,25 @@
 .talk-image-viewer
   position: relative
-  background-color: #000
+  background-color: hsla(0, 0%, 0%, .8)
   color: #fff
 
   .talk-image-viewer-image-view
     text-align: center
     margin: 0 auto
-    width: 80%
+    max-width: 80%
 
     img
-      width: 100%
+      max-width: 100%
+      max-height: 70vw
 
-    h1
-      min-height: 1em
-      margin: 0
+    .talk-image-viewer-image-header
+      max-height: 10vw
+      h1
+        min-height: 1em
+        margin: 0
+
+    .talk-image-viewer-image-footer
+      max-height: 20vw
 
   .talk-image-viewer-prev, .talk-image-viewer-next
     &:disabled

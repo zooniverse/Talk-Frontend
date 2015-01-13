@@ -11,6 +11,7 @@ CollectionPreview
 CollectionCreate
 HashtagsList
 ImageViewer
+ImageCollection
 PrivateMessagePreview
 PrivateMessageDisplay
 PrivateMessageCreate
@@ -19,11 +20,11 @@ Paginate
 ObjectView
 SubjectDisplay} = require '../src/index'
 
-# exampleImages = [
-#   {title: "test 1", src: "http://placehold.it/600X400"}
-#   {title: "test 1", src: "http://placehold.it/600X400", description: "sadasd"}
-#   {src: "http://placehold.it/600X400", description: "sadasd"}
-#   ]
+exampleImages = [
+  {title: "test 1", src: "http://placehold.it/600X400&text=1"}
+  {title: "test 2", src: "http://placehold.it/600X400&text=2", description: "sadasd"}
+  {title: "test 3", src: "http://placehold.it/600X400&text=3", description: "sadasd"}
+  ]
 
 Components = React.createClass
   displayName: 'TalkComponentsExamples'
@@ -69,6 +70,12 @@ Components = React.createClass
 
     </div>
 
+ImageViewerView = React.createClass
+  render: ->
+    <div>
+      <ImageCollection images={exampleImages}/>
+    </div>
+
 App = React.createClass
   getInitialState: -> active: location.hash
   onHashChange: -> @setState active: location.hash
@@ -81,11 +88,14 @@ App = React.createClass
       <nav>
         <a href="#/">components</a>
         <a href="#/object-view">object view</a>
+        <a href="#/image-viewer">image viewer</a>
       </nav>
 
       {switch @state.active
          when '#/object-view'
            <ObjectView />
+         when '#/image-viewer'
+           <ImageViewerView />
          else
            <Components />}
     </div>
