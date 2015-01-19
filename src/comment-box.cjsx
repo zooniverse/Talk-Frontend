@@ -86,7 +86,7 @@ module?.exports = React.createClass
     @wrapSelectionIn(strikethrough)
 
   onBulletClick: (e) ->
-    @wrapSelectionIn(bullet, ensureNewLine: true)
+    @wrapLinesIn(bullet, ensureNewLine: true)
 
   onSelectImage: (image) ->
     @setState focusImage: image.location
@@ -172,3 +172,20 @@ module?.exports = React.createClass
 
     insertAtCursor(text, textarea, cursor, opts)
     @onInputChange()
+
+  wrapLinesIn: (wrapFn, opts = {}) ->
+    textarea = @refs.textarea.getDOMNode()
+    lines = getSelection(textarea).split("\n")
+
+    # delegate to wrapSelectionIn when there's only one line
+    return @wrapSelectionIn(wrapFn, opts) if (lines.length <= 1)
+
+    formattedText = lines
+      .map (line) -> wrapFn(line).text
+      .join("\n")
+
+    cursor = {start: formattedText.length, end: formattedText.length}
+
+    insertAtCursor(formattedText, textarea, cursor, opts)
+    @onInputChange()
+
