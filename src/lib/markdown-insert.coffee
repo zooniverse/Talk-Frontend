@@ -19,6 +19,21 @@ onNewLine = (string, cursorIndex) ->
   charAtCursor = string.charAt(cursorIndex - 1)
   (charAtCursor is '\n') or (cursorIndex is 0)
 
+incrementListItems = (previousText, text) -> # TODO: limit prev lines length
+  numberedLi = /^[^\d]*(\d+)/ # matches something line "3."
+  splitPrevLines = previousText.split("\n")
+  prevLine = splitPrevLines[splitPrevLines.length - 2]
+  splitSelection = text.split("\n")
+
+  if splitSelection.length > 1 # user has multiple lines highlighted
+    splitSelection
+      .map (text, i) ->
+        text.replace numberedLi, (fullMatch, n) -> i + 1
+      .join("\n")
+  else
+    text.replace numberedLi, (fullMatch, n) ->
+      if +prevLine then +prevLine.split(".")[0] + 1 else 1
+
 module?.exports =
   hrefLink: (title, url) ->
     linkTitle = title or "Example Text"
@@ -68,19 +83,17 @@ module?.exports =
 
     # optional char for newline switch
     newLineChar = if (opts.ensureNewLine and notOnNewLine) then '\n' else ''
+    numberedList = opts.incrementLines and opts.ensureNewLine
 
     # values to update input.value with
     begInputValue = inputVal.substring(0, cursorPos) + newLineChar
-    midInputValue = text
+    midInputValue = if numberedList then incrementListItems(begInputValue, text) else text
     endInputValue = inputVal.substring(cursorEnd, inputVal.length)
 
-    # post update selection start
     newSelectionStart = cursorPos + cursor.start + newLineChar.length
-
-    # post update selection end
     newSelectionEnd = cursorPos + cursor.end + newLineChar.length
 
-    # set input value to existing text with new text at current cursor position, or append
+    # update input value with new values
     input.value = begInputValue + midInputValue + endInputValue
 
     # set cursor back to a meaningful location for continued typing

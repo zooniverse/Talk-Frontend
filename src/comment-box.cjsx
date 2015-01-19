@@ -5,7 +5,7 @@ Feedback = require './mixins/feedback'
 CommentPreview = require './comment-preview'
 CommentHelp = require './comment-help'
 CommentImageSelector = require './comment-image-selector'
-{horizontalRule, insertAtCursor, getSelection, bullet, heading, hrefLink, imageLink, quote, bold, italic, strikethrough} = require './lib/markdown-insert'
+{horizontalRule, insertAtCursor, numberedList, getSelection, bullet, heading, hrefLink, imageLink, quote, bold, italic, strikethrough} = require './lib/markdown-insert'
 
 module?.exports = React.createClass
   displayName: 'Commentbox'
@@ -88,6 +88,9 @@ module?.exports = React.createClass
   onBulletClick: (e) ->
     @wrapLinesIn(bullet, ensureNewLine: true)
 
+  onNumberClick: (e) ->
+    @wrapLinesIn(numberedList, ensureNewLine: true, incrementLines: true)
+
   onSelectImage: (image) ->
     @setState focusImage: image.location
 
@@ -119,6 +122,7 @@ module?.exports = React.createClass
         <button className='talk-comment-hr-button' onClick={@onHorizontalRuleClick}>Insert Line</button>
         <button className='talk-comment-strikethrough-button' onClick={@onStrikethroughClick}>Strikethrough</button>
         <button className='talk-comment-bullet-button' onClick={@onBulletClick}>Bullet</button>
+        <button className='talk-comment-number-button' onClick={@onNumberClick}>Number</button>
       </div>
 
       <form className="talk-comment-form" onSubmit={@onSubmitComment}>
