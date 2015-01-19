@@ -37,7 +37,7 @@ module?.exports = React.createClass
   render: ->
     comments = DEV_COMMENTS.map(@commentDisplay)
 
-    <div className="talk-object-view" style={backgroundColor: "grey"}>
+    <div className="talk-object-view" style={backgroundColor: "silver"}>
       <h1>Object View</h1>
 
       <SubjectDisplay />
