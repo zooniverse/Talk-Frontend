@@ -19,7 +19,7 @@ onNewLine = (string, cursorIndex) ->
   charAtCursor = string.charAt(cursorIndex - 1)
   (charAtCursor is '\n') or (cursorIndex is 0)
 
-incrementListItems = (previousText, text) -> # TODO: limit prev lines length
+incrementedListItems = (previousText, text) -> # TODO: limit prev lines length
   numberedLi = /^[^\d]*(\d+)/ # matches something line "3."
   splitPrevLines = previousText.split("\n")
   prevLine = splitPrevLines[splitPrevLines.length - 2]
@@ -32,7 +32,7 @@ incrementListItems = (previousText, text) -> # TODO: limit prev lines length
       .join("\n")
   else
     text.replace numberedLi, (fullMatch, n) ->
-      if +prevLine then +prevLine.split(".")[0] + 1 else 1
+      if prevLine then (+prevLine.split(".")[0] + 1) else 1
 
 module?.exports =
   hrefLink: (title, url) ->
@@ -87,7 +87,7 @@ module?.exports =
 
     # values to update input.value with
     begInputValue = inputVal.substring(0, cursorPos) + newLineChar
-    midInputValue = if numberedList then incrementListItems(begInputValue, text) else text
+    midInputValue = if numberedList then incrementedListItems(begInputValue, text) else text
     endInputValue = inputVal.substring(cursorEnd, inputVal.length)
 
     newSelectionStart = cursorPos + cursor.start + newLineChar.length
