@@ -32,7 +32,10 @@ incrementedListItems = (previousText, text) -> # TODO: limit prev lines length
       .join("\n")
   else
     text.replace numberedLi, (fullMatch, n) ->
-      if prevLine then (+prevLine.split(".")[0] + 1) else 1
+      if prevLine and +prevLine
+        (+prevLine.split(".")[0] + 1)
+      else
+        1
 
 module?.exports =
   hrefLink: (title, url) ->
