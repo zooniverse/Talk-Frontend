@@ -5,7 +5,7 @@ Feedback = require './mixins/feedback'
 CommentPreview = require './comment-preview'
 CommentHelp = require './comment-help'
 CommentImageSelector = require './comment-image-selector'
-{horizontalRule, insertAtCursor, numberedList, getSelection, bullet, heading, hrefLink, imageLink, quote, bold, italic, strikethrough} = require './lib/markdown-insert'
+{horizontalRule, insertAtCursor, numberedList, incrementedListItems, getSelection, bullet, heading, hrefLink, imageLink, quote, bold, italic, strikethrough} = require './lib/markdown-insert'
 
 module?.exports = React.createClass
   displayName: 'Commentbox'
@@ -181,15 +181,16 @@ module?.exports = React.createClass
     textarea = @refs.textarea.getDOMNode()
     lines = getSelection(textarea).split("\n")
 
-    # delegate to wrapSelectionIn when there's only one line
-    return @wrapSelectionIn(wrapFn, opts) if (lines.length <= 1)
-
     formattedText = lines
       .map (line) -> wrapFn(line).text
       .join("\n")
+
+    # increment the line numbers in a list, if that option is specified
+    if opts.incrementLines and opts.ensureNewLine
+      begInputValue = textarea.value.substring(0, textarea.selectionStart) + "\n"
+      formattedText = incrementedListItems(begInputValue, formattedText)
 
     cursor = {start: formattedText.length, end: formattedText.length}
 
     insertAtCursor(formattedText, textarea, cursor, opts)
     @onInputChange()
-
