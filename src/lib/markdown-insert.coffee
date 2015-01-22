@@ -27,7 +27,7 @@ module?.exports =
 
   imageLink: (url, title) ->
     imageTitle = title or "Example Alt Text"
-    imageUrl = url or "http://www.example.com/image.png"
+    imageUrl = url or "http://bit.ly/15CY6wE"
     makeMarkdownHelper("![#{imageTitle}](", imageUrl, ')')
 
   bold: (string) ->
@@ -49,13 +49,15 @@ module?.exports =
     makeMarkdownHelper('1. ', string)
 
   heading: (string) ->
-    makeMarkdownHelper('## ', string, ' ##')
+    text = string or "Heading"
+    makeMarkdownHelper('## ', text, ' ##')
 
   horizontalRule: (string) ->
     makeMarkdownHelper('----------\n', string)
 
   strikethrough: (string) ->
-    makeMarkdownHelper('~~', string, '~~') # github-flavored specific
+    text = string or "Strikethrough"
+    makeMarkdownHelper('~~', text, '~~') # github-flavored specific
 
   getSelection: (input) ->
     input.value.substring(input.selectionStart, input.selectionEnd)

@@ -80,7 +80,7 @@ module?.exports = React.createClass
     @wrapSelectionIn(m.quote, ensureNewLine: true)
 
   onHorizontalRuleClick: (e) ->
-    @wrapSelectionIn(m.horizontalRule)
+    @wrapSelectionIn(m.horizontalRule, ensureNewLine: true)
 
   onStrikethroughClick: (e) ->
     @wrapSelectionIn(m.strikethrough)
