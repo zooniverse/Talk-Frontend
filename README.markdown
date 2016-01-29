@@ -1,3 +1,5 @@
+# DEPRECATED. TALK UI IS IN THE MAIN PFE REPO
+
 ## Talk Frontend
 
 react components for use in the next version of talk
